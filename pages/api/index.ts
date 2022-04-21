@@ -10,13 +10,13 @@ export default async function handler(req, res) {
     }
 
     if (req.query.operation === 'categories') {
-        let megaMenu = await commerceAPI.getMegaMenu()
+        let megaMenu = await commerceAPI.getMegaMenu({})
         res.status(200).json(flattenCategories(megaMenu).map(cat => ({ name: `(${cat.slug}) ${cat.name}`, id: cat.id })))
     }
     else if (req.query.operation === 'megaMenu') {
-        res.status(200).json(await commerceAPI.getMegaMenu())
+        res.status(200).json(await commerceAPI.getMegaMenu({}))
     }
     else if (req.query.operation === 'customerGroups') {
-        res.status(200).json(await commerceAPI.getCustomerGroups())
+        res.status(200).json(await commerceAPI.getCustomerGroups({}))
     }
 }
