@@ -34,6 +34,7 @@ const TreeViewSingle: React.FC<AmpSDKProps> = ({ ampSDK }) => {
         {
           value != '' ? 
           <IconButton aria-label="delete" onClick={() => {
+            console.log('set val')
             setValue('')
             ampSDK.clearValue()
           }}>
@@ -43,7 +44,7 @@ const TreeViewSingle: React.FC<AmpSDKProps> = ({ ampSDK }) => {
         }
       </Typography>
 
-      <div className="tree-contain">  
+      <div className="tree-contain">
         <TreeView
           defaultCollapseIcon={<ExpandMoreIcon />}
           defaultExpandIcon={<ChevronRightIcon />}
