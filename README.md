@@ -38,14 +38,15 @@ Installation Parameters is where you'll enter your E-comm platform-specific envi
 
 ``` bash
 {
-  "host": "YOURINSTANCE.dx.commercecloud.salesforce.com",
-  "clientId": "xxxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-  "secret": "TheClientPWYouSetInAccountMgr",
-  "tokAuth": "clientId:secret",
-  "site": "SfccSiteID"
+  "api_url": "https://YOURINSTANCE.dx.commercecloud.salesforce.com",
+  "auth_url": "https://account.demandware.com/dwsso/oauth2/access_token",
+  "api_token": "clientId:secret",
+  "client_id": "xxxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+  "client_secret": "TheClientPWYouSetInAccountMgr"
+  "site_id": "RefArchGlobal",
 }
 ```
-N.B. that the `tokAuth` needs to be base 64 encoded.
+N.B. that the `api_token` needs to be base64 encoded.
 
 ### Extension Snippets
 

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import CircularProgress from '@mui/material/CircularProgress';
 
 // import './App.css';
 import Stack from '@mui/material/Stack';
@@ -25,7 +26,7 @@ function App() {
   } else if (ampSDK?.view === 'tree') {
     component = <TreeViewSingle ampSDK={ampSDK} />
   } else {
-    component = <></>
+    component =  <><CircularProgress /><div>Loading View..</div></>
   }
 
   return <div className="App">
