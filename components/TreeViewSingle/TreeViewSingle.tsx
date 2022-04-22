@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, createRef, useEffect } from "react";
 import { Typography } from '@mui/material';
 import { AmpSDKProps, TreeItemData } from "../../lib/models/treeItemData";
 import { TreeItem, TreeView } from "@mui/lab";
@@ -26,20 +26,32 @@ const getTreeItemsFromData = (treeItems: TreeItemData[]) => {
 };
 
 const TreeViewSingle: React.FC<AmpSDKProps> = ({ ampSDK }) => {
-  const exHeight = useRef()
+  const ref = createRef<HTMLDivElement>()
   const [value, setValue] = useState(ampSDK.getValue())
+  const [totalHeight, setTotalHeight] = useState(200)
+  const [trigger, setTrigger] = useState(0.1)
+
+  const updateHeight = () => {
+    setTimeout(()=> {
+      setTrigger(Math.random())
+    }, 300)
+  }
   useEffect(() => {
-    console.log('exHeight ref:', exHeight.current );
-  }, [exHeight]) 
+    const { current } = ref
+    setTotalHeight(current.clientHeight)
+    if(ampSDK !== undefined){
+      ampSDK.setHeight(current.clientHeight)
+    }
+  }, [trigger])
+
   return (
     <>
-      <div className="tree-contain" ref={exHeight}>
+      <div ref={ref}>
         <Typography variant="body1" component="p">
           Selected category: {value}
           {
             value != '' ? 
             <IconButton aria-label="delete" onClick={() => {
-              console.log('set val')
               setValue('')
               ampSDK.clearValue()
             }}>
@@ -55,6 +67,10 @@ const TreeViewSingle: React.FC<AmpSDKProps> = ({ ampSDK }) => {
             ampSDK.setValue(val) 
             setValue(val)
           }}
+          onClick={updateHeight}
+          /* onTransitionEnd={()=>{ this does not fire consistently
+            console.log('ended')
+          }} */
           selected={value}>
           {getTreeItemsFromData(ampSDK.getValues())}
         </TreeView>
