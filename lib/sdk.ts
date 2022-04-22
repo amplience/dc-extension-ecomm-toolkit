@@ -93,6 +93,10 @@ const amplienceSDK = async () => {
         clearValue: async () => {
             await sdk.field.setValue('')
             value = { name: '', id: '' }
+        },
+
+        setHeight: (height) => {
+            sdk.frame.setHeight(height)
         }
     }
 

@@ -25,7 +25,7 @@ function App() {
   } else if (ampSDK?.view === 'tree') {
     component = <TreeViewSingle ampSDK={ampSDK} />
   } else {
-    component = <>No View Specified</>
+    component = <></>
   }
 
   return <div className="App">
