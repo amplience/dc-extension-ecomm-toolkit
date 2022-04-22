@@ -33,23 +33,28 @@ const TreeViewSingle: React.FC<AmpSDKProps> = ({ ampSDK }) => {
         Selected category: {value}
         {
           value != '' ? 
-          <IconButton aria-label="delete" onClick={ampSDK.clearValue}>
+          <IconButton aria-label="delete" onClick={() => {
+            setValue('')
+            ampSDK.clearValue()
+          }}>
             <DeleteIcon />
           </IconButton>
           : '' 
         }
       </Typography>
 
-      <TreeView
-        defaultCollapseIcon={<ExpandMoreIcon />}
-        defaultExpandIcon={<ChevronRightIcon />}
-        onNodeSelect={(event, val) => { 
-          ampSDK.setValue(val) 
-          setValue(val)
-        }}
-        selected={value}>
-        {getTreeItemsFromData(ampSDK.getValues())}
-      </TreeView>
+      <div className="tree-contain">  
+        <TreeView
+          defaultCollapseIcon={<ExpandMoreIcon />}
+          defaultExpandIcon={<ChevronRightIcon />}
+          onNodeSelect={(event, val) => { 
+            ampSDK.setValue(val) 
+            setValue(val)
+          }}
+          selected={value}>
+          {getTreeItemsFromData(ampSDK.getValues())}
+        </TreeView>
+      </div>
     </>
   )
 };
