@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Typography } from '@mui/material';
 import { AmpSDKProps, TreeItemData } from "../../lib/models/treeItemData";
 import { TreeItem, TreeView } from "@mui/lab";
@@ -26,25 +26,28 @@ const getTreeItemsFromData = (treeItems: TreeItemData[]) => {
 };
 
 const TreeViewSingle: React.FC<AmpSDKProps> = ({ ampSDK }) => {
+  const exHeight = useRef()
   const [value, setValue] = useState(ampSDK.getValue())
+  useEffect(() => {
+    console.log('exHeight ref:', exHeight.current );
+  }, [exHeight]) 
   return (
     <>
-      <Typography variant="body1" component="p">
-        Selected category: {value}
-        {
-          value != '' ? 
-          <IconButton aria-label="delete" onClick={() => {
-            console.log('set val')
-            setValue('')
-            ampSDK.clearValue()
-          }}>
-            <DeleteIcon />
-          </IconButton>
-          : '' 
-        }
-      </Typography>
-
-      <div className="tree-contain">
+      <div className="tree-contain" ref={exHeight}>
+        <Typography variant="body1" component="p">
+          Selected category: {value}
+          {
+            value != '' ? 
+            <IconButton aria-label="delete" onClick={() => {
+              console.log('set val')
+              setValue('')
+              ampSDK.clearValue()
+            }}>
+              <DeleteIcon />
+            </IconButton>
+            : '' 
+          }
+        </Typography>
         <TreeView
           defaultCollapseIcon={<ExpandMoreIcon />}
           defaultExpandIcon={<ChevronRightIcon />}
