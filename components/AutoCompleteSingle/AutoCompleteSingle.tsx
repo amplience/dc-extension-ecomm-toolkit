@@ -16,6 +16,12 @@ const AutoCompleteSingle: React.FC<AmpSDKProps> = ({ ampSDK }) => {
         ampSDK.setValue(val)
         setValue(val)
       }}
+      onClose={() => {
+        ampSDK.setHeight(70)
+      }}
+      onOpen={() => {
+        ampSDK.setHeight(540)
+      }}
       onEmptied={ampSDK.clearValue}
       renderInput={(params) => <TextField {...params} label={ampSDK.label} />}
     />
