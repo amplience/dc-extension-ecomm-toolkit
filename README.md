@@ -18,7 +18,7 @@
 
 ## Getting Started with Swiss Army Knife
 
-There are many ways one may use a Swiss Army Knife, but first you'll want to register the extension against an Amplience Dynamic Content HUB. Login to your Hub and head to Development > Extensions and click the "Register" button.
+There are many ways one may use a Swiss Army Knife, but first you'll want to register the extension against an Amplience Dynamic Content Hub. Login to your Hub and head to Development > Extensions and click the "Register" button.
 
 ![Register Start](media/register-button.png)
 
@@ -27,6 +27,32 @@ Under the setup tab, enter the following (URL should be `https://dc-extension-ca
 
 ![Extension Setup](media/ext-setup.png)
 
+### Host your own Setup
+You can also clone this repository and deploy to services such as Vercel.
+
+```bash
+$ gh repo clone amplience/dc-extension-ecom-swissarmyknife
+$ cd dc-extension-ecom-swissarmyknife
+$ vercel deploy
+Vercel CLI 24.0.0
+? Set up and deploy “~/Workspace/amplience/dc-extension-ecom-swissarmyknife”? [Y/n] y
+? Which scope do you want to deploy to? zzzzz
+? Link to existing project? [y/N] n
+? What’s your project’s name? dc-extension-ecom-swissarmyknife
+? In which directory is your code located? ./
+Auto-detected Project Settings (Next.js):
+- Build Command: next build
+- Output Directory: Next.js default
+- Development Command: next dev --port $PORT
+? Want to override the settings? [y/N] n
+🔗  Linked to zzzzz/dc-extension-ecom-swissarmyknife (created .vercel)
+🔍  Inspect: https://vercel.com/zzzzz/dc-extension-ecom-swissarmyknife/xxxxxx [1s]
+✅  Production: https://dc-extension-ecom-swissarmyknife-yyyyy.vercel.app [copied to clipboard] [2m]
+📝  Deployed to production. Run `vercel --prod` to overwrite later (https://vercel.link/2F).
+💡  To change the domain or build command, go to https://vercel.com/zzzzz/dc-extension-ecom-swissarmyknife/settings
+
+You can then use the new depolyment URL in your extension configuration.
+
 ### Extension Permissions Settings
 Under the Permissions tab, select the following:
 
@@ -34,9 +60,11 @@ Under the Permissions tab, select the following:
 
 ### Extensions Installation Parameters
 
+#### Installation Parameters only config
+
 Installation Parameters is where you'll enter your E-comm platform-specific environment settings and credentials. If you're on SFCC, they will look like the following:
 
-``` bash
+```json
 {
   "api_url": "https://YOURINSTANCE.dx.commercecloud.salesforce.com",
   "auth_url": "https://account.demandware.com/dwsso/oauth2/access_token",
@@ -47,6 +75,10 @@ Installation Parameters is where you'll enter your E-comm platform-specific envi
 }
 ```
 N.B. that the `api_token` needs to be base64 encoded.
+
+#### Installation parameters using a configuration Content Item
+
+
 
 ### Extension Snippets
 
@@ -60,7 +92,7 @@ Under the Snippets tab, add snippets using each of the following:
 
 #### User Segments - Multi select - object
 
-``` json
+```json
 {
   "title": "User Segments",
   "description": "Multi-select User Segments and store as {name:string,id:string}",
@@ -91,9 +123,29 @@ Under the Snippets tab, add snippets using each of the following:
   }
 }
 ```
+
+Sample content:
+
+```json
+{
+  "content": {
+    "items": [
+      {
+        "id": "2",
+        "name": "Big Spenders"
+      },
+      {
+        "id": "1",
+        "name": "VIP"
+      }
+    ]
+  }
+}
+```
+
 #### User Segments - Multi select - string
 
-``` json
+```json
 {
   "title": "User Groups",
   "description": "Multi-select User Segments and store as string",
@@ -115,9 +167,22 @@ Under the Snippets tab, add snippets using each of the following:
 }
 ```
 
+Sample content:
+
+```json
+{
+  "content": {
+    "items": [
+      "1",
+      "2"
+    ]
+  }
+}
+```
+
 #### Category - Single Select - object
 
-``` json
+```json
 {
   "title": "Category",
   "description": "Single-select Category and store Name,ID as {name:string,id:string}",
@@ -148,9 +213,22 @@ Under the Snippets tab, add snippets using each of the following:
 }
 ```
 
+Sample content:
+
+```json
+{
+  "content": {
+    "propertyName": {
+      "name": "(bath-utilities) Bath Utilities",
+      "id": "24"
+    }
+  }
+}
+```
+
 #### Category - Single Select - string
 
-``` json
+```json
 {
   "title": "Category",
   "description": "Single-select Category and store ID as string",
@@ -162,6 +240,17 @@ Under the Snippets tab, add snippets using each of the following:
       "view": "single",
       "data": "category",
       "type": "string"
+    }
+  }
+}
+```
+
+Sample content:
+
+```json
+{
+  "content": {
+    "propertyName": "24"
     }
   }
 }
@@ -169,7 +258,7 @@ Under the Snippets tab, add snippets using each of the following:
 
 #### Category - Single Select - enforced string
 
-``` json
+```json
 {
   "title": "Category",
   "description": "Single-select Category and store ID as string",
@@ -186,9 +275,21 @@ Under the Snippets tab, add snippets using each of the following:
   }
 }
 ```
+
+Sample content:
+
+```json
+{
+  "content": {
+    "propertyName": "category/24"
+    }
+  }
+}
+```
+
 #### Category - Single Select Tree - string
 
-``` json 
+```json 
 {
   "title": "Category",
   "description": "Single-select Category Tree and store ID as string",
@@ -205,9 +306,20 @@ Under the Snippets tab, add snippets using each of the following:
 }
 ```
 
+Sample content:
+
+```json
+{
+  "content": {
+    "propertyName": "24"
+    }
+  }
+}
+```
+
 #### Category - Single Select Tree - enforced string
 
-``` json 
+```json 
 {
   "title": "Category",
   "description": "Single-select Category Tree and store ID as string",
@@ -225,6 +337,15 @@ Under the Snippets tab, add snippets using each of the following:
 }
 ```
 
- 
+Sample content:
+
+```json
+{
+  "content": {
+    "propertyName": "category/24"
+    }
+  }
+}
+```
  
  
