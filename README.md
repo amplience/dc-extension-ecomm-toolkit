@@ -79,7 +79,89 @@ N.B. that the `api_token` needs to be base64 encoded.
 
 #### Installation parameters using a configuration Content Item
 
+It's also possible to content manage the configuration. You can create configuration object using the following schema (SFCC example):
 
+```json
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$id": "https://demostore.amplience.com/site/integration/sfcc",
+
+	"title": "SFCC integration",
+	"description": "Description",
+
+	"allOf": [
+		{
+			"$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+		}
+	],
+	
+	"type": "object",
+	"properties": {
+		"api_url": {
+			"title": "Base API URL",
+			"type": "string",
+			"minLength": 0,
+			"maxLength": 100
+		},
+		"auth_url": {
+			"title": "Oauth URL",
+			"type": "string",
+			"minLength": 0,
+			"maxLength": 100
+		},
+		"api_token": {
+			"title": "Shopper API token",
+			"type": "string",
+			"minLength": 0,
+			"maxLength": 100
+		},
+		"site_id": {
+			"title": "Site ID",
+			"type": "string",
+			"minLength": 0,
+			"maxLength": 50
+		},
+		"client_id": {
+			"title": "Client ID",
+			"type": "string",
+			"minLength": 0,
+			"maxLength": 50
+		},
+		"client_secret": {
+			"title": "Client secret",
+			"type": "string",
+			"minLength": 0,
+			"maxLength": 100
+		}
+	},
+	"propertyOrder": [
+		"api_url",
+		"auth_url",
+		"api_token",
+		"site_id",
+		"client_id",
+		"client_secret"
+	]
+}
+```
+
+Content Item in Dynamic Content would look like the following:
+
+![Config Object](media/config-object.png)
+
+You then need to specify the Delivery Key for that configuration object to be taken into account as the default one with `aria/integration/default`:
+
+![Delivery Key](media/delivery-key.png)
+
+Once the configuration object is setup, you can simply configure your installation parameters with the following:
+
+```json
+{
+  "config_locator": "<hubname>:default"
+}
+```
+
+This will allow you to quickly switch from one configuration to another.
 
 ### Extension Snippets
 
