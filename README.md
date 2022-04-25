@@ -145,9 +145,18 @@ It's also possible to content manage the configuration. You can create configura
 }
 ```
 
-Content Item in Dynamic Content would look like the following:
+Content Item in Dynamic Content would look like the following (SFCC example):
 
 ![Config Object](media/config-object.png)
+
+Example for CommerceTools:
+
+![Config Object CT](media/config-object-ct.png)
+
+Example for BigCommerce:
+
+![Config Object BC](media/config-object-bc.png)
+
 
 You then need to specify the Delivery Key for that configuration object to be taken into account as the default one with `aria/integration/default`:
 
