@@ -252,7 +252,6 @@ Sample content:
 {
   "content": {
     "propertyName": "24"
-    }
   }
 }
 ```
@@ -283,7 +282,6 @@ Sample content:
 {
   "content": {
     "propertyName": "category/24"
-    }
   }
 }
 ```
@@ -313,7 +311,6 @@ Sample content:
 {
   "content": {
     "propertyName": "24"
-    }
   }
 }
 ```
@@ -344,7 +341,6 @@ Sample content:
 {
   "content": {
     "propertyName": "category/24"
-    }
   }
 }
 ```
