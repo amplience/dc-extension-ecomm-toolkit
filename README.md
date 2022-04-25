@@ -50,6 +50,7 @@ Auto-detected Project Settings (Next.js):
 ✅  Production: https://dc-extension-ecom-swissarmyknife-yyyyy.vercel.app [copied to clipboard] [2m]
 📝  Deployed to production. Run `vercel --prod` to overwrite later (https://vercel.link/2F).
 💡  To change the domain or build command, go to https://vercel.com/zzzzz/dc-extension-ecom-swissarmyknife/settings
+```
 
 You can then use the new depolyment URL in your extension configuration.
 
