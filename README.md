@@ -23,7 +23,7 @@ There are many ways one may use a Swiss Army Knife, but first you'll want to reg
 ![Register Start](media/register-button.png)
 
 ### Base Extension Setup 
-Under the setup tab, enter the following (URL should be `https://dc-extension-category-selector.vercel.app/`) 
+Under the setup tab, enter the following (URL should be `https://dc-extension-ecom-swissarmyknife.vercel.app`) 
 
 ![Extension Setup](media/ext-setup.png)
 
