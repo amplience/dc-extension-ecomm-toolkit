@@ -11,10 +11,16 @@ const AutoCompleteMultiple: React.FC<AmpSDKProps> = ({ ampSDK }) => {
       options={ampSDK.getValues()}
       getOptionLabel={(option) => option.name}
       value={value}
-      sx={{ width: '100%' }}
+      sx={{ width: '99%' }}
       onChange={(event, val) => {
         ampSDK.setValue(val)
         setValue(val) 
+      }}
+      onClose={() => {
+        ampSDK.setHeight(100)
+      }}
+      onOpen={() => {
+        ampSDK.setHeight(540)
       }}
       renderInput={(params) => (
         <TextField

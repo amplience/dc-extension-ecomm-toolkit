@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, createRef, useEffect } from "react";
 import { Typography } from '@mui/material';
 import { AmpSDKProps, TreeItemData } from "../../lib/models/treeItemData";
 import { TreeItem, TreeView } from "@mui/lab";
@@ -26,30 +26,55 @@ const getTreeItemsFromData = (treeItems: TreeItemData[]) => {
 };
 
 const TreeViewSingle: React.FC<AmpSDKProps> = ({ ampSDK }) => {
+  const ref = createRef<HTMLDivElement>()
   const [value, setValue] = useState(ampSDK.getValue())
+  const [totalHeight, setTotalHeight] = useState(200)
+  const [trigger, setTrigger] = useState(0.1)
+
+  const updateHeight = () => {
+    setTimeout(()=> {
+      setTrigger(Math.random())
+    }, 300)
+  }
+  useEffect(() => {
+    const { current } = ref
+    setTotalHeight(current.clientHeight)
+    if(ampSDK !== undefined){
+      ampSDK.setHeight(current.clientHeight)
+    }
+  }, [trigger])
+
   return (
     <>
-      <Typography variant="body1" component="p">
-        Selected category: {value}
-        {
-          value != '' ? 
-          <IconButton aria-label="delete" onClick={ampSDK.clearValue}>
-            <DeleteIcon />
-          </IconButton>
-          : '' 
-        }
-      </Typography>
-
-      <TreeView
-        defaultCollapseIcon={<ExpandMoreIcon />}
-        defaultExpandIcon={<ChevronRightIcon />}
-        onNodeSelect={(event, val) => { 
-          ampSDK.setValue(val) 
-          setValue(val)
-        }}
-        selected={value}>
-        {getTreeItemsFromData(ampSDK.getValues())}
-      </TreeView>
+      <div ref={ref}>
+        <Typography variant="body1" component="p">
+          Selected category: {value}
+          {
+            value != '' ? 
+            <IconButton aria-label="delete" onClick={() => {
+              setValue('')
+              ampSDK.clearValue()
+            }}>
+              <DeleteIcon />
+            </IconButton>
+            : '' 
+          }
+        </Typography>
+        <TreeView
+          defaultCollapseIcon={<ExpandMoreIcon />}
+          defaultExpandIcon={<ChevronRightIcon />}
+          onNodeSelect={(event, val) => { 
+            ampSDK.setValue(val) 
+            setValue(val)
+          }}
+          onClick={updateHeight}
+          /* onTransitionEnd={()=>{ this does not fire consistently
+            console.log('ended')
+          }} */
+          selected={value}>
+          {getTreeItemsFromData(ampSDK.getValues())}
+        </TreeView>
+      </div>
     </>
   )
 };
