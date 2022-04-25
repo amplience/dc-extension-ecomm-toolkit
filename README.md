@@ -93,6 +93,12 @@ Under the Snippets tab, add snippets using each of the following:
 
 #### User Segments - Multi select - object
 
+View screenshot:
+
+![Multi select](media/multi.png)
+
+Schema:
+
 ```json
 {
   "title": "User Segments",
@@ -146,6 +152,12 @@ Sample content:
 
 #### User Segments - Multi select - string
 
+View screenshot:
+
+![Multi Select](media/multi.png)
+
+Schema:
+
 ```json
 {
   "title": "User Groups",
@@ -182,6 +194,12 @@ Sample content:
 ```
 
 #### Category - Single Select - object
+
+View screenshot:
+
+![Single Select](media/single.png)
+
+Schema:
 
 ```json
 {
@@ -229,6 +247,12 @@ Sample content:
 
 #### Category - Single Select - string
 
+View screenshot:
+
+![Single Select](media/single.png)
+
+Schema:
+
 ```json
 {
   "title": "Category",
@@ -257,6 +281,12 @@ Sample content:
 ```
 
 #### Category - Single Select - enforced string
+
+View screenshot:
+
+![Single Select](media/single.png)
+
+Schema:
 
 ```json
 {
@@ -288,6 +318,12 @@ Sample content:
 
 #### Category - Single Select Tree - string
 
+View screenshot:
+
+![Single Select Tree](media/tree-single.png)
+
+Schema:
+
 ```json 
 {
   "title": "Category",
@@ -316,6 +352,12 @@ Sample content:
 ```
 
 #### Category - Single Select Tree - enforced string
+
+View screenshot:
+
+![Single Select Tree](media/tree-single.png)
+
+Schema:
 
 ```json 
 {
