@@ -1,7 +1,6 @@
-import { Identifiable, paginator } from "@amplience/dc-demostore-integration";
+import { Identifiable, flattenCategories } from "@amplience/dc-demostore-integration";
 import { ContentFieldExtension, init } from 'dc-extensions-sdk';
-import { DynamicContent } from "dc-management-sdk-js";
-import { getMegaMenu, getCategories, getCustomerGroups } from "./api";
+import commerceAPI from "./api";
 import { ExtParameters, FieldModel } from "./models/extensionParams";
 import _ from 'lodash'
 
@@ -32,40 +31,18 @@ const amplienceSDK = async () => {
 
     let { instance, installation } = sdk.params as ExtParameters
 
-    // let's try to figure out what schema these parameters match, if any.
-    const dc = new DynamicContent({}, {}, sdk.client);
-    const hub = await dc.hubs.get(sdk.hub.id)
-    const schemas = await paginator(hub.related.contentTypeSchema.list, { status: 'ACTIVE' })
-
-    // schemas.forEach(schema => {
-    //     if (schema.schemaId.indexOf('/site/integration') > -1) {
-    //         let body = JSON.parse(schema.body)
-    //         if (body.properties) {
-    //             let missingKeys = _.difference(Object.keys(body.properties), Object.keys(installation))
-    //             if (missingKeys.length === 0) {
-    //                 installation = {
-    //                     ...installation,
-    //                     _meta: {
-    //                         schema: schema.schemaId,
-    //                         deliveryId: schema.id
-    //                     }
-    //                 }
-    //             }
-    //         }
-    //     }
-    // })
-
     if (instance.data === 'category') {
         if (instance.view === 'tree') {
-            values = await getMegaMenu(installation)
+            values = await commerceAPI.getMegaMenu(installation)
         }
         else { // a.view === 'single'
-            values = await getCategories(installation)
+            let megaMenu: any[] = await commerceAPI.getMegaMenu(installation)
+            values = flattenCategories(megaMenu).map(cat => ({ name: `(${cat.slug}) ${cat.name}`, id: cat.id }))
             value = instance.type === 'string' && value ? values.find(opt => cleanValue(value) == opt.id) : value
         }
     }
     else { // a.data === 'customerGroups'
-        values = await getCustomerGroups(installation)
+        values = await commerceAPI.getCustomerGroups(installation)
         value = instance.type === 'string' && value ? values.filter(opt => value.includes(opt.id)) : value
     }
 
