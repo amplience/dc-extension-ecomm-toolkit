@@ -1,6 +1,6 @@
 import { Identifiable, flattenCategories } from "@amplience/dc-demostore-integration";
 import { ContentFieldExtension, init } from 'dc-extensions-sdk';
-import { commerceApi } from "../pages/api";
+import { getCommerceAPI } from "../pages/api";
 import { ExtParameters, FieldModel } from "./models/extensionParams";
 import _ from 'lodash'
 
@@ -30,7 +30,7 @@ const amplienceSDK = async () => {
     // end
 
     let { instance, installation } = sdk.params as ExtParameters
-    const commerceAPI = commerceApi(installation)
+    const commerceAPI = getCommerceAPI(installation)
 
     if (instance.data === 'category') {
         if (instance.view === 'tree') {
