@@ -1,6 +1,5 @@
-import { Identifiable, flattenCategories } from "@amplience/dc-demostore-integration";
+import { Identifiable, flattenCategories, getCommerceAPI } from "@amplience/dc-demostore-integration";
 import { ContentFieldExtension, init } from 'dc-extensions-sdk';
-import { getCommerceAPI } from "../pages/api";
 import { ExtParameters, FieldModel } from "./models/extensionParams";
 import _ from 'lodash'
 
