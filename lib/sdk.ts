@@ -29,7 +29,7 @@ const amplienceSDK = async () => {
     // end
 
     let { instance, installation } = sdk.params as ExtParameters
-    const commerceAPI = getCommerceAPI(installation)
+    const commerceAPI = await getCommerceAPI(installation)
 
     if (instance.data === 'category') {
         if (instance.view === 'tree') {
