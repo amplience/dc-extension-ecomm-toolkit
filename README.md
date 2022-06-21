@@ -1,8 +1,8 @@
 [![Amplience Dynamic Content](media/header.png)](https://amplience.com/dynamic-content)
 
-# eComm Swiss Army Knife
+# eComm Toolkit
 
-`dc-extension-ecom-swissarmyknife` is an extension written in React/MUI/Typescript for Amplience Dynamic Content that provides an eassy way to interface with 'X' ecomm platform for multiple use cases. The extension currently supports SFCC, with more eComm support in the works. Here's a list of high-level current/future features:
+`dc-extension-ecomm-toolkit` is an extension written in React/MUI/Typescript for Amplience Dynamic Content that provides an eassy way to interface with 'X' ecomm platform for multiple use cases. The extension currently supports SFCC, with more eComm support in the works. Here's a list of high-level current/future features:
 
 ## Supported e-comm platforms
 - Salesforce Commerce Cloud
@@ -16,14 +16,14 @@
 - Campaign/Promo selector (future release)
 - Product Finder/Selector (future release)
 
-## Getting Started with Swiss Army Knife
+## Getting Started with the eComm Toolkit
 
-There are many ways one may use a Swiss Army Knife, but first you'll want to register the extension against an Amplience Dynamic Content Hub. Login to your Hub and head to Development > Extensions and click the "Register" button.
+There are many ways one may use a toolkit, but first you'll want to register the extension against an Amplience Dynamic Content Hub. Login to your Hub and head to Development > Extensions and click the "Register" button.
 
 ![Register Start](media/register-button.png)
 
 ### Base Extension Setup 
-Under the setup tab, enter the following (URL should be `https://dc-extension-ecom-swissarmyknife.vercel.app`) 
+Under the setup tab, enter the following (URL should be `https://dc-extension-ecomm-toolkit.vercel.app`) 
 
 ![Extension Setup](media/ext-setup.png)
 
@@ -31,25 +31,25 @@ Under the setup tab, enter the following (URL should be `https://dc-extension-ec
 You can also clone this repository and deploy to services such as Vercel.
 
 ```bash
-$ gh repo clone amplience/dc-extension-ecom-swissarmyknife
-$ cd dc-extension-ecom-swissarmyknife
+$ gh repo clone amplience/dc-extension-ecomm-toolkit
+$ cd dc-extension-ecomm-toolkit
 $ vercel deploy
 Vercel CLI 24.0.0
-? Set up and deploy “~/Workspace/amplience/dc-extension-ecom-swissarmyknife”? [Y/n] y
+? Set up and deploy “~/Workspace/amplience/dc-extension-ecomm-toolkit”? [Y/n] y
 ? Which scope do you want to deploy to? zzzzz
 ? Link to existing project? [y/N] n
-? What’s your project’s name? dc-extension-ecom-swissarmyknife
+? What’s your project’s name? dc-extension-ecomm-toolkit
 ? In which directory is your code located? ./
 Auto-detected Project Settings (Next.js):
 - Build Command: next build
 - Output Directory: Next.js default
 - Development Command: next dev --port $PORT
 ? Want to override the settings? [y/N] n
-🔗  Linked to zzzzz/dc-extension-ecom-swissarmyknife (created .vercel)
-🔍  Inspect: https://vercel.com/zzzzz/dc-extension-ecom-swissarmyknife/xxxxxx [1s]
-✅  Production: https://dc-extension-ecom-swissarmyknife-yyyyy.vercel.app [copied to clipboard] [2m]
+🔗  Linked to zzzzz/dc-extension-ecomm-toolkit (created .vercel)
+🔍  Inspect: https://vercel.com/zzzzz/dc-extension-ecomm-toolkit/xxxxxx [1s]
+✅  Production: https://dc-extension-ecomm-toolkit-yyyyy.vercel.app [copied to clipboard] [2m]
 📝  Deployed to production. Run `vercel --prod` to overwrite later (https://vercel.link/2F).
-💡  To change the domain or build command, go to https://vercel.com/zzzzz/dc-extension-ecom-swissarmyknife/settings
+💡  To change the domain or build command, go to https://vercel.com/zzzzz/dc-extension-ecomm-toolkit/settings
 ```
 
 You can then use the new depolyment URL in your extension configuration.
@@ -176,7 +176,7 @@ This will allow you to quickly switch from one configuration to another.
 
 ### Extension Snippets
 
-Since the Swiss Army knife requires a number of "Instance Parameters", we recommend providing a number of extension snippets for ease of use and to ensure functionality. By including Snippets in an extension registration, you'll be able to quickly configure properties when you're editing/creating a Content Schema that are automatically associated with an extension.
+Since the eComm Toolkit requires a number of "Instance Parameters", we recommend providing a number of extension snippets for ease of use and to ensure functionality. By including Snippets in an extension registration, you'll be able to quickly configure properties when you're editing/creating a Content Schema that are automatically associated with an extension.
 
 ![Extension Snippets](media/ext-snipSelections.png)
 
@@ -213,7 +213,7 @@ Schema:
     }
   },
   "ui:extension": {
-    "name": "swiss-army-knife",
+    "name": "ecomm-toolkit",
     "params": {
       "label": "User Segments",
       "view": "multi",
@@ -262,7 +262,7 @@ Schema:
     "type": "string"
   },
   "ui:extension": {
-    "name": "swiss-army-knife",
+    "name": "ecomm-toolkit",
     "params": {
       "label": "User Segments",
       "view": "multi",
@@ -314,7 +314,7 @@ Schema:
     "name"
   ],
   "ui:extension": {
-    "name": "swiss-army-knife",
+    "name": "ecomm-toolkit",
     "params": {
       "label": "Category",
       "view": "single",
@@ -352,7 +352,7 @@ Schema:
   "description": "Single-select Category and store ID as string",
   "type": "string",
   "ui:extension": {
-    "name": "swiss-army-knife",
+    "name": "ecomm-toolkit",
     "params": {
       "label": "Category",
       "view": "single",
@@ -388,7 +388,7 @@ Schema:
   "type": "string",
   "pattern": "category\/.*",
   "ui:extension": {
-    "name": "swiss-army-knife",
+    "name": "ecomm-toolkit",
     "params": {
       "label": "Category",
       "view": "single",
@@ -423,7 +423,7 @@ Schema:
   "description": "Single-select Category Tree and store ID as string",
   "type": "string",
   "ui:extension": {
-    "name": "swiss-army-knife",
+    "name": "ecomm-toolkit",
     "params": {
       "label": "Category",
       "view": "tree",
@@ -459,7 +459,7 @@ Schema:
   "type": "string",
   "pattern": "category\/.*",
   "ui:extension": {
-    "name": "swiss-army-knife",
+    "name": "ecomm-toolkit",
     "params": {
       "label": "Category",
       "view": "tree",
