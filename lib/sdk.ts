@@ -31,6 +31,8 @@ const amplienceSDK = async () => {
 
     let { instance, installation } = sdk.params as ExtParameters
 
+    console.log(`installation params: ${JSON.stringify(installation, undefined, 4)}`)
+
     if (instance.data === 'category') {
         if (instance.view === 'tree') {
             values = await getCommerceApi(installation).getMegaMenu({})
