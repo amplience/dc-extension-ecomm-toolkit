@@ -1,8 +1,8 @@
-import { CodecConfiguration } from "@amplience/dc-demostore-integration";
+import { CommerceCodec } from "@amplience/dc-demostore-integration";
 
 export interface ExtParameters {
     instance: InstanceParams;
-    installation: CodecConfiguration
+    installation: CommerceCodec
 }
 
 export type InstanceParams = {
