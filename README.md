@@ -23,7 +23,7 @@ There are many ways one may use a toolkit, but first you'll want to register the
 ![Register Start](media/register-button.png)
 
 ### Base Extension Setup 
-Under the setup tab, enter the following (URL should be `https://dc-extension-ecomm-toolkit.vercel.app`) 
+Under the setup tab, enter the following (URL should be `https://ecomm-toolkit.dc-demostore.com/`) 
 
 ![Extension Setup](media/ext-setup.png)
 
