@@ -10,7 +10,7 @@
     "ver": "vercel dev --listen 3002"
   },
   "dependencies": {
-    "@amplience/dc-demostore-integration": "git+https://github.com/amplience/dc-demostore-integration.git#fix",
+    "@amplience/dc-demostore-integration": "git+https://github.com/amplience/dc-demostore-integration.git#r2",
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
     "@mui/icons-material": "^5.6.0",
