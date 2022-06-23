@@ -1,6 +1,6 @@
 import { Identifiable, flattenCategories } from "@amplience/dc-demostore-integration";
 import { ContentFieldExtension, init } from 'dc-extensions-sdk';
-import { getCommerceApi } from "../pages/api";
+import { initCommerceApi } from "../pages/api";
 import { ExtParameters, FieldModel } from "./models/extensionParams";
 import _ from 'lodash'
 
@@ -30,21 +30,22 @@ const amplienceSDK = async () => {
     // end
 
     let { instance, installation } = sdk.params as ExtParameters
+    let commerceApi = await initCommerceApi(installation) 
 
     console.log(`installation params: ${JSON.stringify(installation, undefined, 4)}`)
 
     if (instance.data === 'category') {
         if (instance.view === 'tree') {
-            values = await getCommerceApi(installation).getMegaMenu({})
+            values = await commerceApi.getMegaMenu({})
         }
         else { // a.view === 'single'
-            let megaMenu: any[] = await getCommerceApi(installation).getMegaMenu({})
+            let megaMenu: any[] = await commerceApi.getMegaMenu({})
             values = flattenCategories(megaMenu).map(cat => ({ name: `(${cat.slug}) ${cat.name}`, id: cat.id }))
             value = instance.type === 'string' && value ? values.find(opt => cleanValue(value) == opt.id) : value
         }
     }
     else { // a.data === 'customerGroups'
-        values = await getCommerceApi(installation).getCustomerGroups({})
+        values = await commerceApi.getCustomerGroups({})
         value = instance.type === 'string' && value ? values.filter(opt => value.includes(opt.id)) : value
     }
 
