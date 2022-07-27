@@ -5,10 +5,15 @@
 `dc-extension-ecomm-toolkit` is an extension written in React/MUI/Typescript for Amplience Dynamic Content that provides an eassy way to interface with 'X' ecomm platform for multiple use cases. The extension currently supports SFCC, with more eComm support in the works. Here's a list of high-level current/future features:
 
 ## Supported e-comm platforms
-- Salesforce Commerce Cloud
-- Commercetools (future release)
-- BigCommerce (future release)
-- TODO etc?
+- akeneo
+- bigcommerce
+- commercetools
+- constructor.io (prototype)
+- elasticpath
+- fabric
+- hybris
+- rest (json flat file)
+- sfcc
 
 ## Supported features
 - Category selector
