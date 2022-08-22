@@ -82,6 +82,8 @@ Installation Parameters is where you'll enter your E-comm platform-specific envi
 ```
 N.B. that the `api_token` needs to be base64 encoded.
 
+N.B. (part 2): `api_token` has been deprecated.  It is kept for backwards compatibility, but if it is not populated, it will be computed automatically based on `client_id` and `client_secret`.
+
 You can find more information about the possibilities on the [dc-demostore-integration](https://github.com/amplience/dc-demostore-integration) project.
 
 #### Installation parameters using a configuration Content Item
