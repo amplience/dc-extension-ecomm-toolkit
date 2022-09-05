@@ -13,8 +13,12 @@ const AutoCompleteSingle: React.FC<AmpSDKProps> = ({ ampSDK }) => {
       sx={{ width: '100%', marginTop: '6px' }}
       value={value}
       onChange={(event, val) => {
-        ampSDK.setValue({...val, name: val.name.replace(/\(.*\)\s/, '')})
-        setValue(val)
+        if(val !== null){
+          ampSDK.setValue({...val, name: val.name.replace(/\(.*\)\s/, '')})
+          setValue(val)
+        }else{
+          ampSDK.clearValue()
+        }
       }}
       onClose={() => {
         ampSDK.setHeight(70)
@@ -22,7 +26,6 @@ const AutoCompleteSingle: React.FC<AmpSDKProps> = ({ ampSDK }) => {
       onOpen={() => {
         ampSDK.setHeight(540)
       }}
-      onEmptied={ampSDK.clearValue}
       renderInput={(params) => <TextField {...params} label={ampSDK.label} />}
     />
   )
