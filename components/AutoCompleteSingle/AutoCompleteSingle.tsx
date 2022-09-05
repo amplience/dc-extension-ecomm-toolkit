@@ -18,6 +18,7 @@ const AutoCompleteSingle: React.FC<AmpSDKProps> = ({ ampSDK }) => {
           setValue(val)
         }else{
           ampSDK.clearValue()
+          setValue({ name: '', id: '' })
         }
       }}
       onClose={() => {
