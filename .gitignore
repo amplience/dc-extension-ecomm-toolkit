@@ -34,3 +34,5 @@ pnpm-lock.yaml
 # vercel
 .vercel
 tsconfig.tsbuildinfo
+
+.vercel
