@@ -2,24 +2,15 @@
 
 # eComm Toolkit
 
-`dc-extension-ecomm-toolkit` is an extension written in React/MUI/Typescript for Amplience Dynamic Content that provides an eassy way to interface with 'X' ecomm platform for multiple use cases. The extension currently supports SFCC, with more eComm support in the works. Here's a list of high-level current/future features:
+`dc-extension-ecomm-toolkit` is an extension written in React/MUI/Typescript for Amplience Dynamic Content that provides an easy way to interface with eComm platforms for multiple use cases. The extension currently supports SFCC, with more eComm support in the works. Here's a list of high-level current features:
 
-## Supported e-comm platforms
-- akeneo
-- bigcommerce
-- commercetools
-- constructor.io (prototype)
-- elasticpath
-- fabric
-- hybris
-- rest (json flat file)
-- sfcc
+## Supported platforms
+- Salesforce Commerce Cloud (SFCC)
+- demostore (JSON Flat File)
 
 ## Supported features
 - Category selector
 - User Segment selector
-- Campaign/Promo selector (future release)
-- Product Finder/Selector (future release)
 
 ## Getting Started with the eComm Toolkit
 
@@ -28,7 +19,7 @@ There are many ways one may use a toolkit, but first you'll want to register the
 ![Register Start](media/register-button.png)
 
 ### Base Extension Setup 
-Under the setup tab, enter the following (URL should be `https://ecomm-toolkit.dc-demostore.com/`) 
+Under the setup tab, enter the following (URL should be `https://ecomm-toolkit.dc-demostore.com`) 
 
 ![Extension Setup](media/ext-setup.png)
 
@@ -66,120 +57,34 @@ Under the Permissions tab, select the following:
 
 ### Extensions Installation Parameters
 
-#### Installation Parameters only config
+#### Salesforce Commerce Cloud - SFCC
 
-Installation Parameters is where you'll enter your E-comm platform-specific environment settings and credentials. If you're on SFCC, they will look like the following:
+Installation Parameters is where you'll enter your eComm platform-specific environment settings and credentials. If you're on SFCC, they will look like the following:
 
 ```json
 {
+  "vendor": "sfcc",
   "api_url": "https://YOURINSTANCE.dx.commercecloud.salesforce.com",
   "auth_url": "https://account.demandware.com/dwsso/oauth2/access_token",
-  "api_token": "clientId:secret",
   "client_id": "xxxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-  "client_secret": "TheClientPWYouSetInAccountMgr"
-  "site_id": "RefArchGlobal",
+  "client_secret": "TheClientPWYouSetInAccountMgr",
+  "site_id": "RefArchGlobal"
 }
 ```
-N.B. that the `api_token` needs to be base64 encoded.
 
-N.B. (part 2): `api_token` has been deprecated.  It is kept for backwards compatibility, but if it is not populated, it will be computed automatically based on `client_id` and `client_secret`.
+#### Demostore - JSON Flat File
 
-You can find more information about the possibilities on the [dc-demostore-integration](https://github.com/amplience/dc-demostore-integration) project.
-
-#### Installation parameters using a configuration Content Item
-
-It's also possible to content manage the configuration. You can create configuration object using the following schema (SFCC example):
+If you're using Demostore with Flat File, installation paraneters will look like the following:
 
 ```json
 {
-	"$schema": "http://json-schema.org/draft-07/schema#",
-	"$id": "https://demostore.amplience.com/site/integration/sfcc",
-
-	"title": "SFCC integration",
-	"description": "Description",
-
-	"allOf": [
-		{
-			"$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
-		}
-	],
-	
-	"type": "object",
-	"properties": {
-		"api_url": {
-			"title": "Base API URL",
-			"type": "string",
-			"minLength": 0,
-			"maxLength": 100
-		},
-		"auth_url": {
-			"title": "Oauth URL",
-			"type": "string",
-			"minLength": 0,
-			"maxLength": 100
-		},
-		"api_token": {
-			"title": "Shopper API token",
-			"type": "string",
-			"minLength": 0,
-			"maxLength": 100
-		},
-		"site_id": {
-			"title": "Site ID",
-			"type": "string",
-			"minLength": 0,
-			"maxLength": 50
-		},
-		"client_id": {
-			"title": "Client ID",
-			"type": "string",
-			"minLength": 0,
-			"maxLength": 50
-		},
-		"client_secret": {
-			"title": "Client secret",
-			"type": "string",
-			"minLength": 0,
-			"maxLength": 100
-		}
-	},
-	"propertyOrder": [
-		"api_url",
-		"auth_url",
-		"api_token",
-		"site_id",
-		"client_id",
-		"client_secret"
-	]
+    "productURL": "https://demostore-catalog.s3.us-east-2.amazonaws.com/products.json",
+    "categoryURL": "https://demostore-catalog.s3.us-east-2.amazonaws.com/categories.json",
+    "customerGroupURL": "https://demostore-catalog.s3.us-east-2.amazonaws.com/customerGroups.json",
+    "translationsURL": "https://demostore-catalog.s3.us-east-2.amazonaws.com/translations.json"
 }
+
 ```
-
-Content Item in Dynamic Content would look like the following (SFCC example):
-
-![Config Object](media/config-object.png)
-
-Example for CommerceTools:
-
-![Config Object CT](media/config-object-ct.png)
-
-Example for BigCommerce:
-
-![Config Object BC](media/config-object-bc.png)
-
-
-You then need to specify the Delivery Key for that configuration object to be taken into account as the default one with `aria/integration/default`:
-
-![Delivery Key](media/delivery-key.png)
-
-Once the configuration object is setup, you can simply configure your installation parameters with the following:
-
-```json
-{
-  "config_locator": "<hubname>:default"
-}
-```
-
-This will allow you to quickly switch from one configuration to another.
 
 ### Extension Snippets
 
@@ -187,7 +92,7 @@ Since the eComm Toolkit requires a number of "Instance Parameters", we recommend
 
 ![Extension Snippets](media/ext-snipSelections.png)
 
-The Instance Parameters are all included in the snippets and will drive how the extension looks and functions, and what type of data will be retrieved from your e-comm platform. 
+The Instance Parameters are all included in the snippets and will drive how the extension looks and functions, and what type of data will be retrieved from your eComm platform. 
 
 Under the Snippets tab, add snippets using each of the following:
 
@@ -486,10 +391,3 @@ Sample content:
   }
 }
 ```
- 
- 
- 
- 
- 
-
- 
