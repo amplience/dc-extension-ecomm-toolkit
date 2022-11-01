@@ -16,7 +16,7 @@
     "prepare-major-release": "run-s build version:major"
   },
   "dependencies": {
-    "@amplience/dc-demostore-integration": "git+https://github.com/amplience/dc-demostore-integration.git#r2",
+    "@amplience/dc-demostore-integration": "git+https://github.com/amplience/dc-demostore-integration.git#r2.1",
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
     "@mui/icons-material": "^5.6.0",
