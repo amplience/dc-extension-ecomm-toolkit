@@ -7,6 +7,7 @@ import Stack from '@mui/material/Stack';
 import AutoCompleteSingle from '../AutoCompleteSingle/AutoCompleteSingle';
 import AutoCompleteMultiple from '../AutoCompleteMultiple/AutoCompleteMultiple';
 import TreeViewSingle from '../TreeViewSingle/TreeViewSingle';
+import ProductSelector from '../ProductSelector';
 
 import amplienceSDK from '../../lib/sdk'
 
@@ -16,15 +17,20 @@ function App() {
   useEffect(() => {
     amplienceSDK().then(setAmpSDK)
     console.log('sdk', ampSDK)
+    console.log('data type', ampSDK?.data)
   }, [ampSDK]);
 
   let component = <></>
+  
+
   if (ampSDK?.view === 'single') {
     component = <AutoCompleteSingle ampSDK={ampSDK} />
   } else if (ampSDK?.view === 'multi') {
     component = <AutoCompleteMultiple ampSDK={ampSDK} />
   } else if (ampSDK?.view === 'tree') {
     component = <TreeViewSingle ampSDK={ampSDK} />
+  } else if (ampSDK?.view === 'product') {
+    component = <ProductSelector ampSDK={ampSDK} />
   } else {
     component =  <><CircularProgress /><div>Loading View..</div></>
   }
