@@ -26,6 +26,7 @@ const amplienceSDK = async () => {
     // data members
     let sdk: ContentFieldExtension = await init<ContentFieldExtension<FieldModel, ExtParameters>>({ debug: true })
     let value: any = await sdk.field.getValue()
+    let storedVal: any = await sdk.field.getValue()
     let values: any[] = []
     // end
 
@@ -57,6 +58,7 @@ const amplienceSDK = async () => {
         ...instance,
         getValue: () => value,
         getValues: () => values,
+        getStoredValue: () => storedVal,
 
         setValue: async (newValue: ValueType) => {
             if (newValue) {
