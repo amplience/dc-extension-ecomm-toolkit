@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import {
     Autocomplete,
     TextField,
@@ -11,13 +11,10 @@ import {
     IconButton,
     ImageList
 } from "@mui/material";
-import styled from "@emotion/styled";
 import SearchIcon from "@mui/icons-material/Search";
 import ProductTile from "../ProductTile";
+import SortableList from "../SortableList";
 import {AmpSDKProps} from "../../lib/models/treeItemData";
-import {DndProvider} from "react-dnd";
-import {HTML5Backend} from "react-dnd-html5-backend";
-import update from "immutability-helper";
 
 const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
     const [storedValue, setStoredValue] = useState(ampSDK.getStoredValue())
@@ -67,29 +64,7 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
         setSelectedProducts(selectedProducts.filter(p => p.index !== productTile.index))
     }
 
-    const moveTile = (dragIndex, hoverIndex) => {
-        const draggedTile = selectedProducts[dragIndex];
-        setSelectedProducts(
-            update(selectedProducts, {
-                $splice: [[dragIndex, 1], [hoverIndex, 0, draggedTile]]
-            })
-        );
-    };
-
-    useEffect(() => {
-        if(!mode) keywordInput.current.value = ''
-    }, [mode])
-
-    useEffect(() => {
-        console.log('results: ', results)
-        if(results.length) {ampSDK.setHeight(640)}
-        else if(results.length && selectedProducts.length){ampSDK.setHeight(880)}
-        else if(selectedProducts.length){ampSDK.setHeight(340)}
-    }, [results, ampSDK, selectedProducts])
-
-    // Whenever selectedProducts list changes, save to dc form
-    useEffect(() => {
-        //console.log('selected: ', selectedProducts)
+    const updateSelected = useCallback((selectedProducts) => {
         if(selectedProducts.length){
             switch (ampSDK?.type) {
                 case 'string':
@@ -119,7 +94,24 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
         }else{
             ampSDK.clearValue()
         }
-    }, [selectedProducts, ampSDK])
+    }, [ampSDK])
+
+    useEffect(() => {
+        if(!mode) keywordInput.current.value = ''
+    }, [mode])
+
+    useEffect(() => {
+        console.log('results: ', results)
+        if(results.length) {ampSDK.setHeight(640)}
+        else if(results.length && selectedProducts.length){ampSDK.setHeight(880)}
+        else if(selectedProducts.length){ampSDK.setHeight(340)}
+    }, [results, ampSDK, selectedProducts])
+
+    // Whenever selectedProducts list changes, save to dc form
+    useEffect(() => {
+        console.log('selected: ', selectedProducts)
+        updateSelected(selectedProducts)
+    }, [selectedProducts, ampSDK, updateSelected])
 
     // Process values stored in the dc form to put into selecteProducts
     useEffect( () => {
@@ -241,19 +233,7 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
                     <Typography variant="h3" fontSize={'10px'} fontWeight={'bold'} textTransform={'uppercase'}>
                         Selected Products
                     </Typography>
-                    <ImageList sx={{ width: '100%', height: 240 }} cols={5} rowHeight={120}>
-                        {selectedProducts.map((product: any, index: number) => {
-                            return (
-                                <ProductTile
-                                    key={index}
-                                    index={index}
-                                    product={product}
-                                    size={120}
-                                    moveTile={moveTile}
-                                    removeProduct={removeProduct} />
-                            )
-                        })} 
-                    </ImageList>
+                    <SortableList selectedProducts={selectedProducts} updateSelected={updateSelected} removeProduct={removeProduct} />
                 </>
                 : 
                 <></>

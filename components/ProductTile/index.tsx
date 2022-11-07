@@ -3,7 +3,6 @@ import React, {useRef} from 'react'
 import {Box, ImageListItem, Typography, IconButton} from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete';
 import styled from '@emotion/styled'
-import { useDrag, useDrop } from "react-dnd";
 
 const StyledItem = styled(Box)`
     cursor: pointer;
@@ -17,6 +16,7 @@ const StyledItem = styled(Box)`
         transition: all 0.8s ease;
     }
     .close-button {
+        color: #f11;
         position: absolute;
         top: 0;
         right: 0;
@@ -65,11 +65,9 @@ interface ProductTileProps {
 const ProductTile = (
     {
         product,
-        index,
         size,
         selectProduct = undefined,
         removeProduct = undefined,
-        moveTile = undefined
     }: ProductTileProps) => {
 
     const imageURL = product.variants[0].images[0].url
@@ -101,42 +99,9 @@ const ProductTile = (
             removeProduct(product)
         }
     }
-
-    /* const [, drop] = useDrop({
-        accept: dragType,
-        hover(item) {
-            if (!ref.current) {
-                return;
-            }
-            const dragIndex = item.index;
-            const hoverIndex = index;
-            // Don't replace items with themselves
-            if (dragIndex === hoverIndex) {
-                return;
-            }
-            // Move the content
-            if(moveTile !== undefined){
-                moveTile(dragIndex, hoverIndex);
-            }
-            // Update the index for dragged item directly to avoid flickering when half dragged
-            item.index = hoverIndex;
-        },
-    }) */
-
-    /* const [{ isDragging }, drag] = useDrag(() => ({
-        type: dragType,
-        item: { id: product.id, index },
-        collect: (monitor) => {
-            return {
-                isDragging: monitor.isDragging(),
-            };
-        },
-    })); */
-
-    //drag(drop(ref));
     
     return (
-        <StyledItem height={size}>
+        <StyledItem height={size} sx={removeProduct !== undefined ? {cursor: 'move'} : {}}>
             {close()}
             <ImageListItem ref={ref} onClick={handleClick}>
                 // eslint-disable-next-line @next/next/no-img-element
