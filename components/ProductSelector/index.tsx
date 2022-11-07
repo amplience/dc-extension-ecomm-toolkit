@@ -24,6 +24,7 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
     const [results, setResults] = useState([])
     const [selectedProducts, setSelectedProducts] = useState([])
     const keywordInput = useRef(null)
+    const container = useRef(null)
 
     const searchByCategory = async (catId: string) => {
         setResults([])
@@ -57,11 +58,11 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
     };
 
     const selectProduct = (product: any) => {
-        setSelectedProducts(selectedProducts => [...selectedProducts, {...product, index: selectedProducts.length}])
+        setSelectedProducts(selectedProducts => [...selectedProducts, {...product, deleteKey: selectedProducts.length}])
     }
 
     const removeProduct = (productTile: any) => {
-        setSelectedProducts(selectedProducts.filter(p => p.index !== productTile.index))
+        setSelectedProducts(selectedProducts.filter(p => p.deleteKey !== productTile.deleteKey))
     }
 
     const updateSelected = useCallback((selectedProducts) => {
@@ -98,18 +99,16 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
 
     useEffect(() => {
         if(!mode) keywordInput.current.value = ''
+        setResults([])
     }, [mode])
-
+    
     useEffect(() => {
+        ampSDK.setHeight(container.current.offsetHeight)
         console.log('results: ', results)
-        if(results.length) {ampSDK.setHeight(640)}
-        else if(results.length && selectedProducts.length){ampSDK.setHeight(880)}
-        else if(selectedProducts.length){ampSDK.setHeight(340)}
     }, [results, ampSDK, selectedProducts])
 
     // Whenever selectedProducts list changes, save to dc form
     useEffect(() => {
-        console.log('selected: ', selectedProducts)
         updateSelected(selectedProducts)
     }, [selectedProducts, ampSDK, updateSelected])
 
@@ -142,12 +141,15 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
                 default:
                     break;
             }
-            getProducts(Ids).then( res => setSelectedProducts(res))
+            getProducts(Ids).then( res => {
+                const r = res.map((r: any, index: number) => ({...r, deleteKey: index}))
+                setSelectedProducts(r)
+            })
         }
     }, [storedValue, ampSDK])
 
     return (
-        <>
+        <div ref={container}>
             <Backdrop
                 sx={{ color: '#77f', backgroundColor: 'rgba(200,200,200,0.6)', zIndex: (theme) => theme.zIndex.drawer + 1 }}
                 open={loading}
@@ -157,6 +159,8 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
             <Typography variant="h2" fontSize={'12px'} fontWeight={'bold'} fontStyle={'italic'} textTransform={'uppercase'}>
                 Product Selector
             </Typography>
+
+            { /* Dual Mode Search */}
             <Paper
                 elevation={0}
                 component="form"
@@ -228,6 +232,8 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
                 <></>
                 )}
             </Paper>
+
+            { /* Sortable Selected Products */}
             {selectedProducts.length ?
                 <>
                     <Typography variant="h3" fontSize={'10px'} fontWeight={'bold'} textTransform={'uppercase'}>
@@ -245,14 +251,14 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
                     </Typography>
                     <ImageList sx={{ width: '100%', height: 450 }} cols={4} rowHeight={158}>
                         {results.map((product: any, index: number) => {
-                            return <ProductTile key={index} size={158} index={index} product={product} selectProduct={selectProduct} />
+                            return <ProductTile key={index} size={158} product={product} selectProduct={selectProduct} />
                         })} 
                     </ImageList>
                 </>
                 :   
                 <></>
             }
-        </>
+        </div>
     );
 };
 

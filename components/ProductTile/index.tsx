@@ -55,11 +55,9 @@ const dragType = 'StyledItem'
 
 interface ProductTileProps {
     product: any;
-    index: number;
     size: number;
     selectProduct?: Function;
     removeProduct?: Function;
-    moveTile?: Function;
 }
 
 const ProductTile = (

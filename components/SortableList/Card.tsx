@@ -7,7 +7,7 @@ import { ItemTypes } from './ItemTypes'
 import ProductTile from '../ProductTile'
 
 const style = {
-	border: '1px dashed gray',
+	//border: '1px dashed gray',
 	marginBottom: '.5rem',
 	backgroundColor: 'white',
 	cursor: 'move !important',
@@ -107,7 +107,6 @@ export const Card: FC<CardProps> = ({ id, product, index, size, moveCard, remove
 		<div ref={ref} style={{ ...style, opacity, height: size }} data-handler-id={handlerId}>
 			<ProductTile 
                 key={product.id}
-                index={index}
                 product={product}
                 removeProduct={removeProduct}
                 size={120}    
