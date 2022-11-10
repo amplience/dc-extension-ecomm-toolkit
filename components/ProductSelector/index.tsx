@@ -83,7 +83,14 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
             setAlertMessage("You've reached the maximum amount of selectable items")
             setShowAlert(true)
         }else{
-            setSelectedProducts(selectedProducts => [...selectedProducts, {...product, deleteKey: selectedProducts.length, selectedVariant: product.variants[0]}])
+            const match = selectedProducts.find(p => p.id === product.id)
+            console.log('match: ', match)
+            if(match){
+                setAlertMessage("You've already selected this item")
+                setShowAlert(true)
+            }else{
+                setSelectedProducts(selectedProducts => [...selectedProducts, {...product, deleteKey: selectedProducts.length, selectedVariant: product.variants[0]}])
+            }
         }
     }
 
