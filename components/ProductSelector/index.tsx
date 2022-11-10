@@ -7,7 +7,6 @@ import {
     Dialog,
     Card,
     CardContent,
-    CardActions,
     Backdrop,
     CircularProgress,
     ToggleButton,
@@ -19,7 +18,6 @@ import SearchIcon from "@mui/icons-material/Search";
 import ProductTile from "../ProductTile";
 import SortableList from "../SortableList";
 import {AmpSDKProps} from "../../lib/models/treeItemData";
-import { constant } from "lodash";
 
 const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
     const [storedValue, setStoredValue] = useState(ampSDK.getStoredValue())
@@ -32,6 +30,7 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
     const [selectedProducts, setSelectedProducts] = useState([])
     const keywordInput = useRef(null)
     const container = useRef(null)
+    const [height, setHeight] = useState(200)
 
     const itemsPerPage = 12;
     const [page, setPage] = React.useState(1);
@@ -41,7 +40,7 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
 
     const handlePageChange = (event, value) => {
         setPage(value);
-      };
+    };
 
     const searchByCategory = async (catId: string) => {
         setResults([])
@@ -83,8 +82,9 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
             setAlertMessage("You've reached the maximum amount of selectable items")
             setShowAlert(true)
         }else{
-            const match = selectedProducts.find(p => p.id === product.id)
-            console.log('match: ', match)
+            // TODO: [NOVADEV-980] Update UX to validate if user wants to add variants of a master
+            const match = selectedProducts.find(p => p.selectedVariant.sku === product.variants[0].sku)
+            //console.log('match: ', match)
             if(match){
                 setAlertMessage("You've already selected this item")
                 setShowAlert(true)
@@ -100,27 +100,28 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
 
     //const updateVariant()
 
+    const getContainerHeight = () => {
+        const newHeight = container.current.clientHeight;
+        setHeight(newHeight);
+    };
+
     const updateSelected = useCallback((selectedProducts) => {
         if(selectedProducts.length){
             switch (ampSDK?.type) {
                 case 'string':
                     const formStr = selectedProducts.map(prod => (prod.id))
-                    //console.log('single string: ', formStr[0])
                     ampSDK.setValue(formStr[0])
                     break;
                 case 'strings':
                     const formStrs = selectedProducts.map(prod => (prod.id))
-                    //console.log('strings: ', formStrs)
                     ampSDK.setValue(formStrs)
                     break;
                 case 'object':
                     const formVal = {id: selectedProducts[0].id, variant: selectedProducts[0].selectedVariant?.sku }
-                    //console.log('object: ', formVal)
                     ampSDK.setValue(formVal)
                     break;
                 case 'objects':
                     const formVals = selectedProducts.map(prod => ({id: prod.id, variant: prod.selectedVariant?.sku}))
-                    //console.log('objects: ', formVals)
                     ampSDK.setValue(formVals)
                     break;
             
@@ -138,11 +139,23 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
     }, [mode])
     
     useEffect(() => {
-        ampSDK.setHeight(container.current.offsetHeight + 40)
         setPage(1)
         setNoOfPages(Math.ceil(results.length / itemsPerPage))
-        console.log('results: ', results)
-    }, [results, ampSDK, selectedProducts])
+        setTimeout(() => {getContainerHeight()}, 100)
+        //console.log('results: ', results)
+    }, [results, selectedProducts])
+
+    useEffect(() => {
+        window.addEventListener("resize", getContainerHeight)
+        
+        return () => {
+            window.removeEventListener('resize', getContainerHeight)
+        }
+    }, [])
+
+    useEffect(() => {
+        ampSDK.setHeight(height + 20)
+    }, [height, ampSDK])
 
     // Whenever selectedProducts list changes, save to dc form
     useEffect(() => {
@@ -193,7 +206,7 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
                     }
                 )
                 
-                if(ampSDK?.type === 'object') console.log('loaded object:', prod)
+                //if(ampSDK?.type === 'object') console.log('loaded object:', prod)
                 setSelectedProducts(prod)
             })
         }
@@ -312,7 +325,7 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
                     <Typography variant="h3" fontSize={'10px'} fontWeight={'bold'} textTransform={'uppercase'}>
                         Search Results
                     </Typography>
-                    <ImageList sx={{ width: '100%' }} cols={4} rowHeight={140}>
+                    <ImageList sx={{ width: '100%', display: 'flex', flexWrap: 'wrap'}} rowHeight={140}>
                         {results.slice((page - 1) * itemsPerPage, page * itemsPerPage).map((product: any, index: number) => {
                             return <ProductTile key={index + page * itemsPerPage + product.id} dataType={ampSDK?.type} size={140} product={product} selectProduct={selectProduct} />
                         })} 

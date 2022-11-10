@@ -106,7 +106,6 @@ const ProductTile = (
     const [showSelectVariant, setShowSelectVariant] = useState(false)
     const [selectedIndex, setSelectedIndex] = React.useState(0)
     const ref = useRef(null)
-    const imgRef = useRef(null)
     const [imageLoaded, setImageLoaded] = useState(false)
     const [imgUrl, setImgUrl] = useState(variant.images[0].url)
 
@@ -168,7 +167,7 @@ const ProductTile = (
     }
 
     const edit = () => {
-        console.log('edit: ', product)
+        //console.log('edit: ', product)
         setShowSelectVariant(true)
     }
 
@@ -204,7 +203,7 @@ const ProductTile = (
                     })}
                 </List>
             </Dialog>
-            <StyledItem height={size} sx={removeProduct !== undefined ? {cursor: 'move'} : {}}>
+            <StyledItem height={size} width={size} sx={removeProduct !== undefined ? {cursor: 'move'} : {}}>
                 {actions()}
                 <ImageListItem ref={ref} onClick={handleClick}> 
                     <img

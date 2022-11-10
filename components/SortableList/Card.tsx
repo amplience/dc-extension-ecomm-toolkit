@@ -106,7 +106,7 @@ export const Card: FC<CardProps> = ({ id, product, index, size, dataType, moveCa
 	const opacity = isDragging ? 0 : 1
 	drag(drop(ref))
 	return (
-		<div ref={ref} style={{ ...style, opacity, height: size }} data-handler-id={handlerId}>
+		<div ref={ref} style={{ ...style, opacity, height: size, width: size }} data-handler-id={handlerId}>
 			<ProductTile 
                 key={product.id}
                 product={product}
