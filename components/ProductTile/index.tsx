@@ -21,6 +21,7 @@ import styled from '@emotion/styled'
 const StyledItem = styled(Box)`
     cursor: pointer;
     border-radius: 4px;
+    border: 1px solid #ddd;
     overflow: hidden;
     position: relative;
     img {
@@ -62,7 +63,8 @@ const StyledItem = styled(Box)`
         display: inline-block;
         padding: 6px 10px;
         transition: all 0.8s ease;
-        background: rgba(255, 255, 255, 0.5);
+        border-radius: 3px;
+        background: rgba(255, 255, 255, 0.75);
         z-index: 1;
     }
     &:hover {
@@ -106,6 +108,7 @@ const ProductTile = (
     const ref = useRef(null)
     const imgRef = useRef(null)
     const [imageLoaded, setImageLoaded] = useState(false)
+    const [imgUrl, setImgUrl] = useState(variant.images[0].url)
 
     const handleClick = () => {
         if(selectProduct !== undefined) {
@@ -113,11 +116,20 @@ const ProductTile = (
         }
     }
 
+    const handleLoaded = () => {
+        setImageLoaded(true)
+    }
+
     useEffect(() => {
-        setImageLoaded(false)
-        if(imgRef.current.complete) setImageLoaded(true)
-        setVariant(product.selectedVariant ? product.selectedVariant : product.variants[0])
-    }, [product])
+        const vari = product.selectedVariant ? product.selectedVariant : product.variants[0]
+        //setImageLoaded(false)
+        //if(imgRef.current.complete) setImageLoaded(true)
+        setVariant(vari)
+        if(imgUrl !== vari.images[0].url){
+            setImageLoaded(false)
+            setImgUrl(vari.images[0].url)
+        }
+    }, [product, imgUrl])
 
     const selectVariant = (variant: any, index: number) => {
         setVariant(variant)
@@ -196,7 +208,7 @@ const ProductTile = (
                 {actions()}
                 <ImageListItem ref={ref} onClick={handleClick}> 
                     <img
-                        ref={imgRef}
+                        onLoad={handleLoaded}
                         className={!imageLoaded ? 'hidden' : ''}
                         src={`${variant.images[0].url}?sw=${size*2}&fit=crop&auto=format`}
                         srcSet={`${variant.images[0].url}?sw=${size*2}&fit=crop&auto=format&dpr=2 2x`}
@@ -205,12 +217,15 @@ const ProductTile = (
                     <Skeleton
                         className={!imageLoaded ? 'loading skel' : 'skel'}
                         variant="rounded" 
-                        width={size} 
+                        width={'100%'} 
                         height={size}
                     />
                     <div className='text-box'>
-                        <Typography variant="h3" fontSize={'10px'}>
+                        <Typography mb={0.5} variant="h3" fontSize={'10px'}>
                             {product.name}
+                        </Typography>
+                        <Typography variant="h4" fontStyle={'italic'} fontSize={'10px'}>
+                            ({product.id})
                         </Typography>
                     </div>
                 </ImageListItem>

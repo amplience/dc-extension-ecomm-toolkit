@@ -131,7 +131,7 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
     }, [mode])
     
     useEffect(() => {
-        ampSDK.setHeight(container.current.offsetHeight)
+        ampSDK.setHeight(container.current.offsetHeight + 40)
         setPage(1)
         setNoOfPages(Math.ceil(results.length / itemsPerPage))
         console.log('results: ', results)
@@ -210,8 +210,8 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
             >
                 <CircularProgress color="inherit" />
             </Backdrop>
-            <Typography variant="h2" fontSize={'12px'} fontWeight={'bold'} fontStyle={'italic'} textTransform={'uppercase'}>
-                Product Selector
+        <Typography mb={2} variant="h2" fontSize={'12px'} fontWeight={'bold'} fontStyle={'italic'} textTransform={'uppercase'}>
+                Product Selector ({ampSDK.type})
             </Typography>
 
             { /* Dual Mode Search */}
@@ -290,7 +290,7 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
             { /* Sortable Selected Products */}
             {selectedProducts.length ?
                 <>
-                    <Typography variant="h3" fontSize={'10px'} fontWeight={'bold'} textTransform={'uppercase'}>
+                    <Typography mt={2} variant="h3" fontSize={'10px'} fontWeight={'bold'} textTransform={'uppercase'}>
                         Selected Products
                     </Typography>
                     <SortableList selectedProducts={selectedProducts} dataType={ampSDK?.type} updateSelected={updateSelected} removeProduct={removeProduct} />
@@ -307,15 +307,15 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
                     </Typography>
                     <ImageList sx={{ width: '100%' }} cols={4} rowHeight={140}>
                         {results.slice((page - 1) * itemsPerPage, page * itemsPerPage).map((product: any, index: number) => {
-                            return <ProductTile key={index} dataType={ampSDK?.type} size={140} product={product} selectProduct={selectProduct} />
+                            return <ProductTile key={index + page * itemsPerPage + product.id} dataType={ampSDK?.type} size={140} product={product} selectProduct={selectProduct} />
                         })} 
                     </ImageList>
-                    <Pagination
+                    {noOfPages > 1 && <Pagination
                         count={noOfPages}
                         page={page}
                         onChange={handlePageChange}
                         defaultPage={1}
-                    />
+                    />}
                 </>
                 :   
                 <></>
