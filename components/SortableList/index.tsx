@@ -12,7 +12,7 @@ export interface Item {
 	product: any
 }
 
-const SortableList = ({ selectedProducts, updateSelected, removeProduct }) => {
+const SortableList = ({ selectedProducts, updateSelected, removeProduct, dataType }) => {
 
     const [cards, setCards] = useState(selectedProducts)
 
@@ -27,12 +27,19 @@ const SortableList = ({ selectedProducts, updateSelected, removeProduct }) => {
         )
     }, [])
 
+    const updateCard = (product: any) => {
+        const p = cards.find(prod => prod.id === product.id)
+        if(p){
+            p.selectedVariant = product.selectedVariant
+        }
+        updateSelected(cards)
+    }
+
     useEffect(() => {
         updateSelected(cards)
     }, [cards, updateSelected])
 
     useEffect(() => {
-        console.log('selected sortable: ', selectedProducts)
         setCards(selectedProducts)
     }, [selectedProducts])
 
@@ -40,7 +47,7 @@ const SortableList = ({ selectedProducts, updateSelected, removeProduct }) => {
         <>
             {cards.length ?
                 <>
-                    <ImageList sx={{ width: '100%' }} cols={5} rowHeight={120}>
+                    <ImageList sx={{ width: '100%' }} cols={4} rowHeight={140}>
                         <DndProvider backend={HTML5Backend}>
                         {cards.map((product: any, index: number) => {
                             return (
@@ -51,7 +58,9 @@ const SortableList = ({ selectedProducts, updateSelected, removeProduct }) => {
                                     product={product}
                                     moveCard={moveCard}
                                     removeProduct={removeProduct}
-                                    size={120}
+                                    updateCard={updateCard}
+                                    dataType={dataType}
+                                    size={140}
                                 />
                             )
                         })} 

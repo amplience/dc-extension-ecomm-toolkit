@@ -18,8 +18,10 @@ export interface CardProps {
 	index: number
     product: any
     size: number
+	dataType: string
 	moveCard: (dragIndex: number, hoverIndex: number) => void
     removeProduct: (product: any) => void
+	updateCard: (product: any) => void
 }
 
 interface DragItem {
@@ -28,7 +30,7 @@ interface DragItem {
 	type: string
 }
 
-export const Card: FC<CardProps> = ({ id, product, index, size, moveCard, removeProduct }) => {
+export const Card: FC<CardProps> = ({ id, product, index, size, dataType, moveCard, removeProduct, updateCard }) => {
 	const ref = useRef<HTMLDivElement>(null)
 	const [{ handlerId }, drop] = useDrop<
 		DragItem,
@@ -109,7 +111,9 @@ export const Card: FC<CardProps> = ({ id, product, index, size, moveCard, remove
                 key={product.id}
                 product={product}
                 removeProduct={removeProduct}
-                size={120}    
+				updateCard={updateCard}
+                size={size}
+				dataType={dataType}   
             />
 		</div>
 	)

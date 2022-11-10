@@ -1,7 +1,21 @@
-/* eslint-disable react/jsx-no-comment-textnodes */
-import React, {useRef} from 'react'
-import {Box, ImageListItem, Typography, IconButton} from '@mui/material'
+/* eslint-disable @next/next/no-img-element */
+import React, {useCallback, useEffect, useRef, useState} from 'react'
+import {
+    Avatar,
+    Box, 
+    ImageListItem, 
+    Typography, 
+    IconButton, 
+    Dialog,
+    DialogTitle, 
+    List, 
+    ListItemButton,
+    ListItemAvatar,
+    ListItemText,
+    Skeleton
+} from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit'
 import styled from '@emotion/styled'
 
 const StyledItem = styled(Box)`
@@ -12,12 +26,26 @@ const StyledItem = styled(Box)`
     img {
         ratio: 1;
         height: 100%;
+        opacity: 1;
         filter: grayscale(0%);
         transition: all 0.8s ease;
+        &.hidden {
+            opacity: 0
+        }
     }
-    .close-button {
+    .skel {
+        display: none;
+        position: absolute;
+        top: 0;
+        &.loading {
+            display: inline-block;
+        }
+    }
+    .actions {
         color: #f11;
         position: absolute;
+        display: flex;
+        flex-direction: column;
         top: 0;
         right: 0;
         z-index: 1;
@@ -54,22 +82,30 @@ const StyledItem = styled(Box)`
 const dragType = 'StyledItem'
 
 interface ProductTileProps {
-    product: any;
-    size: number;
-    selectProduct?: Function;
-    removeProduct?: Function;
+    product: any
+    size: number
+    dataType: string
+    selectProduct?: Function
+    removeProduct?: Function
+    updateCard?: Function
 }
 
 const ProductTile = (
     {
         product,
         size,
+        dataType,
         selectProduct = undefined,
         removeProduct = undefined,
+        updateCard = undefined
     }: ProductTileProps) => {
 
-    const imageURL = product.variants[0].images[0].url
-    const ref = useRef(null);
+    const [variant, setVariant] = useState(product.selectedVariant ? product.selectedVariant : product.variants[0])
+    const [showSelectVariant, setShowSelectVariant] = useState(false)
+    const [selectedIndex, setSelectedIndex] = React.useState(0)
+    const ref = useRef(null)
+    const imgRef = useRef(null)
+    const [imageLoaded, setImageLoaded] = useState(false)
 
     const handleClick = () => {
         if(selectProduct !== undefined) {
@@ -77,45 +113,109 @@ const ProductTile = (
         }
     }
 
-    const close = () => {
+    useEffect(() => {
+        setImageLoaded(false)
+        if(imgRef.current.complete) setImageLoaded(true)
+        setVariant(product.selectedVariant ? product.selectedVariant : product.variants[0])
+    }, [product])
+
+    const selectVariant = (variant: any, index: number) => {
+        setVariant(variant)
+        setSelectedIndex(index)
+        product.selectedVariant = variant;
+        if(updateCard !== undefined) updateCard(product)
+    }
+
+    const actions = () => {
+        // if removeProduct is present, it means we are in the SortableList
         if(removeProduct !== undefined){
             return (
-                <IconButton
-                    className='close-button'
-                    onClick={closeClick}
-                    aria-label="delete"
-                    size="small"
-                >
-                    <DeleteIcon />
-                </IconButton>
+                <div className='actions'>
+                    <IconButton
+                        onClick={removeClick}
+                        aria-label="delete"
+                        size="small"
+                    >
+                        <DeleteIcon fontSize='inherit' />
+                    </IconButton>
+                    {/* TODO - revisit selecting product variants*/}
+                    {/* {dataType === 'object' || dataType === 'objects' ? 
+                        <IconButton
+                            onClick={edit}
+                            aria-label="delete"
+                            size="small"
+                        >
+                            <EditIcon fontSize='inherit' />
+                        </IconButton>
+                        : 
+                        <></>
+                    } */}
+                </div>
             )    
         }
     }
 
-    const closeClick = () => {
+    const edit = () => {
+        console.log('edit: ', product)
+        setShowSelectVariant(true)
+    }
+
+    const closeEdit = () => {
+        setShowSelectVariant(false)
+    }
+
+    const removeClick = () => {
         if(removeProduct !== undefined){
             removeProduct(product)
         }
     }
     
     return (
-        <StyledItem height={size} sx={removeProduct !== undefined ? {cursor: 'move'} : {}}>
-            {close()}
-            <ImageListItem ref={ref} onClick={handleClick}>
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                    src={`${imageURL}?w=${size}&h=${size}&fit=crop&auto=format`}
-                    srcSet={`${imageURL}?w=${size}&h=${size}&fit=crop&auto=format&dpr=2 2x`}
-                    alt={imageURL}
-                    loading="lazy"
-                />
-                <div className='text-box'>
-                    <Typography variant="h3" fontSize={'10px'}>
-                        {product.name} 
-                    </Typography>
-                </div>
-            </ImageListItem>
-        </StyledItem>
+        <>
+            <Dialog fullWidth={true} maxWidth={'xl'} open={showSelectVariant} onClose={closeEdit}>
+                <DialogTitle>Select Variant</DialogTitle>
+                <List sx={{width: '100%', maxWidth: 600}}>
+                    {product.variants.map((variant: any, index: number) => {
+                        return (
+                            <ListItemButton
+                                key={index}
+                                alignItems="flex-start"
+                                selected={selectedIndex === index}
+                                onClick={() => selectVariant(variant, index)}
+                            >
+                                <ListItemAvatar>
+                                    <Avatar variant='square' alt={product.name} src={variant.images[0].url} />
+                                </ListItemAvatar>
+                                <ListItemText primary={variant.sku}></ListItemText>
+                            </ListItemButton>
+                        )
+                    })}
+                </List>
+            </Dialog>
+            <StyledItem height={size} sx={removeProduct !== undefined ? {cursor: 'move'} : {}}>
+                {actions()}
+                <ImageListItem ref={ref} onClick={handleClick}> 
+                    <img
+                        ref={imgRef}
+                        className={!imageLoaded ? 'hidden' : ''}
+                        src={`${variant.images[0].url}?sw=${size*2}&fit=crop&auto=format`}
+                        srcSet={`${variant.images[0].url}?sw=${size*2}&fit=crop&auto=format&dpr=2 2x`}
+                        alt={product.name}
+                    />
+                    <Skeleton
+                        className={!imageLoaded ? 'loading skel' : 'skel'}
+                        variant="rounded" 
+                        width={size} 
+                        height={size}
+                    />
+                    <div className='text-box'>
+                        <Typography variant="h3" fontSize={'10px'}>
+                            {product.name}
+                        </Typography>
+                    </div>
+                </ImageListItem>
+            </StyledItem>
+        </>
     )
 }
 
