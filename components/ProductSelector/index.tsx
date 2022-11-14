@@ -78,7 +78,7 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
     };
 
     const selectProduct = (product: any) => {
-        if((ampSDK?.type === 'string' || ampSDK?.type === 'object') && selectedProducts.length){
+        if(ampSDK?.type === 'array' && ampSDK.maxItems && selectedProducts.length >= ampSDK.maxItems){
             setAlertMessage("You've reached the maximum amount of selectable items")
             setShowAlert(true)
         }else{
@@ -88,6 +88,9 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
             if(match){
                 setAlertMessage("You've already selected this item")
                 setShowAlert(true)
+            }else if((ampSDK?.type === 'string' || ampSDK?.type === 'object')) {
+                // For single selection, replace the selected product.
+                setSelectedProducts(selectedProducts => [{...product, deleteKey: selectedProducts.length, selectedVariant: product.variants[0]}])
             }else{
                 setSelectedProducts(selectedProducts => [...selectedProducts, {...product, deleteKey: selectedProducts.length, selectedVariant: product.variants[0]}])
             }

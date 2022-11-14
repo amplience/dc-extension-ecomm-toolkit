@@ -28,5 +28,6 @@ export interface AmpSDKProps {
         clearValue: () => void
         enforceValue: (value: any) => string
         commerceApi: CommerceAPI
+        maxItems?: number
     }
 }
