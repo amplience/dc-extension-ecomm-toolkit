@@ -96,7 +96,8 @@ const amplienceSDK = async () => {
             return sdk.field.schema?.pattern
         },
 
-        commerceApi: commerceApi
+        commerceApi: commerceApi,
+        maxItems: sdk.field.schema?.maxItems
     }
 
     return ampSDK
