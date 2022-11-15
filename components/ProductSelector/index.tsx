@@ -305,9 +305,8 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
 				mb={2}
 				variant='h2'
 				fontSize={'12px'}
-				fontWeight={'bold'}
-				fontStyle={'italic'}
-				textTransform={'uppercase'}
+				fontWeight={'normal'}
+                color='#666'
 			>
 				Product Selector ({ampSDK.type})
 			</Typography>
@@ -318,9 +317,9 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
 					<Typography
 						mt={2}
 						variant='h3'
-						fontSize={'10px'}
-						fontWeight={'bold'}
-						textTransform={'uppercase'}
+						fontSize={'12px'}
+                        fontWeight={'normal'}
+                        color='#666'
 					>
 						Selected Products
 					</Typography>
@@ -408,10 +407,11 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
 			{results.length ? (
 				<>
 					<Typography
+						mt={2}
 						variant='h3'
-						fontSize={'10px'}
-						fontWeight={'bold'}
-						textTransform={'uppercase'}
+						fontSize={'12px'}
+						fontWeight={'normal'}
+                        color='#666'
 					>
 						Search Results
 					</Typography>
