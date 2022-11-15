@@ -301,15 +301,6 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
 			>
 				<CircularProgress color='inherit' />
 			</Backdrop>
-			<Typography
-				mb={2}
-				variant='h2'
-				fontSize={'12px'}
-				fontWeight={'normal'}
-                color='#666'
-			>
-				Product Selector ({ampSDK.type})
-			</Typography>
 
 			{/* Sortable Selected Products */}
 			{selectedProducts.length ? (
