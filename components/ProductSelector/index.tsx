@@ -312,6 +312,29 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
 				Product Selector ({ampSDK.type})
 			</Typography>
 
+			{/* Sortable Selected Products */}
+			{selectedProducts.length ? (
+				<>
+					<Typography
+						mt={2}
+						variant='h3'
+						fontSize={'10px'}
+						fontWeight={'bold'}
+						textTransform={'uppercase'}
+					>
+						Selected Products
+					</Typography>
+					<SortableList
+						selectedProducts={selectedProducts}
+						dataType={ampSDK?.type}
+						updateSelected={updateSelected}
+						removeProduct={removeProduct}
+					/>
+				</>
+			) : (
+				<></>
+			)}
+
 			{/* Dual Mode Search */}
 
 			<Tabs
@@ -380,29 +403,6 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
 					)}
 				/>
 			</TabPanel>
-
-			{/* Sortable Selected Products */}
-			{selectedProducts.length ? (
-				<>
-					<Typography
-						mt={2}
-						variant='h3'
-						fontSize={'10px'}
-						fontWeight={'bold'}
-						textTransform={'uppercase'}
-					>
-						Selected Products
-					</Typography>
-					<SortableList
-						selectedProducts={selectedProducts}
-						dataType={ampSDK?.type}
-						updateSelected={updateSelected}
-						removeProduct={removeProduct}
-					/>
-				</>
-			) : (
-				<></>
-			)}
 
 			{/* Search Results */}
 			{results.length ? (
