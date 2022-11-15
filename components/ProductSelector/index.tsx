@@ -306,7 +306,7 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
 			{selectedProducts.length ? (
 				<>
 					<Typography
-						mt={2}
+						mt={1}
 						variant='h3'
 						fontSize={'12px'}
                         fontWeight={'normal'}
