@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import React, {useCallback, useEffect, useRef, useState} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import {
     Avatar,
     Box, 
@@ -14,8 +14,7 @@ import {
     ListItemText,
     Skeleton
 } from '@mui/material'
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit'
+import DeleteIcon from '@mui/icons-material/Delete'
 import styled from '@emotion/styled'
 
 const StyledItem = styled(Box)`
@@ -96,7 +95,6 @@ const ProductTile = (
     {
         product,
         size,
-        dataType,
         selectProduct = undefined,
         removeProduct = undefined,
         updateCard = undefined

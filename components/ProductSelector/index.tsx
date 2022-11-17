@@ -3,13 +3,11 @@ import {
 	Autocomplete,
 	TextField,
 	Typography,
-	Paper,
 	Dialog,
 	Card,
 	CardContent,
 	Backdrop,
 	CircularProgress,
-	ToggleButton,
 	IconButton,
 	ImageList,
 	Pagination,
@@ -45,7 +43,7 @@ function TabPanel(props: TabPanelProps) {
 }
 
 const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
-	const [storedValue, setStoredValue] = useState(ampSDK.getStoredValue())
+	const [storedValue] = useState(ampSDK.getStoredValue())
 	const [mode, setMode] = useState(0)
 	const [keyword, setKeyword] = useState('')
 	const [loading, setLoading] = useState(false)
