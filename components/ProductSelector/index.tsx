@@ -202,6 +202,9 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
     useEffect(() => {
         setPage(1)
         setNoOfPages(Math.ceil(results.length / itemsPerPage))
+    }, [results])
+
+    useEffect(() => {
         setTimeout(() => {
             getContainerHeight()
         }, 100)
