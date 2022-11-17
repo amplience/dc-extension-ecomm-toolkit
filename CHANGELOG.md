@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/amplience/dc-extension-ecomm-toolkit/compare/v1.1.0...v1.2.0) (2022-11-17)
+
+
+### Features
+
+* dual mode product search WIP ([91f3612](https://github.com/amplience/dc-extension-ecomm-toolkit/commit/91f36126a315fb45de322d3bd2d24e5f48b4e0fa))
+* remove redundant title ([01d36da](https://github.com/amplience/dc-extension-ecomm-toolkit/commit/01d36da0424c97559fe3a01e1fe7e7a88e4b4fa9))
+* sortable drag and drop list ([5616d3b](https://github.com/amplience/dc-extension-ecomm-toolkit/commit/5616d3bdcf8c087aefcf9890402655a2eab3be1c))
+* style match DC a bit more ([786de77](https://github.com/amplience/dc-extension-ecomm-toolkit/commit/786de77c20e05e7e629dc3daf13b01ea14a5ffc1))
+* use maxItems validation, overwrite when doing single select ([101e10c](https://github.com/amplience/dc-extension-ecomm-toolkit/commit/101e10c33bae010ed4d3e5faa33dbf45217b58a2))
+
+
+### Bug Fixes
+
+* add/remove functional with sortable list ([ba10948](https://github.com/amplience/dc-extension-ecomm-toolkit/commit/ba109488a04883f05a98e4ad01aab5549ad4098f))
+* can't add teh same item more than once. ([a33c3c1](https://github.com/amplience/dc-extension-ecomm-toolkit/commit/a33c3c130b0aca8371c5672758b3f3f4012cb5d8))
+* comment in PR ([4fc0bbe](https://github.com/amplience/dc-extension-ecomm-toolkit/commit/4fc0bbe3add4a071412500ed93503bb2d40dac7c))
+* display selected products above search box ([09a538b](https://github.com/amplience/dc-extension-ecomm-toolkit/commit/09a538b4f989c652a0271a4e44d5f4a705e5e29a))
+* fix maxItems limit on product selector ([3fa394d](https://github.com/amplience/dc-extension-ecomm-toolkit/commit/3fa394d8fe19ad114a3aa72878ed15e137aa1137))
+* last 2 comments ([d668ee7](https://github.com/amplience/dc-extension-ecomm-toolkit/commit/d668ee755ccc1df5d7934b066ebf52a26842b7b1))
+* reduce top margin on selected products ([7a8e5a2](https://github.com/amplience/dc-extension-ecomm-toolkit/commit/7a8e5a2433e42189505f02cd0ac5a718fcb57726))
+* remove unused imports ([1bf5099](https://github.com/amplience/dc-extension-ecomm-toolkit/commit/1bf5099adda1275ddc3140b3cfda76d85cd66737))
+* set page 1 on results only ([e1806dd](https://github.com/amplience/dc-extension-ecomm-toolkit/commit/e1806dd29cd14dd6ba1fe4e0762ad16ac781a5e5))
+* small style tweak to search box ([57c5a56](https://github.com/amplience/dc-extension-ecomm-toolkit/commit/57c5a56575abac8b784d2f3c35eecc8999a592ea))
+
 ## [1.1.0](https://github.com/amplience/dc-extension-ecomm-toolkit/compare/v1.0.0...v1.1.0) (2022-11-01)
 
 
