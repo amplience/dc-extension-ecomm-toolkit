@@ -12,38 +12,38 @@ import ProductSelector from '../ProductSelector'
 import amplienceSDK from '../../lib/sdk'
 
 function App() {
-	const [ampSDK, setAmpSDK] = useState<any>(undefined)
+    const [ampSDK, setAmpSDK] = useState<any>(undefined)
 
-	useEffect(() => {
-		amplienceSDK().then(setAmpSDK)
-	}, [ampSDK])
+    useEffect(() => {
+        amplienceSDK().then(setAmpSDK)
+    }, [ampSDK])
 
-	let component = <></>
+    let component = <></>
 
-	if (ampSDK?.view === 'single') {
-		component = <AutoCompleteSingle ampSDK={ampSDK} />
-	} else if (ampSDK?.view === 'multi') {
-		component = <AutoCompleteMultiple ampSDK={ampSDK} />
-	} else if (ampSDK?.view === 'tree') {
-		component = <TreeViewSingle ampSDK={ampSDK} />
-	} else if (ampSDK?.view === 'product') {
-		component = <ProductSelector ampSDK={ampSDK} />
-	} else {
-		component = (
-			<>
-				<CircularProgress />
-				<div>Loading View..</div>
-			</>
-		)
-	}
+    if (ampSDK?.view === 'single') {
+        component = <AutoCompleteSingle ampSDK={ampSDK} />
+    } else if (ampSDK?.view === 'multi') {
+        component = <AutoCompleteMultiple ampSDK={ampSDK} />
+    } else if (ampSDK?.view === 'tree') {
+        component = <TreeViewSingle ampSDK={ampSDK} />
+    } else if (ampSDK?.view === 'product') {
+        component = <ProductSelector ampSDK={ampSDK} />
+    } else {
+        component = (
+            <>
+                <CircularProgress />
+                <div>Loading View..</div>
+            </>
+        )
+    }
 
-	return (
-		<div className='App'>
-			<Stack spacing={3} sx={{ width: '100%' }}>
-				{component}
-			</Stack>
-		</div>
-	)
+    return (
+        <div className='App'>
+            <Stack spacing={3} sx={{ width: '100%' }}>
+                {component}
+            </Stack>
+        </div>
+    )
 }
 
 export default App
