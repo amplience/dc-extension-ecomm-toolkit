@@ -1,3 +1,5 @@
+import { CommerceAPI } from "@amplience/dc-demostore-integration";
+import { InstanceParams } from "../extensionParams";
 
 export interface TreeItemData {
     id: string;
@@ -16,5 +18,16 @@ export interface DataTreeViewProps {
 }
 
 export interface AmpSDKProps {
-    ampSDK: any
+    ampSDK: InstanceParams & {
+        getValue: () => any
+        getValues: () => any
+        getStoredValue: () => any
+        setValue: (value: any) => void
+        setHeight: (height: number) => void
+        isEnforced: () => boolean
+        clearValue: () => void
+        enforceValue: (value: any) => string
+        commerceApi: CommerceAPI
+        maxItems?: number
+    }
 }

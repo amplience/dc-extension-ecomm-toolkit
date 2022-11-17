@@ -1,0 +1,99 @@
+{
+    "product": {
+        "title": "Product Selector (string)",
+        "description": "Single-select Category and store ID as string",
+        "type": "string",
+        "ui:extension": {
+            "name": "ecomm-toolkit",
+            "params": {
+                "label": "Search By Category",
+                "view": "product",
+                "data": "product",
+                "type": "string"
+            }
+        }
+    },
+    "productEnforced": {
+        "title": "Product Selector (string)",
+        "description": "Single-select Category and store ID as string",
+        "type": "string",
+        "pattern": "pdp/content/.*",
+        "ui:extension": {
+            "name": "ecomm-toolkit",
+            "params": {
+                "label": "Search By Category",
+                "view": "product",
+                "data": "product",
+                "type": "string"
+            }
+        }
+    },
+    "products": {
+        "title": "Product Selector (strings)",
+        "description": "Single-select Category and store ID as string",
+        "type": "array",
+        "items": {
+            "type": "string"
+        },
+        "ui:extension": {
+            "name": "ecomm-toolkit",
+            "params": {
+                "label": "Search By Category",
+                "view": "product",
+                "data": "product",
+                "type": "strings"
+            }
+        }
+    },
+    "productObject": {
+        "title": "Product Selector (object)",
+        "description": "Single-select Category and store ID as string",
+        "type": "object",
+        "properties": {
+            "id": {
+                "title": "Product ID",
+                "type": "string"
+            },
+            "variant": {
+                "title": "Selected Variant ID",
+                "type": "string"
+            }
+        },
+        "ui:extension": {
+            "name": "ecomm-toolkit",
+            "params": {
+                "label": "Search By Category",
+                "view": "product",
+                "data": "product",
+                "type": "object"
+            }
+        }
+    },
+    "productObjects": {
+        "title": "Product Selector (objects)",
+        "description": "Single-select Category and store ID as string",
+        "type": "array",
+        "items": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "title": "Product ID",
+                    "type": "string"
+                },
+                "variant": {
+                    "title": "Selected Variant ID",
+                    "type": "string"
+                }
+            }
+        },
+        "ui:extension": {
+            "name": "ecomm-toolkit",
+            "params": {
+                "label": "Search By Category",
+                "view": "product",
+                "data": "product",
+                "type": "objects"
+            }
+        }
+    }
+}

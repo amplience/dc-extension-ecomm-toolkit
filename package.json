@@ -1,43 +1,46 @@
 {
-  "name": "@amplience/dc-extension-ecomm-toolkit",
-  "version": "1.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
-    "ver": "vercel dev --listen 3002",
-    "version:patch": "standard-version",
-    "version:minor": "standard-version --release-as minor",
-    "version:major": "standard-version --release-as major",
-    "prepare-patch-release": "run-s build version:patch",
-    "prepare-minor-release": "run-s build version:minor",
-    "prepare-major-release": "run-s build version:major"
-  },
-  "dependencies": {
-    "@amplience/dc-demostore-integration": "git+https://github.com/amplience/dc-demostore-integration.git#r2.1",
-    "@emotion/react": "^11.9.0",
-    "@emotion/styled": "^11.8.1",
-    "@mui/icons-material": "^5.6.0",
-    "@mui/lab": "^5.0.0-alpha.76",
-    "@mui/material": "^5.6.0",
-    "axios": "^0.26.1",
-    "dc-extensions-sdk": "^2.1.0",
-    "dc-management-sdk-js": "^1.16.2",
-    "lodash": "^4.17.21",
-    "next": "^12.2.5",
-    "npm-run-all": "^4.1.5",
-    "react": "18.0.0",
-    "react-dom": "18.0.0",
-    "standard-version": "^9.5.0"
-  },
-  "devDependencies": {
-    "@types/lodash": "^4.14.181",
-    "@types/node": "^17.0.23",
-    "@types/react": "18.0.0",
-    "eslint": "8.12.0",
-    "eslint-config-next": "12.1.4",
-    "vercel": "^24.0.1"
-  }
+    "name": "@amplience/dc-extension-ecomm-toolkit",
+    "version": "1.1.0",
+    "private": true,
+    "scripts": {
+        "dev": "next dev --port 3000",
+        "build": "next build",
+        "start": "next start",
+        "lint": "next lint",
+        "ver": "vercel dev --listen 3002",
+        "version:patch": "standard-version",
+        "version:minor": "standard-version --release-as minor",
+        "version:major": "standard-version --release-as major",
+        "prepare-patch-release": "run-s build version:patch",
+        "prepare-minor-release": "run-s build version:minor",
+        "prepare-major-release": "run-s build version:major"
+    },
+    "dependencies": {
+        "@amplience/dc-demostore-integration": "git+https://github.com/amplience/dc-demostore-integration.git#r2.2",
+        "@emotion/react": "^11.9.0",
+        "@emotion/styled": "^11.8.1",
+        "@mui/icons-material": "^5.6.0",
+        "@mui/lab": "^5.0.0-alpha.76",
+        "@mui/material": "^5.6.0",
+        "axios": "^0.26.1",
+        "dc-extensions-sdk": "^2.1.0",
+        "dc-management-sdk-js": "^1.16.2",
+        "immutability-helper": "^3.1.1",
+        "lodash": "^4.17.21",
+        "next": "^12.2.5",
+        "npm-run-all": "^4.1.5",
+        "react": "18.0.0",
+        "react-dnd": "^16.0.1",
+        "react-dnd-html5-backend": "^16.0.1",
+        "react-dom": "18.0.0",
+        "standard-version": "^9.5.0"
+    },
+    "devDependencies": {
+        "@types/lodash": "^4.14.181",
+        "@types/node": "^17.0.23",
+        "@types/react": "18.0.0",
+        "eslint": "8.12.0",
+        "eslint-config-next": "12.1.4",
+        "vercel": "^24.0.1"
+    }
 }

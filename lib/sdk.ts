@@ -12,20 +12,28 @@ const amplienceSDK = async () => {
     }
 
     const cleanValue = (value: any) => {
-        return isEnforced() ? value.split('/')[1] : value
+        return isEnforced() ? value.split('/').pop() : value
     }
 
     const enforceValue = (value: any) => {
         let val = value
+
         if (typeof value !== 'string') {
             val = value.id
         }
-        return isEnforced() ? `${sdk.field.schema?.pattern.split('/')[0]}/${val}` : val
+        if(isEnforced()) {
+            let pattern = sdk.field.schema?.pattern.split('/')
+            pattern.pop()
+            return `${pattern.join('/')}/${val}`
+        }else{
+            return val
+        }
     }
 
     // data members
     let sdk: ContentFieldExtension = await init<ContentFieldExtension<FieldModel, ExtParameters>>({ debug: true })
     let value: any = await sdk.field.getValue()
+    let storedVal: any = await sdk.field.getValue()
     let values: any[] = []
     // end
 
@@ -43,6 +51,10 @@ const amplienceSDK = async () => {
             values = flattenCategories(megaMenu).map(cat => ({ name: `(${cat.slug}) ${cat.name}`, id: cat.id }))
             value = instance.type === 'string' && value ? values.find(opt => cleanValue(value) == opt.id) : value
         }
+    }else if(instance.data === 'product'){
+        let megaMenu: any[] = await commerceApi.getMegaMenu({})
+        values = flattenCategories(megaMenu).map(cat => ({ name: `(${cat.slug}) ${cat.name}`, id: cat.id }))
+        value = instance.type === 'string' && value ? values.find(opt => cleanValue(value) == opt.id) : value
     }
     else { // a.data === 'customerGroups'
         values = await commerceApi.getCustomerGroups({})
@@ -53,6 +65,7 @@ const amplienceSDK = async () => {
         ...instance,
         getValue: () => value,
         getValues: () => values,
+        getStoredValue: () => storedVal,
 
         setValue: async (newValue: ValueType) => {
             if (newValue) {
@@ -77,7 +90,14 @@ const amplienceSDK = async () => {
 
         setHeight: (height) => {
             sdk.frame.setHeight(height)
-        }
+        },
+
+        isEnforced: () => {
+            return sdk.field.schema?.pattern
+        },
+
+        commerceApi: commerceApi,
+        maxItems: sdk.field.schema?.maxItems
     }
 
     return ampSDK
