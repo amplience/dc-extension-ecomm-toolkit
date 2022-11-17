@@ -152,10 +152,10 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
         )
     }
 
-    const getContainerHeight = () => {
+    const getContainerHeight = useCallback(() => {
         const newHeight = container.current.clientHeight
         setHeight(newHeight)
-    }
+    }, [container])
 
     const updateSelected = useCallback(
         (selectedProducts) => {
@@ -205,7 +205,7 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
         setTimeout(() => {
             getContainerHeight()
         }, 100)
-    }, [results, selectedProducts])
+    }, [results, selectedProducts, getContainerHeight])
 
     useEffect(() => {
         window.addEventListener('resize', getContainerHeight)
@@ -213,7 +213,7 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
         return () => {
             window.removeEventListener('resize', getContainerHeight)
         }
-    }, [])
+    }, [getContainerHeight])
 
     useEffect(() => {
         ampSDK.setHeight(height + 20)
@@ -366,9 +366,6 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
                     onChange={(event, val) => {
                         if (val !== null) {
                             searchByCategory(val.id)
-                        } else {
-                            /* ampSDK.clearValue();
-                                        setValue({ name: "", id: "" }); */
                         }
                     }}
                     onClose={() => {
