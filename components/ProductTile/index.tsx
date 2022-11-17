@@ -1,20 +1,20 @@
 /* eslint-disable @next/next/no-img-element */
-import React, {useCallback, useEffect, useRef, useState} from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import {
     Avatar,
-    Box, 
-    ImageListItem, 
-    Typography, 
-    IconButton, 
+    Box,
+    ImageListItem,
+    Typography,
+    IconButton,
     Dialog,
-    DialogTitle, 
-    List, 
+    DialogTitle,
+    List,
     ListItemButton,
     ListItemAvatar,
     ListItemText,
     Skeleton
 } from '@mui/material'
-import DeleteIcon from '@mui/icons-material/Delete';
+import DeleteIcon from '@mui/icons-material/Delete'
 import EditIcon from '@mui/icons-material/Edit'
 import styled from '@emotion/styled'
 
@@ -31,7 +31,7 @@ const StyledItem = styled(Box)`
         filter: grayscale(0%);
         transition: all 0.8s ease;
         &.hidden {
-            opacity: 0
+            opacity: 0;
         }
     }
     .skel {
@@ -59,7 +59,7 @@ const StyledItem = styled(Box)`
         left: 0;
         right: 0;
         margin: 0 9px;
-        borderRadius: 6px;
+        borderradius: 6px;
         display: inline-block;
         padding: 6px 10px;
         transition: all 0.8s ease;
@@ -69,9 +69,6 @@ const StyledItem = styled(Box)`
     }
     &:hover {
         text-decoration: none;
-        h2 {
-            //text-decoration: underline;
-        }
         img {
             filter: grayscale(65%);
         }
@@ -92,17 +89,17 @@ interface ProductTileProps {
     updateCard?: Function
 }
 
-const ProductTile = (
-    {
-        product,
-        size,
-        dataType,
-        selectProduct = undefined,
-        removeProduct = undefined,
-        updateCard = undefined
-    }: ProductTileProps) => {
-
-    const [variant, setVariant] = useState(product.selectedVariant ? product.selectedVariant : product.variants[0])
+const ProductTile = ({
+    product,
+    size,
+    dataType,
+    selectProduct = undefined,
+    removeProduct = undefined,
+    updateCard = undefined
+}: ProductTileProps) => {
+    const [variant, setVariant] = useState(
+        product.selectedVariant ? product.selectedVariant : product.variants[0]
+    )
     const [showSelectVariant, setShowSelectVariant] = useState(false)
     const [selectedIndex, setSelectedIndex] = React.useState(0)
     const ref = useRef(null)
@@ -110,7 +107,7 @@ const ProductTile = (
     const [imgUrl, setImgUrl] = useState(variant.images[0].url)
 
     const handleClick = () => {
-        if(selectProduct !== undefined) {
+        if (selectProduct !== undefined) {
             selectProduct(product)
         }
     }
@@ -120,11 +117,11 @@ const ProductTile = (
     }
 
     useEffect(() => {
-        const vari = product.selectedVariant ? product.selectedVariant : product.variants[0]
-        //setImageLoaded(false)
-        //if(imgRef.current.complete) setImageLoaded(true)
+        const vari = product.selectedVariant
+            ? product.selectedVariant
+            : product.variants[0]
         setVariant(vari)
-        if(imgUrl !== vari.images[0].url){
+        if (imgUrl !== vari.images[0].url) {
             setImageLoaded(false)
             setImgUrl(vari.images[0].url)
         }
@@ -133,19 +130,19 @@ const ProductTile = (
     const selectVariant = (variant: any, index: number) => {
         setVariant(variant)
         setSelectedIndex(index)
-        product.selectedVariant = variant;
-        if(updateCard !== undefined) updateCard(product)
+        product.selectedVariant = variant
+        if (updateCard !== undefined) updateCard(product)
     }
 
     const actions = () => {
         // if removeProduct is present, it means we are in the SortableList
-        if(removeProduct !== undefined){
+        if (removeProduct !== undefined) {
             return (
                 <div className='actions'>
                     <IconButton
                         onClick={removeClick}
-                        aria-label="delete"
-                        size="small"
+                        aria-label='delete'
+                        size='small'
                     >
                         <DeleteIcon fontSize='inherit' />
                     </IconButton>
@@ -162,12 +159,11 @@ const ProductTile = (
                         <></>
                     } */}
                 </div>
-            )    
+            )
         }
     }
 
     const edit = () => {
-        //console.log('edit: ', product)
         setShowSelectVariant(true)
     }
 
@@ -176,54 +172,77 @@ const ProductTile = (
     }
 
     const removeClick = () => {
-        if(removeProduct !== undefined){
+        if (removeProduct !== undefined) {
             removeProduct(product)
         }
     }
-    
+
     return (
         <>
-            <Dialog fullWidth={true} maxWidth={'xl'} open={showSelectVariant} onClose={closeEdit}>
+            <Dialog
+                fullWidth={true}
+                maxWidth={'xl'}
+                open={showSelectVariant}
+                onClose={closeEdit}
+            >
                 <DialogTitle>Select Variant</DialogTitle>
-                <List sx={{width: '100%', maxWidth: 600}}>
+                <List sx={{ width: '100%', maxWidth: 600 }}>
                     {product.variants.map((variant: any, index: number) => {
                         return (
                             <ListItemButton
                                 key={index}
-                                alignItems="flex-start"
+                                alignItems='flex-start'
                                 selected={selectedIndex === index}
                                 onClick={() => selectVariant(variant, index)}
                             >
                                 <ListItemAvatar>
-                                    <Avatar variant='square' alt={product.name} src={variant.images[0].url} />
+                                    <Avatar
+                                        variant='square'
+                                        alt={product.name}
+                                        src={variant.images[0].url}
+                                    />
                                 </ListItemAvatar>
-                                <ListItemText primary={variant.sku}></ListItemText>
+                                <ListItemText
+                                    primary={variant.sku}
+                                ></ListItemText>
                             </ListItemButton>
                         )
                     })}
                 </List>
             </Dialog>
-            <StyledItem height={size} width={size} sx={removeProduct !== undefined ? {cursor: 'move'} : {}}>
+            <StyledItem
+                height={size}
+                width={size}
+                sx={removeProduct !== undefined ? { cursor: 'move' } : {}}
+            >
                 {actions()}
-                <ImageListItem ref={ref} onClick={handleClick}> 
+                <ImageListItem ref={ref} onClick={handleClick}>
                     <img
                         onLoad={handleLoaded}
                         className={!imageLoaded ? 'hidden' : ''}
-                        src={`${variant.images[0].url}?sw=${size*2}&fit=crop&auto=format`}
-                        srcSet={`${variant.images[0].url}?sw=${size*2}&fit=crop&auto=format&dpr=2 2x`}
+                        src={`${variant.images[0].url}?sw=${
+                            size * 2
+                        }&fit=crop&auto=format`}
+                        srcSet={`${variant.images[0].url}?sw=${
+                            size * 2
+                        }&fit=crop&auto=format&dpr=2 2x`}
                         alt={product.name}
                     />
                     <Skeleton
                         className={!imageLoaded ? 'loading skel' : 'skel'}
-                        variant="rounded" 
-                        width={'100%'} 
+                        variant='rounded'
+                        width={'100%'}
                         height={size}
                     />
                     <div className='text-box'>
-                        <Typography mb={0.5} variant="h3" fontSize={'10px'}>
+                        <Typography mb={0.5} variant='h3' fontSize={'10px'}>
                             {product.name}
                         </Typography>
-                        <Typography variant="h4" fontStyle={'italic'} fontSize={'10px'}>
+                        <Typography
+                            variant='h4'
+                            fontStyle={'italic'}
+                            fontSize={'10px'}
+                        >
                             ({product.id})
                         </Typography>
                     </div>
