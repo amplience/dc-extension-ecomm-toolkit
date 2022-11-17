@@ -343,7 +343,7 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
                     <IconButton
                         type='button'
                         onClick={searchByKeyword}
-                        sx={{ p: '10px' }}
+                        sx={{ ml: '5px', p: '8px' }}
                         aria-label='search'
                     >
                         <SearchIcon />
