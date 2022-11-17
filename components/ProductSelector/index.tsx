@@ -106,7 +106,7 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
 
     const selectProduct = (product: any) => {
         if (
-            ampSDK?.type === 'array' &&
+            (ampSDK?.type === 'objects' || ampSDK?.type === 'strings') &&
             ampSDK.maxItems &&
             selectedProducts.length >= ampSDK.maxItems
         ) {
