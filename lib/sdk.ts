@@ -46,12 +46,12 @@ const amplienceSDK = async () => {
         }
         else { // a.view === 'single'
             let megaMenu: any[] = await commerceApi.getMegaMenu({})
-            values = flattenCategories(megaMenu).map(cat => ({ name: `(${cat.slug}) ${cat.name}`, id: cat.id }))
+            values = flattenCategories(megaMenu).map(cat => ({ name: `(${cat.slug}) ${cat.name}`, slug: cat.slug, id: cat.id }))
             value = instance.type === 'string' && value ? values.find(opt => cleanValue(value) == opt.id) : value
         }
     }else if(instance.data === 'product'){
         let megaMenu: any[] = await commerceApi.getMegaMenu({})
-        values = flattenCategories(megaMenu).map(cat => ({ name: `(${cat.slug}) ${cat.name}`, id: cat.id }))
+        values = flattenCategories(megaMenu).map(cat => ({ name: `(${cat.slug}) ${cat.name}`, slug: cat.slug, id: cat.id }))
         value = instance.type === 'string' && value ? values.find(opt => cleanValue(value) == opt.id) : value
     }
     else { // a.data === 'customerGroups'

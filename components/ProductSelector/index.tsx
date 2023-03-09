@@ -69,22 +69,26 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
         setMode(newValue)
     }
 
-    const searchByCategory = async (catId: string) => {
+    const searchByCategory = async (catSlug: string) => {
         setResults([])
         setLoading(true)
-        const p = await ampSDK.commerceApi.getCategory({ slug: catId })
-        setResults(p.products)
+        if (catSlug !== '') {
+            const p = await ampSDK.commerceApi.getCategory({ slug: catSlug })
+            setResults(p.products)
+        }
         setLoading(false)
     }
 
     const searchByKeyword = async () => {
         setResults([])
         setLoading(true)
-        const p = await ampSDK.commerceApi.getProducts({
-            keyword: keywordInput.current.value
-        })
+        if (keywordInput.current.value !== '') {
+            const p = await ampSDK.commerceApi.getProducts({
+                keyword: keywordInput.current.value
+            })
+            setResults(p)
+        }
         setLoading(false)
-        setResults(p)
     }
 
     const handleKeyWordKeydown = (event: React.KeyboardEvent<HTMLElement>) => {
@@ -370,7 +374,8 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
                     value={storedValue}
                     onChange={(event, val) => {
                         if (val !== null) {
-                            searchByCategory(val.id)
+                            console.log("VALUE", val)
+                            searchByCategory(val.slug)
                         }
                     }}
                     onClose={() => {
