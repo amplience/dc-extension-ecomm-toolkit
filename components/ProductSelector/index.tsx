@@ -83,7 +83,6 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
         const p = await ampSDK.commerceApi.getProducts({
             keyword: keywordInput.current.value
         })
-
         setLoading(false)
         setResults(p)
     }
@@ -230,6 +229,9 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
     // Process values stored in the dc form to put into selecteProducts
     useEffect(() => {
         const getProducts = async (ids) => {
+            if (ids === '') { 
+                return []
+            }
             const p = await ampSDK.commerceApi.getProducts({
                 productIds: ids
             })
