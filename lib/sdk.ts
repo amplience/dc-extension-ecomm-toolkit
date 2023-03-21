@@ -42,16 +42,16 @@ const amplienceSDK = async () => {
 
     if (instance.data === 'category') {
         if (instance.view === 'tree') {
-            values = await commerceApi.getMegaMenu({})
+            values = await commerceApi.getCategoryTree({})
         }
         else { // a.view === 'single'
-            let megaMenu: any[] = await commerceApi.getMegaMenu({})
-            values = flattenCategories(megaMenu).map(cat => ({ name: `(${cat.slug}) ${cat.name}`, slug: cat.slug, id: cat.id }))
+            let categoryTree: any[] = await commerceApi.getCategoryTree({})
+            values = flattenCategories(categoryTree).map(cat => ({ name: `(${cat.slug}) ${cat.name}`, slug: cat.slug, id: cat.id }))
             value = instance.type === 'string' && value ? values.find(opt => cleanValue(value) == opt.id) : value
         }
     }else if(instance.data === 'product'){
-        let megaMenu: any[] = await commerceApi.getMegaMenu({})
-        values = flattenCategories(megaMenu).map(cat => ({ name: `(${cat.slug}) ${cat.name}`, slug: cat.slug, id: cat.id }))
+        let categoryTree: any[] = await commerceApi.getCategoryTree({})
+        values = flattenCategories(categoryTree).map(cat => ({ name: `(${cat.slug}) ${cat.name}`, slug: cat.slug, id: cat.id }))
         value = instance.type === 'string' && value ? values.find(opt => cleanValue(value) == opt.id) : value
     }
     else { // a.data === 'customerGroups'
