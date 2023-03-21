@@ -19,6 +19,7 @@ import SearchIcon from '@mui/icons-material/Search'
 import ProductTile from '../ProductTile'
 import SortableList from '../SortableList'
 import { AmpSDKProps } from '../../lib/models/treeItemData'
+import { isEqual } from 'lodash'
 
 interface TabPanelProps {
     children?: React.ReactNode
@@ -46,10 +47,11 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
     const [storedValue] = useState(ampSDK.getStoredValue())
     const [mode, setMode] = useState(0)
     const [keyword, setKeyword] = useState('')
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(true)
     const [showAlert, setShowAlert] = useState(false)
     const [alertMessage, setAlertMessage] = useState('')
     const [results, setResults] = useState([])
+    const [lastValue, setLastValue] = useState()
     const [selectedProducts, setSelectedProducts] = useState([])
     const keywordInput = useRef(null)
     const container = useRef(null)
@@ -162,39 +164,50 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
 
     const updateSelected = useCallback(
         (selectedProducts) => {
+            if (loading) {
+                return;
+            }
+
             if (selectedProducts.length) {
+                let result
                 switch (ampSDK?.type) {
                     case 'string':
                         const formStr = selectedProducts.map((prod) => prod.id)
-                        ampSDK.setValue(formStr[0])
+                        result = formStr[0]
                         break
                     case 'strings':
                         const formStrs = selectedProducts.map((prod) => prod.id)
-                        ampSDK.setValue(formStrs)
+                        result = formStrs
                         break
                     case 'object':
                         const formVal = {
                             id: selectedProducts[0].id,
                             variant: selectedProducts[0].selectedVariant?.sku
                         }
-                        ampSDK.setValue(formVal)
+                        result = formVal
                         break
                     case 'objects':
                         const formVals = selectedProducts.map((prod) => ({
                             id: prod.id,
                             variant: prod.selectedVariant?.sku
                         }))
-                        ampSDK.setValue(formVals)
+                        result = formVals
                         break
 
                     default:
                         break
                 }
-            } else {
+
+                if (!isEqual(lastValue, result)) {
+                    ampSDK.setValue(result)
+                    setLastValue(result)
+                }
+            } else if (lastValue != null) {
                 ampSDK.clearValue()
+                setLastValue(undefined)
             }
         },
-        [ampSDK]
+        [ampSDK, loading, lastValue]
     )
 
     useEffect(() => {
