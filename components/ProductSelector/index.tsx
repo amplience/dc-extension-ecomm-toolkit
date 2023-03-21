@@ -292,6 +292,8 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
 
                 setSelectedProducts(prod)
             })
+        } else {
+            setLoading(false)
         }
     }, [storedValue, ampSDK])
 
