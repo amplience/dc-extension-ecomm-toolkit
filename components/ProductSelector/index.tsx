@@ -252,7 +252,7 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
             const p = await ampSDK.commerceApi.getProducts({
                 productIds: ids
             })
-            return p
+            return p.filter((item: any) => item !== null)
         }
         // form comma-delim ID string
         if (storedValue != undefined) {
