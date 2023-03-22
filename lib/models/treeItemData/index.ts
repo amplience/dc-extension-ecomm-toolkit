@@ -19,6 +19,8 @@ export interface DataTreeViewProps {
 
 export interface AmpSDKProps {
     ampSDK: InstanceParams & {
+        getTitle: () => string
+        getDescription: () => string 
         getValue: () => any
         getValues: () => any
         getStoredValue: () => any

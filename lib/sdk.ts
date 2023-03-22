@@ -21,11 +21,11 @@ const amplienceSDK = async () => {
         if (typeof value !== 'string') {
             val = value.id
         }
-        if(isEnforced()) {
+        if (isEnforced()) {
             let pattern = sdk.field.schema?.pattern.split('/')
             pattern.pop()
             return `${pattern.join('/')}/${val}`
-        }else{
+        } else {
             return val
         }
     }
@@ -35,10 +35,12 @@ const amplienceSDK = async () => {
     let value: any = await sdk.field.getValue()
     let storedVal: any = await sdk.field.getValue()
     let values: any[] = []
+    let title: string = sdk.field.schema?.title
+    let description: string = sdk.field.schema?.description
     // end
 
     let { instance, installation } = sdk.params as ExtParameters
-    let commerceApi = await initCommerceApi(installation) 
+    let commerceApi = await initCommerceApi(installation)
 
     if (instance.data === 'category') {
         if (instance.view === 'tree') {
@@ -49,7 +51,7 @@ const amplienceSDK = async () => {
             values = flattenCategories(categoryTree).map(cat => ({ name: `(${cat.slug}) ${cat.name}`, slug: cat.slug, id: cat.id }))
             value = instance.type === 'string' && value ? values.find(opt => cleanValue(value) == opt.id) : value
         }
-    }else if(instance.data === 'product'){
+    } else if (instance.data === 'product') {
         let categoryTree: any[] = await commerceApi.getCategoryTree({})
         values = flattenCategories(categoryTree).map(cat => ({ name: `(${cat.slug}) ${cat.name}`, slug: cat.slug, id: cat.id }))
         value = instance.type === 'string' && value ? values.find(opt => cleanValue(value) == opt.id) : value
@@ -61,6 +63,8 @@ const amplienceSDK = async () => {
 
     let ampSDK = {
         ...instance,
+        getTitle: () => title,
+        getDescription: () => description,
         getValue: () => value,
         getValues: () => values,
         getStoredValue: () => storedVal,

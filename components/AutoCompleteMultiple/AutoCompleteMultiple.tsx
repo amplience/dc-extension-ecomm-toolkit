@@ -17,7 +17,7 @@ const AutoCompleteMultiple: React.FC<AmpSDKProps> = ({ ampSDK }) => {
         setValue(val) 
       }}
       onClose={() => {
-        ampSDK.setHeight(100)
+        ampSDK.setHeight(160)
       }}
       onOpen={() => {
         ampSDK.setHeight(540)

@@ -235,7 +235,7 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
     }, [getContainerHeight])
 
     useEffect(() => {
-        ampSDK.setHeight(height + 20)
+        ampSDK.setHeight(height + 100)
     }, [height, ampSDK])
 
     // Whenever selectedProducts list changes, save to dc form
@@ -394,7 +394,7 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
                         }
                     }}
                     onClose={() => {
-                        ampSDK.setHeight(200)
+                        ampSDK.setHeight(260)
                     }}
                     onOpen={() => {
                         ampSDK.setHeight(540)
