@@ -41,8 +41,14 @@ function App() {
     return (
         <div className='App'>
             <Stack spacing={3} sx={{ width: '100%' }}>
-                <Typography variant='body1'>{ampSDK?.getTitle()}</Typography>
-                <Typography variant='caption'>{ampSDK?.getDescription()}</Typography>
+                {
+                    ampSDK?.getTitle() &&
+                    <Typography variant='body1'>{ampSDK?.getTitle()}</Typography>
+                }
+                {
+                    ampSDK?.getDescription() &&
+                    <Typography variant='caption'>{ampSDK?.getDescription()}</Typography>
+                }
                 {component}
             </Stack>
         </div>
