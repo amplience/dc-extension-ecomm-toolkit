@@ -323,7 +323,7 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
                         variant='h3'
                         fontSize={'12px'}
                         fontWeight={'normal'}
-                        color='#666'
+                        color='#333'
                     >
                         Selected Products
                     </Typography>
