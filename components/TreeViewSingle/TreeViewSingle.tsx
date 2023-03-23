@@ -38,9 +38,9 @@ const TreeViewSingle: React.FC<AmpSDKProps> = ({ ampSDK }) => {
   }
   useEffect(() => {
     const { current } = ref
-    setTotalHeight(current.clientHeight)
+    setTotalHeight(current.clientHeight + 100)
     if(ampSDK !== undefined){
-      ampSDK.setHeight(current.clientHeight)
+      ampSDK.setHeight(current.clientHeight + 100)
     }
   }, [trigger])
 
@@ -48,7 +48,7 @@ const TreeViewSingle: React.FC<AmpSDKProps> = ({ ampSDK }) => {
     <>
       <div ref={ref}>
         <Typography variant="body1" component="p">
-          Selected category: {value}
+          XSelected category: {value}
           {
             value != '' ? 
             <IconButton aria-label="delete" onClick={() => {
