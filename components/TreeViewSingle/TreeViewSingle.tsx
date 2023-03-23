@@ -48,7 +48,7 @@ const TreeViewSingle: React.FC<AmpSDKProps> = ({ ampSDK }) => {
     <>
       <div ref={ref}>
         <Typography variant="body1" component="p">
-          XSelected category: {value}
+          Selected category: {value}
           {
             value != '' ? 
             <IconButton aria-label="delete" onClick={() => {
