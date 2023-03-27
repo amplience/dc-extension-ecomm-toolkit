@@ -7,7 +7,10 @@
 ## Supported platforms
 
 -   Salesforce Commerce Cloud (SFCC)
--   demostore (JSON Flat File)
+-   Big Commerce
+-   Commerce Tools
+-   Shopify
+-   Rest (JSON Sample Data)
 
 ## Supported features
 
@@ -61,35 +64,7 @@ Under the Permissions tab, select the following:
 
 ![Extension Permissions](media/ext-perms.png)
 
-### Extensions Installation Parameters
-
-#### Salesforce Commerce Cloud - SFCC
-
-Installation Parameters is where you'll enter your eComm platform-specific environment settings and credentials. If you're on SFCC, they will look like the following:
-
-```json
-{
-	"vendor": "sfcc",
-	"api_url": "https://YOURINSTANCE.dx.commercecloud.salesforce.com",
-	"auth_url": "https://account.demandware.com/dwsso/oauth2/access_token",
-	"client_id": "xxxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-	"client_secret": "TheClientPWYouSetInAccountMgr",
-	"site_id": "RefArchGlobal"
-}
-```
-
-#### Demostore - JSON Flat File
-
-If you're using Demostore with Flat File, installation paraneters will look like the following:
-
-```json
-{
-	"productURL": "https://demostore-catalog.s3.us-east-2.amazonaws.com/products.json",
-	"categoryURL": "https://demostore-catalog.s3.us-east-2.amazonaws.com/categories.json",
-	"customerGroupURL": "https://demostore-catalog.s3.us-east-2.amazonaws.com/customerGroups.json",
-	"translationsURL": "https://demostore-catalog.s3.us-east-2.amazonaws.com/translations.json"
-}
-```
+### Extensions Installation Parameters & Setup
 
 ### Extension Snippets
 
