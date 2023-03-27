@@ -69,12 +69,12 @@ Installation Parameters is where you'll enter your eComm platform-specific envir
 
 ```json
 {
-    "vendor": "sfcc",
-    "api_url": "https://YOURINSTANCE.dx.commercecloud.salesforce.com",
-    "auth_url": "https://account.demandware.com/dwsso/oauth2/access_token",
-    "client_id": "xxxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-    "client_secret": "TheClientPWYouSetInAccountMgr",
-    "site_id": "RefArchGlobal"
+	"vendor": "sfcc",
+	"api_url": "https://YOURINSTANCE.dx.commercecloud.salesforce.com",
+	"auth_url": "https://account.demandware.com/dwsso/oauth2/access_token",
+	"client_id": "xxxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+	"client_secret": "TheClientPWYouSetInAccountMgr",
+	"site_id": "RefArchGlobal"
 }
 ```
 
@@ -84,10 +84,10 @@ If you're using Demostore with Flat File, installation paraneters will look like
 
 ```json
 {
-    "productURL": "https://demostore-catalog.s3.us-east-2.amazonaws.com/products.json",
-    "categoryURL": "https://demostore-catalog.s3.us-east-2.amazonaws.com/categories.json",
-    "customerGroupURL": "https://demostore-catalog.s3.us-east-2.amazonaws.com/customerGroups.json",
-    "translationsURL": "https://demostore-catalog.s3.us-east-2.amazonaws.com/translations.json"
+	"productURL": "https://demostore-catalog.s3.us-east-2.amazonaws.com/products.json",
+	"categoryURL": "https://demostore-catalog.s3.us-east-2.amazonaws.com/categories.json",
+	"customerGroupURL": "https://demostore-catalog.s3.us-east-2.amazonaws.com/customerGroups.json",
+	"translationsURL": "https://demostore-catalog.s3.us-east-2.amazonaws.com/translations.json"
 }
 ```
 
@@ -111,33 +111,33 @@ Schema:
 
 ```json
 {
-    "title": "User Segments",
-    "description": "Multi-select User Segments and store as {name:string,id:string}",
-    "type": "array",
-    "minItems": 0,
-    "maxItems": 5,
-    "items": {
-        "type": "object",
-        "properties": {
-            "id": {
-                "title": "ID",
-                "type": "string"
-            },
-            "name": {
-                "title": "Name",
-                "type": "string"
-            }
-        }
-    },
-    "ui:extension": {
-        "name": "ecomm-toolkit",
-        "params": {
-            "label": "User Segments",
-            "view": "multi",
-            "data": "segment",
-            "type": "object"
-        }
-    }
+	"title": "User Segments",
+	"description": "Multi-select User Segments and store as {name:string,id:string}",
+	"type": "array",
+	"minItems": 0,
+	"maxItems": 5,
+	"items": {
+		"type": "object",
+		"properties": {
+			"id": {
+				"title": "ID",
+				"type": "string"
+			},
+			"name": {
+				"title": "Name",
+				"type": "string"
+			}
+		}
+	},
+	"ui:extension": {
+		"name": "ecomm-toolkit",
+		"params": {
+			"label": "User Segments",
+			"view": "multi",
+			"data": "segment",
+			"type": "object"
+		}
+	}
 }
 ```
 
@@ -145,18 +145,18 @@ Sample content:
 
 ```json
 {
-    "content": {
-        "items": [
-            {
-                "id": "2",
-                "name": "Big Spenders"
-            },
-            {
-                "id": "1",
-                "name": "VIP"
-            }
-        ]
-    }
+	"content": {
+		"items": [
+			{
+				"id": "2",
+				"name": "Big Spenders"
+			},
+			{
+				"id": "1",
+				"name": "VIP"
+			}
+		]
+	}
 }
 ```
 
@@ -170,23 +170,23 @@ Schema:
 
 ```json
 {
-    "title": "User Groups",
-    "description": "Multi-select User Segments and store as string",
-    "type": "array",
-    "minItems": 0,
-    "maxItems": 5,
-    "items": {
-        "type": "string"
-    },
-    "ui:extension": {
-        "name": "ecomm-toolkit",
-        "params": {
-            "label": "User Segments",
-            "view": "multi",
-            "data": "segment",
-            "type": "string"
-        }
-    }
+	"title": "User Groups",
+	"description": "Multi-select User Segments and store as string",
+	"type": "array",
+	"minItems": 0,
+	"maxItems": 5,
+	"items": {
+		"type": "string"
+	},
+	"ui:extension": {
+		"name": "ecomm-toolkit",
+		"params": {
+			"label": "User Segments",
+			"view": "multi",
+			"data": "segment",
+			"type": "string"
+		}
+	}
 }
 ```
 
@@ -194,9 +194,9 @@ Sample content:
 
 ```json
 {
-    "content": {
-        "items": ["1", "2"]
-    }
+	"content": {
+		"items": ["1", "2"]
+	}
 }
 ```
 
@@ -210,29 +210,29 @@ Schema:
 
 ```json
 {
-    "title": "Category",
-    "description": "Single-select Category and store Name,ID as {name:string,id:string}",
-    "type": "object",
-    "properties": {
-        "name": {
-            "title": "Name",
-            "type": "string"
-        },
-        "id": {
-            "title": "ID",
-            "type": "string"
-        }
-    },
-    "propertyOrder": ["id", "name"],
-    "ui:extension": {
-        "name": "ecomm-toolkit",
-        "params": {
-            "label": "Category",
-            "view": "single",
-            "data": "category",
-            "type": "object"
-        }
-    }
+	"title": "Category",
+	"description": "Single-select Category and store Name,ID as {name:string,id:string}",
+	"type": "object",
+	"properties": {
+		"name": {
+			"title": "Name",
+			"type": "string"
+		},
+		"id": {
+			"title": "ID",
+			"type": "string"
+		}
+	},
+	"propertyOrder": ["id", "name"],
+	"ui:extension": {
+		"name": "ecomm-toolkit",
+		"params": {
+			"label": "Category",
+			"view": "single",
+			"data": "category",
+			"type": "object"
+		}
+	}
 }
 ```
 
@@ -240,12 +240,12 @@ Sample content:
 
 ```json
 {
-    "content": {
-        "propertyName": {
-            "name": "(bath-utilities) Bath Utilities",
-            "id": "24"
-        }
-    }
+	"content": {
+		"propertyName": {
+			"name": "(bath-utilities) Bath Utilities",
+			"id": "24"
+		}
+	}
 }
 ```
 
@@ -259,18 +259,18 @@ Schema:
 
 ```json
 {
-    "title": "Category",
-    "description": "Single-select Category and store ID as string",
-    "type": "string",
-    "ui:extension": {
-        "name": "ecomm-toolkit",
-        "params": {
-            "label": "Category",
-            "view": "single",
-            "data": "category",
-            "type": "string"
-        }
-    }
+	"title": "Category",
+	"description": "Single-select Category and store ID as string",
+	"type": "string",
+	"ui:extension": {
+		"name": "ecomm-toolkit",
+		"params": {
+			"label": "Category",
+			"view": "single",
+			"data": "category",
+			"type": "string"
+		}
+	}
 }
 ```
 
@@ -278,9 +278,9 @@ Sample content:
 
 ```json
 {
-    "content": {
-        "propertyName": "24"
-    }
+	"content": {
+		"propertyName": "24"
+	}
 }
 ```
 
@@ -294,19 +294,19 @@ Schema:
 
 ```json
 {
-    "title": "Category",
-    "description": "Single-select Category and store ID as string",
-    "type": "string",
-    "pattern": "category/.*",
-    "ui:extension": {
-        "name": "ecomm-toolkit",
-        "params": {
-            "label": "Category",
-            "view": "single",
-            "data": "category",
-            "type": "string"
-        }
-    }
+	"title": "Category",
+	"description": "Single-select Category and store ID as string",
+	"type": "string",
+	"pattern": "category/.*",
+	"ui:extension": {
+		"name": "ecomm-toolkit",
+		"params": {
+			"label": "Category",
+			"view": "single",
+			"data": "category",
+			"type": "string"
+		}
+	}
 }
 ```
 
@@ -314,9 +314,9 @@ Sample content:
 
 ```json
 {
-    "content": {
-        "propertyName": "category/24"
-    }
+	"content": {
+		"propertyName": "category/24"
+	}
 }
 ```
 
@@ -330,18 +330,18 @@ Schema:
 
 ```json
 {
-    "title": "Category",
-    "description": "Single-select Category Tree and store ID as string",
-    "type": "string",
-    "ui:extension": {
-        "name": "ecomm-toolkit",
-        "params": {
-            "label": "Category",
-            "view": "tree",
-            "data": "category",
-            "type": "string"
-        }
-    }
+	"title": "Category",
+	"description": "Single-select Category Tree and store ID as string",
+	"type": "string",
+	"ui:extension": {
+		"name": "ecomm-toolkit",
+		"params": {
+			"label": "Category",
+			"view": "tree",
+			"data": "category",
+			"type": "string"
+		}
+	}
 }
 ```
 
@@ -349,9 +349,9 @@ Sample content:
 
 ```json
 {
-    "content": {
-        "propertyName": "24"
-    }
+	"content": {
+		"propertyName": "24"
+	}
 }
 ```
 
@@ -365,19 +365,19 @@ Schema:
 
 ```json
 {
-    "title": "Category",
-    "description": "Single-select Category Tree and store ID as string",
-    "type": "string",
-    "pattern": "category/.*",
-    "ui:extension": {
-        "name": "ecomm-toolkit",
-        "params": {
-            "label": "Category",
-            "view": "tree",
-            "data": "category",
-            "type": "string"
-        }
-    }
+	"title": "Category",
+	"description": "Single-select Category Tree and store ID as string",
+	"type": "string",
+	"pattern": "category/.*",
+	"ui:extension": {
+		"name": "ecomm-toolkit",
+		"params": {
+			"label": "Category",
+			"view": "tree",
+			"data": "category",
+			"type": "string"
+		}
+	}
 }
 ```
 
@@ -385,9 +385,9 @@ Sample content:
 
 ```json
 {
-    "content": {
-        "propertyName": "category/24"
-    }
+	"content": {
+		"propertyName": "category/24"
+	}
 }
 ```
 
@@ -423,19 +423,19 @@ Schema:
 
 ```json
 {
-    "title": "Product Selector (string)",
-    "description": "Single-select Category and store ID as string",
-    "type": "string",
-    "pattern": "pdp/content/.*",
-    "ui:extension": {
-        "name": "ecomm-toolkit",
-        "params": {
-            "label": "Search By Category",
-            "view": "product",
-            "data": "product",
-            "type": "string"
-        }
-    }
+	"title": "Product Selector (string)",
+	"description": "Single-select Category and store ID as string",
+	"type": "string",
+	"pattern": "pdp/content/.*",
+	"ui:extension": {
+		"name": "ecomm-toolkit",
+		"params": {
+			"label": "Search By Category",
+			"view": "product",
+			"data": "product",
+			"type": "string"
+		}
+	}
 }
 ```
 
@@ -486,28 +486,28 @@ Schema:
 
 ```json
 {
-    "title": "Product Selector (object)",
-    "description": "Single-select Category and store ID as string",
-    "type": "object",
-    "properties": {
-        "id": {
-            "title": "Product ID",
-            "type": "string"
-        },
-        "variant": {
-            "title": "Selected Variant ID",
-            "type": "string"
-        }
-    },
-    "ui:extension": {
-        "name": "ecomm-toolkit",
-        "params": {
-            "label": "Search By Category",
-            "view": "product",
-            "data": "product",
-            "type": "object"
-        }
-    }
+	"title": "Product Selector (object)",
+	"description": "Single-select Category and store ID as string",
+	"type": "object",
+	"properties": {
+		"id": {
+			"title": "Product ID",
+			"type": "string"
+		},
+		"variant": {
+			"title": "Selected Variant ID",
+			"type": "string"
+		}
+	},
+	"ui:extension": {
+		"name": "ecomm-toolkit",
+		"params": {
+			"label": "Search By Category",
+			"view": "product",
+			"data": "product",
+			"type": "object"
+		}
+	}
 }
 ```
 
@@ -526,31 +526,31 @@ Schema:
 
 ```json
 {
-    "title": "Product Selector (objects)",
-    "description": "Single-select Category and store ID as string",
-    "type": "array",
-    "items": {
-        "type": "object",
-        "properties": {
-            "id": {
-                "title": "Product ID",
-                "type": "string"
-            },
-            "variant": {
-                "title": "Selected Variant ID",
-                "type": "string"
-            }
-        }
-    },
-    "ui:extension": {
-        "name": "ecomm-toolkit",
-        "params": {
-            "label": "Search By Category",
-            "view": "product",
-            "data": "product",
-            "type": "objects"
-        }
-    }
+	"title": "Product Selector (objects)",
+	"description": "Single-select Category and store ID as string",
+	"type": "array",
+	"items": {
+		"type": "object",
+		"properties": {
+			"id": {
+				"title": "Product ID",
+				"type": "string"
+			},
+			"variant": {
+				"title": "Selected Variant ID",
+				"type": "string"
+			}
+		}
+	},
+	"ui:extension": {
+		"name": "ecomm-toolkit",
+		"params": {
+			"label": "Search By Category",
+			"view": "product",
+			"data": "product",
+			"type": "objects"
+		}
+	}
 }
 ```
 
@@ -572,3 +572,17 @@ Sample Content:
   }
 ]
 ```
+
+## License
+
+This software is licensed under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0),
+
+Copyright 2023 Amplience
+
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
+
+```
+http://www.apache.org/licenses/LICENSE-2.0
+```
+
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
