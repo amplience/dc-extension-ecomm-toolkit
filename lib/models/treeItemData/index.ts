@@ -1,4 +1,4 @@
-import { CommerceAPI } from "@amplience/dc-demostore-integration";
+import { CommerceAPI } from "@amplience/dc-integration-middleware";
 import { InstanceParams } from "../extensionParams";
 
 export interface TreeItemData {

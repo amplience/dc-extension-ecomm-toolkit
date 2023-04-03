@@ -1,4 +1,4 @@
-import { Identifiable, flattenCategories } from "@amplience/dc-demostore-integration";
+import { Identifiable, flattenCategories } from "@amplience/dc-integration-middleware";
 import { ContentFieldExtension, init } from 'dc-extensions-sdk';
 import { initCommerceApi } from "../pages/api";
 import { ExtParameters, FieldModel } from "./models/extensionParams";
