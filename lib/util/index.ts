@@ -1,4 +1,4 @@
-import { Identifiable } from '@amplience/dc-demostore-integration'
+import { Identifiable } from '@amplience/dc-integration-middleware'
 import { SFCCTreeItemData } from "../models/treeItemData";
 export module Utils {
 

@@ -1,4 +1,4 @@
-import { middleware, CommerceAPI, getCommerceAPI as integrationGetCommerceAPI } from '@amplience/dc-demostore-integration'
+import { middleware, CommerceAPI, getCommerceAPI as integrationGetCommerceAPI } from '@amplience/dc-integration-middleware'
 
 // add the /api route
 export default middleware

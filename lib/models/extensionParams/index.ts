@@ -1,4 +1,4 @@
-import { CommerceCodec } from "@amplience/dc-demostore-integration";
+import { CommerceCodec } from "@amplience/dc-integration-middleware";
 
 export interface ExtParameters {
     instance: InstanceParams;
