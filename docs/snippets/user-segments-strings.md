@@ -1,0 +1,39 @@
+# User Segments - Multi select - string
+
+View screenshot:
+
+![Multi Select](../../media/multi.png)
+
+Schema:
+
+```json
+{
+	"title": "User Segments (strings)",
+	"description": "Multi-select User Segments, and store Segments as strings array",
+	"type": "array",
+	"minItems": 0,
+	"maxItems": 5,
+	"items": {
+		"type": "string"
+	},
+	"ui:extension": {
+		"name": "ecomm-toolkit",
+		"params": {
+			"label": "User Segments",
+			"view": "multi",
+			"data": "segment",
+			"type": "string"
+		}
+	}
+}
+```
+
+Sample content:
+
+```json
+{
+	"content": {
+		"items": ["1", "2"]
+	}
+}
+```
