@@ -8,7 +8,7 @@
         "start": "next start",
         "lint": "next lint",
         "ver": "vercel dev --listen 3002",
-        "version:patch": "standard-version",
+        "version:patch": "standard-version --release-as patch",
         "version:minor": "standard-version --release-as minor",
         "version:major": "standard-version --release-as major",
         "prepare-patch-release": "run-s build version:patch",
