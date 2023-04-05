@@ -86,7 +86,7 @@ You can find the code for all snippets in [data/snippets.json](./data/snippets.j
 - [Category Tree (string)](./docs/snippets/category-tree-string.md)
 - [Category Tree (enforced string)](./docs/snippets/category-tree-enforced-string.md)
 - [User Segments (strings)](./docs/snippets/user-segments-strings.md)
-- [User Segments (objects)](./docs/snippets/user-segments-objects)
+- [User Segments (objects)](./docs/snippets/user-segments-objects.md)
 
 ## Useful Links
  * [Contributing](./CONTRIBUTING.md)
