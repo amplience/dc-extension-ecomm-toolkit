@@ -1,6 +1,6 @@
-# Product Selector - Single - enforced string
+# Product Selector (enforced string)
 
-Schema:
+Keyword Search or Single-select Category, and store Product ID as enforced string:
 
 ```json
 {
@@ -23,5 +23,7 @@ Schema:
 Sample Content:
 
 ```json
-"product": "pdp/content/25050736M"
+{
+	"productSingleEnforcedString": "pdp/content/25050736M"
+}
 ```

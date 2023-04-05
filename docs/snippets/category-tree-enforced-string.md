@@ -1,10 +1,6 @@
-# Category - Single Select Tree - enforced string
+# Category Tree (enforced string)
 
-View screenshot:
-
-![Single Select Tree](../media/tree-single.png)
-
-Schema:
+Single-select Category Tree, and store Category ID as string:
 
 ```json
 {
@@ -28,8 +24,6 @@ Sample content:
 
 ```json
 {
-	"content": {
-		"propertyName": "category/24"
-	}
+	"categorySingleEnforcedStringTree": "category/24"
 }
 ```

@@ -1,10 +1,6 @@
-# Category - Single Select Tree - string
+# Category Tree (string)
 
-View screenshot:
-
-![Single Select Tree](../../media/tree-single.png)
-
-Schema:
+Single-select Category Tree, and store Category ID as string:
 
 ```json
 {
@@ -27,8 +23,6 @@ Sample content:
 
 ```json
 {
-	"content": {
-		"propertyName": "24"
-	}
+	"categorySingleStringTree": "24"
 }
 ```

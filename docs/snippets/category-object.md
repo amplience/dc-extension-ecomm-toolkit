@@ -1,15 +1,11 @@
-# Category - Single Select - object
+# Category (object)
 
-View screenshot:
-
-![Single Select](../../media/single.png)
-
-Schema:
+Single-select Category, and store Name, ID as object:
 
 ```json
 {
 	"title": "Category (object)",
-	"description": "Single-select Category, and store Name, ID as { name: string, id: string }",
+	"description": "Single-select Category, and store Name, ID as object",
 	"type": "object",
 	"properties": {
 		"name": {
@@ -38,11 +34,9 @@ Sample content:
 
 ```json
 {
-	"content": {
-		"propertyName": {
-			"name": "(bath-utilities) Bath Utilities",
-			"id": "24"
-		}
+	"categorySingleObject": {
+		"name": "(bath-utilities) Bath Utilities",
+		"id": "24"
 	}
 }
 ```

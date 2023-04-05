@@ -1,10 +1,6 @@
-# Category - Single Select - enforced string
+# Category (enforced string)
 
-View screenshot:
-
-![Single Select](../../media/single.png)
-
-Schema:
+Single-select Category, and store Category ID as enforced string:
 
 ```json
 {
@@ -28,8 +24,6 @@ Sample content:
 
 ```json
 {
-	"content": {
-		"propertyName": "category/24"
-	}
+	"categorySingleEnforcedString": "category/24"
 }
 ```

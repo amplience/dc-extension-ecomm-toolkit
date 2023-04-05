@@ -1,6 +1,6 @@
-# Product Selector - Single - string
+# Product Selector (string)
 
-Schema:
+Keyword Search or Single-select Category, and store Product ID as string:
 
 ```json
 {
@@ -22,5 +22,7 @@ Schema:
 Sample Content:
 
 ```json
-"product": "25050736M"
+{
+	"productSingleString": "25050736M"
+}
 ```

@@ -1,15 +1,11 @@
-# Category - Single Select - string
+# Category (string)
 
-View screenshot:
-
-![Single Select](../../media/single.png)
-
-Schema:
+Single-select Category, and store Category ID as string:
 
 ```json
 {
 	"title": "Category (string)",
-	"description": "Single-select Category, and store Category ID as enforced string",
+	"description": "Single-select Category, and store Category ID as string",
 	"type": "string",
 	"ui:extension": {
 		"name": "ecomm-toolkit",
@@ -27,8 +23,8 @@ Sample content:
 
 ```json
 {
-	"content": {
-		"propertyName": "category/24"
+	"categorySingleString": {
+		"categorySingleString": "24"
 	}
 }
 ```

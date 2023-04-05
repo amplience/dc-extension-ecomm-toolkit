@@ -1,15 +1,11 @@
-# User Segments - Multi select - object
+# User Segments (objects)
 
-View screenshot:
-
-![Multi select](../../media/multi.png)
-
-Schema:
+Multi-select User Segments, and store as object:
 
 ```json
 {
 	"title": "User Segments (objects)",
-	"description": "Multi-select User Segments, and store as { name: string, id: string }",
+	"description": "Multi-select User Segments, and store as object",
 	"type": "array",
 	"minItems": 0,
 	"maxItems": 5,
@@ -42,7 +38,7 @@ Sample content:
 
 ```json
 {
-	"content": {
+	"segmentMultiSelectObject": {
 		"items": [
 			{
 				"id": "2",

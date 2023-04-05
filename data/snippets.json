@@ -94,7 +94,7 @@
     },
     "categorySingleObject": {
         "title": "Category (object)",
-        "description": "Single-select Category, and store Name, ID as { name: string, id: string }",
+        "description": "Single-select Category, and store Name, ID as object",
         "type": "object",
         "properties": {
             "name": {
@@ -170,7 +170,7 @@
     },
     "segmentMultiSelectObject": {
         "title": "User Segments (objects)",
-        "description": "Multi-select User Segments, and store as { name: string, id: string }",
+        "description": "Multi-select User Segments, and store as object",
         "type": "array",
         "minItems": 0,
         "maxItems": 5,

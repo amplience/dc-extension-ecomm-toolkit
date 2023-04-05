@@ -1,6 +1,6 @@
-# Product Selector - Array of ID Strings - `string[]`
+# Product Selector (strings)
 
-Schema:
+Keyword Search or Single-select Category, and store Product IDs as array of string:
 
 ```json
 {
@@ -25,11 +25,7 @@ Schema:
 Sample Content:
 
 ```json
-"products": [
-    "25591072M",
-    "25517823M",
-    "25050730M",
-    "25594776M",
-    "25501952M"
-  ]
+{
+	"productArrayStrings": ["25591072M", "25517823M", "25050730M", "25594776M", "25501952M"]
+}
 ```

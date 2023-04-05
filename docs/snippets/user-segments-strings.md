@@ -1,10 +1,6 @@
-# User Segments - Multi select - string
+# User Segments (strings)
 
-View screenshot:
-
-![Multi Select](../../media/multi.png)
-
-Schema:
+Multi-select User Segments, and store Segments as strings array:
 
 ```json
 {
@@ -32,7 +28,7 @@ Sample content:
 
 ```json
 {
-	"content": {
+	"segmentMultiSelectString": {
 		"items": ["1", "2"]
 	}
 }
