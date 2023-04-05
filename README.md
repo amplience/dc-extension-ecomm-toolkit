@@ -20,7 +20,7 @@
 
 ## 🏁Quickstart
 
-Instructions for basic registering & setting up the ecomm-toolkit in your Amplience Dynamic Content box [are here](./docs/extension.md).
+Instructions for basic registration & setup of the ecomm-toolkit in your Amplience Dynamic Content box [are here](./docs/extension.md). Then come back to the Snippets section below.
 
 ### Extension Snippets
 
