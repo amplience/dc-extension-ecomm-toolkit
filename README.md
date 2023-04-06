@@ -8,7 +8,7 @@
 
 -   [Salesforce Commerce Cloud (SFCC)](./docs/sfcc.md)
 -   [Big Commerce](./docs/bigcommerce.md)
--   [Commerce Tools](./docs/commercetools.md)
+-   [Commercetools](./docs/commercetools.md)
 -   [Shopify](./docs/shopify.md)
 -   [REST (JSON Sample Data)](./docs/rest.md)
 
