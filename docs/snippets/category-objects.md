@@ -1,4 +1,4 @@
-# Category (object)
+# Category (objects)
 
 Single-select Category, and store Name, ID as object:
 
@@ -39,14 +39,16 @@ Sample content:
 
 ```json
 {
-	"categoryObjects": [
+	"categoryArrayObject": [
 		{
-			"name": "(bath-utilities) Bath Utilities",
-			"id": "24"
+			"name": "(shop-all) Shop All",
+			"slug": "shop-all",
+			"id": "23"
 		},
 		{
-			"name": "(womens) Womens",
-			"id": "3"
+			"name": "(bath) Bath",
+			"slug": "bath",
+			"id": "18"
 		}
 	]
 }

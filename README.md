@@ -44,6 +44,7 @@ You can find the code for all snippets in [data/snippets.json](./data/snippets.j
   - [Category (enforced string)](./docs/snippets/category-enforced-string.md)
   - [Category (strings)](./docs/snippets/category-strings.md)
   - [Category (object)](./docs/snippets/category-object.md)
+  - [Category (objects)](./docs/snippets/category-objects.md)
   - [Category Tree (string)](./docs/snippets/category-tree-string.md)
   - [Category Tree (enforced string)](./docs/snippets/category-tree-enforced-string.md)
 - **User Segments**

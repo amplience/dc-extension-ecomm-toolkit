@@ -246,7 +246,7 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
     // Process values stored in the dc form to put into selecteProducts
     useEffect(() => {
         const getProducts = async (ids) => {
-            if (ids === '') { 
+            if (ids === '' || ids == null) { 
                 return []
             }
             const p = await ampSDK.commerceApi.getProducts({
