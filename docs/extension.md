@@ -1,17 +1,18 @@
 # Extension Setup
 
 First you'll need to register the extension against an Amplience Dynamic Content Hub. General guidance can be found [here](https://amplience.com/developers/docs/integrations/extensions/register-use/) and following the specifics below:
- 
- Login to your Hub and head to Development > Extensions and click the "Register" button.
+
+Login to your Hub and head to Development > Extensions and click the "Register" button.
 
 ![Register Start](../media/register-button.png)
 
 ## Base Extension Setup
 
 Under the setup tab put the URL where your extension is hosted:
- - Developement: This will either be `http://localhost:300` of your dev branch deployement url
- - Self hosted: This will be your main brand deployement URL
- - Amplience hosted (if you are not self hosting): `https://ecomm-toolkit.dc-demostore.com`
+
+-   Developement: This will either be `http://localhost:3000` of your dev branch deployement url
+-   Self hosted: This will be your main brand deployement URL
+-   Amplience hosted (if you are not self hosting): `https://ecomm-toolkit.dc-demostore.com`
 
 ![Extension Setup](../media/ext-setup.png)
 
@@ -21,13 +22,11 @@ Under the Permissions tab, select the following:
 
 ![Extension Permissions](../media/ext-perms.png)
 
-- API Permissions:
-    - Read Access ✅
-    - Modify Access ✅
-- Sandbox Permissions:
-    - Allow Same Origin ✅
-
-
+-   API Permissions:
+    -   Read Access ✅
+    -   Modify Access ✅
+-   Sandbox Permissions:
+    -   Allow Same Origin ✅
 
 ## Extensions Installation Parameters & Setup
 
