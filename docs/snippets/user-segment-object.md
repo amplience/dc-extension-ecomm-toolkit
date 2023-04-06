@@ -1,11 +1,11 @@
 # User Segment (object)
 
-Single-select User Segment, and store as object:
+Single-select a User Segment, and store as object:
 
 ```json
-"segmentSingleSelectObject": {
+{
     "title": "User Segment (object)",
-    "description": "Single-select User Segment, and store as object",
+    "description": "Single-select a User Segment, and store as an object",
     "type": "object",
     "properties": {
         "id": {
@@ -33,17 +33,9 @@ Sample content:
 
 ```json
 {
-    "segmentMultiSelectObject": {
-        "items": [
-            {
-                "id": "2",
-                "name": "Big Spenders"
-            },
-            {
-                "id": "1",
-                "name": "VIP"
-            }
-        ]
+    "segmentSingleSelectObject": {
+        "id": "2",
+        "name": "Big Spenders"
     }
 }
 ```

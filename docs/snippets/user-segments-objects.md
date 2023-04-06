@@ -5,7 +5,7 @@ Multi-select User Segments, and store as object:
 ```json
 {
     "title": "User Segments (objects)",
-    "description": "Multi-select User Segments, and store as object",
+    "description": "Multi-select User Segments, and store as objects",
     "type": "array",
     "minItems": 0,
     "maxItems": 5,
@@ -38,17 +38,15 @@ Sample content:
 
 ```json
 {
-    "segmentMultiSelectObject": {
-        "items": [
-            {
-                "id": "2",
-                "name": "Big Spenders"
-            },
-            {
-                "id": "1",
-                "name": "VIP"
-            }
-        ]
-    }
+    "segmentMultiSelectObjects": [
+        {
+            "id": "2",
+            "name": "Big Spenders"
+        },
+        {
+            "id": "1",
+            "name": "VIP"
+        }
+    ]
 }
 ```
