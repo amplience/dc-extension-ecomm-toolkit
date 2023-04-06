@@ -69,24 +69,6 @@
             }
         }
     },
-    "productArrayEnforcedStrings": {
-        "title": "Product Selector (enforced strings)",
-        "description": "Keyword Search or Single-select Category, and store Product IDs as enforced string",
-        "type": "array",
-        "items": {
-            "type": "string",
-            "pattern": "pdp/content/.*"
-        },
-        "ui:extension": {
-            "name": "ecomm-toolkit",
-            "params": {
-                "label": "Search By Category",
-                "view": "product",
-                "data": "product",
-                "type": "strings"
-            }
-        }
-    },
     "categorySingleString": {
         "title": "Category (string)",
         "description": "Single-select Category, and store Category ID as string",
