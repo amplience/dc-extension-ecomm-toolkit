@@ -394,10 +394,10 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
                         }
                     }}
                     onClose={() => {
-                        ampSDK.setHeight(260)
+                        ampSDK.setHeight(Math.max(height + 100, 260))
                     }}
                     onOpen={() => {
-                        ampSDK.setHeight(540)
+                        ampSDK.setHeight(Math.max(height + 100, 540))
                     }}
                     renderInput={(params) => (
                         <TextField {...params} label={ampSDK.label} />
