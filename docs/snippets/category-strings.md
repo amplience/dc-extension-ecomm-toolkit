@@ -1,5 +1,7 @@
 # Category (strings)
 
+# Snippet
+
 Multi-select Categories, and store Category IDs as array of string:
 
 ```json
@@ -22,7 +24,7 @@ Multi-select Categories, and store Category IDs as array of string:
 }
 ```
 
-Sample content:
+## Sample content
 
 ```json
 {
@@ -30,7 +32,10 @@ Sample content:
 }
 ```
 
-Sample UI:
+## Sample UI
 
+Empty field:
 ![Sample UI](../../media/category-strings.png)
+
+Selecting multiple categories:
 ![Sample UI](../../media/category-strings2.png)

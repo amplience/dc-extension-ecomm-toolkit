@@ -1,5 +1,7 @@
 # Category (objects)
 
+## Snippet
+
 Multi-select Category, and store Name, ID as object:
 
 ```json
@@ -35,7 +37,7 @@ Multi-select Category, and store Name, ID as object:
 }
 ```
 
-Sample content:
+## Sample content
 
 ```json
 {
@@ -54,8 +56,10 @@ Sample content:
 }
 ```
 
-Sample UI:
+## Sample UI
 
+Empty field:
 ![Sample UI](../../media/category-objects.png)
 
+Selecting multiple categories:
 ![Sample UI](../../media/category-objects2.png)

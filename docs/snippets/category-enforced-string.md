@@ -1,5 +1,7 @@
 # Category (enforced string)
 
+## Snippet
+
 Single-select Category, and store Category ID as enforced string:
 
 ```json
@@ -20,7 +22,7 @@ Single-select Category, and store Category ID as enforced string:
 }
 ```
 
-Sample content:
+## Sample content
 
 ```json
 {
@@ -28,8 +30,10 @@ Sample content:
 }
 ```
 
-Sample UI:
+## Sample UI
 
+Empty field:
 ![Sample UI](../../media/category-enforced-string.png)
 
+Selecting a category:
 ![Sample UI](../../media/category-enforced-string2.png)

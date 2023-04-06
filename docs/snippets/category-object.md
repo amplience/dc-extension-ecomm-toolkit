@@ -1,5 +1,7 @@
 # Category (object)
 
+## Snippet
+
 Single-select Category, and store Name, ID as object:
 
 ```json
@@ -30,7 +32,7 @@ Single-select Category, and store Name, ID as object:
 }
 ```
 
-Sample content:
+## Sample content
 
 ```json
 {
@@ -41,8 +43,10 @@ Sample content:
 }
 ```
 
-Sample UI:
+## Sample UI
 
+Empty field:
 ![Sample UI](../../media/category-object.png)
 
+Selecting a category:
 ![Sample UI](../../media/category-object2.png)

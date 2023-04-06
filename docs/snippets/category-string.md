@@ -1,5 +1,7 @@
 # Category (string)
 
+## Snippet
+
 Single-select Category, and store Category ID as string:
 
 ```json
@@ -19,7 +21,7 @@ Single-select Category, and store Category ID as string:
 }
 ```
 
-Sample content:
+## Sample content
 
 ```json
 {
@@ -27,7 +29,10 @@ Sample content:
 }
 ```
 
-Sample UI:
+## Sample UI
 
+Category selected:
 ![Sample UI](../../media/category-string.png)
+
+Selecting a category:
 ![Sample UI](../../media/category-string2.png)
