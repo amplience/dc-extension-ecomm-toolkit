@@ -38,11 +38,13 @@ You can find the code for all snippets in [data/snippets.json](./data/snippets.j
 - **Products**
   - [Product Selector (string)](./docs/snippets/product-selector-string.md)
   - [Product Selector (enforced string)](./docs/snippets/product-selector-enforced-string.md)
+  - [Product Selector (object)](./docs/snippets/product-selector-object.md)
   - [Product Selector (strings)](./docs/snippets/product-selector-strings.md)
   - [Product Selector (enforced strings)](./docs/snippets/product-selector-enforced-strings.md)
 - **Categories**
   - [Category (string)](./docs/snippets/category-string.md)
   - [Category (enforced string)](./docs/snippets/category-enforced-string.md)
+  - [Category (strings)](./docs/snippets/category-strings.md)
   - [Category (object)](./docs/snippets/category-object.md)
   - [Category Tree (string)](./docs/snippets/category-tree-string.md)
   - [Category Tree (enforced string)](./docs/snippets/category-tree-enforced-string.md)

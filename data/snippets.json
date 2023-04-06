@@ -28,6 +28,30 @@
             }
         }
     },
+    "productSingleObject": {
+        "title": "Product Selector (object)",
+        "description": "Keyword Search or Single-select Category, and store Product as object",
+        "type": "string",
+        "properties": {
+            "variant": {
+                "title": "Variant",
+                "type": "string"
+            },
+            "id": {
+                "title": "ID",
+                "type": "string"
+            }
+        },
+        "ui:extension": {
+            "name": "e-comm-toolkit-big-commerce",
+            "params": {
+                "label": "Search By Category",
+                "view": "product",
+                "data": "product",
+                "type": "object"
+            }
+        }
+    },
     "productArrayStrings": {
         "title": "Product Selector (strings)",
         "description": "Keyword Search or Single-select Category, and store Product IDs as array of string",
@@ -87,6 +111,23 @@
             "params": {
                 "label": "Category",
                 "view": "single",
+                "data": "category",
+                "type": "string"
+            }
+        }
+    },
+    "categoryArrayStrings": {
+        "title": "Category (strings)",
+        "description": "Multi-select Categories, and store Category IDs as array of string",
+        "type": "array",
+        "items": {
+            "type": "string"
+        },
+        "ui:extension": {
+            "name": "ecomm-toolkit",
+            "params": {
+                "label": "Category",
+                "view": "multi",
                 "data": "category",
                 "type": "string"
             }
