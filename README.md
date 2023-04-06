@@ -49,6 +49,7 @@ You can find the code for all snippets in [data/snippets.json](./data/snippets.j
 - **User Segments**
   - [User Segments (strings)](./docs/snippets/user-segments-strings.md)
   - [User Segments (objects)](./docs/snippets/user-segments-objects.md)
+  - [User Segment (object)](./docs/snippets/user-segment-object.md)
 
 ## 🌍 Useful Links
 

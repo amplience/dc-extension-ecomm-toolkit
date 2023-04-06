@@ -28,11 +28,9 @@ Sample content:
 
 ```json
 {
-    "segmentMultiSelectString": {
-        "items": [
-            "1", 
-            "2"
-        ]
-    }
+    "segmentMultiSelectStrings": [
+        "1", 
+        "2"
+    ]
 }
 ```
