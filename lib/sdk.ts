@@ -58,7 +58,11 @@ const amplienceSDK = async () => {
     }
     else { // a.data === 'customerGroups'
         values = await commerceApi.getCustomerGroups({})
-        value = instance.type === 'string' && value ? values.filter(opt => value.includes(opt.id)) : value
+        value = instance.type === 'string' && value ? 
+            (instance.view === 'multi' ? 
+                values.filter(opt => value.includes(opt.id)) :
+                values.find(opt => value.includes(opt.id))) :
+            value
     }
 
     let ampSDK = {
