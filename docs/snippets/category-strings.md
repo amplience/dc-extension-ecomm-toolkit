@@ -26,10 +26,10 @@ Sample content:
 
 ```json
 {
-    "categoryArrayStrings": [
-        "23",
-        "24",
-        "18"
-    ]
+	"categoryArrayStrings": ["23", "24", "18"]
 }
 ```
+
+Sample UI:
+
+![Sample UI](../../media/category-strings.png)

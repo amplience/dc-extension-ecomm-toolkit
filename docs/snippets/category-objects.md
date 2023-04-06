@@ -4,8 +4,8 @@ Single-select Category, and store Name, ID as object:
 
 ```json
 {
-	"title": "Category (object)",
-	"description": "Single-select Category, and store Name, ID as object",
+	"title": "Category (objects)",
+	"description": "Multi-select Category, stored as [{ID:string, name:string}...]",
 	"type": "array",
 	"minItems": 0,
 	"maxItems": 10,
@@ -53,3 +53,7 @@ Sample content:
 	]
 }
 ```
+
+Sample UI:
+
+![Sample UI](../../media/category-objects.png)

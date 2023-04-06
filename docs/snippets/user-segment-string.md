@@ -23,6 +23,10 @@ Sample content:
 
 ```json
 {
-    "segmentSingleSelectString": "1"
+	"segmentSingleSelectString": "1"
 }
 ```
+
+Sample UI:
+
+![Sample UI](../../media/user-segment-string.png)
