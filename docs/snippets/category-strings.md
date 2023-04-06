@@ -35,7 +35,9 @@ Multi-select Categories, and store Category IDs as array of string:
 ## Sample UI
 
 Empty field:
+
 ![Sample UI](../../media/category-strings.png)
 
 Selecting multiple categories:
+
 ![Sample UI](../../media/category-strings2.png)

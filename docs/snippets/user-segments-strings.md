@@ -37,4 +37,5 @@ Multi-select User Segments, and store Segments as strings array:
 ## Sample UI
 
 Multiple segments selected:
+
 ![Sample UI](../../media/user-segment-strings.png)

@@ -32,7 +32,9 @@ Single-select Category, and store Category ID as string:
 ## Sample UI
 
 Category selected:
+
 ![Sample UI](../../media/category-string.png)
 
 Selecting a category:
+
 ![Sample UI](../../media/category-string2.png)

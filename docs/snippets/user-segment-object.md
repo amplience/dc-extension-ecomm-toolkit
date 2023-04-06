@@ -45,4 +45,5 @@ Single-select a User Segment, and store as object:
 ## Sample UI
 
 Selected segment:
+
 ![Sample UI](../../media/user-segment-object.png)

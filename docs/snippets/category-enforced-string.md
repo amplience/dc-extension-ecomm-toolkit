@@ -33,7 +33,9 @@ Single-select Category, and store Category ID as enforced string:
 ## Sample UI
 
 Empty field:
+
 ![Sample UI](../../media/category-enforced-string.png)
 
 Selecting a category:
+
 ![Sample UI](../../media/category-enforced-string2.png)

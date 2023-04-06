@@ -46,7 +46,9 @@ Single-select Category, and store Name, ID as object:
 ## Sample UI
 
 Empty field:
+
 ![Sample UI](../../media/category-object.png)
 
 Selecting a category:
+
 ![Sample UI](../../media/category-object2.png)

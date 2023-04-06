@@ -56,4 +56,5 @@ Multi-select User Segments, and store as object:
 ## Sample UI
 
 Multiple segments selected:
+
 ![Sample UI](../../media/user-segment-objects.png)

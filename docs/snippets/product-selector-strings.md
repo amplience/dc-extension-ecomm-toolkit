@@ -35,10 +35,13 @@ Keyword Search or Single-select Category, and store Product IDs as array of stri
 ## Sample UI
 
 Empty field:
+
 ![Sample UI](../../media/product-selector-strings.png)
 
 Sample Keyword Search:
+
 ![Sample UI](../../media/product-selector-key2.png)
 
 Sample Category Search:
+
 ![Sample UI](../../media/product-selector-cat2.png)

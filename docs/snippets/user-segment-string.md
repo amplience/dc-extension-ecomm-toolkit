@@ -32,4 +32,5 @@ Single-select User Segment, and store Segment ID as string:
 ## Sample UI
 
 Empty field:
+
 ![Sample UI](../../media/user-segment-string.png)

@@ -33,7 +33,9 @@ Single-select Category Tree, and store Category ID as string:
 ## Sample UI
 
 No category selected:
+
 ![Sample UI](../../media/category-tree-enforced-string.png)
 
 Selecting a category:
+
 ![Sample UI](../../media/category-tree-string2.png)
