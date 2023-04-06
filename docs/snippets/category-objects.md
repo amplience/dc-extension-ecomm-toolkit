@@ -1,11 +1,11 @@
 # Category (objects)
 
-Single-select Category, and store Name, ID as object:
+Multi-select Category, and store Name, ID as object:
 
 ```json
 {
-	"title": "Category (object)",
-	"description": "Single-select Category, and store Name, ID as object",
+	"title": "Category (objects)",
+	"description": "Multi-select Category, and store Name, ID as object",
 	"type": "array",
 	"minItems": 0,
 	"maxItems": 10,
