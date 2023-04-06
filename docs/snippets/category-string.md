@@ -23,8 +23,6 @@ Sample content:
 
 ```json
 {
-    "categorySingleString": {
-        "categorySingleString": "24"
-    }
+    "categorySingleString": "24"
 }
 ```
