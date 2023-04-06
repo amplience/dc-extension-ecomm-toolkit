@@ -6,8 +6,8 @@ import {DndProvider} from "react-dnd";
 import {HTML5Backend} from "react-dnd-html5-backend"
 
 export interface Item {
-	id: number
-	product: any
+    id: number
+    product: any
 }
 
 const SortableList = ({ selectedProducts, updateSelected, removeProduct, dataType }) => {

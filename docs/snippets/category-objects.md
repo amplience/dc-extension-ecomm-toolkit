@@ -1,6 +1,6 @@
 # Category (objects)
 
-Single-select Category, and store Name, ID as object:
+Multi-select Category, and store Name, ID as object:
 
 ```json
 {

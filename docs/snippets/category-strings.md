@@ -3,7 +3,7 @@
 Multi-select Categories, and store Category IDs as array of string:
 
 ```json
-"categoryArrayStrings": {
+{
     "title": "Category (strings)",
     "description": "Multi-select Categories, and store Category IDs as array of string",
     "type": "array",
