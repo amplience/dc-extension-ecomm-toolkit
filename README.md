@@ -32,17 +32,20 @@ The Instance Parameters are all included in the snippets and will drive how the 
 
 You can find the code for all snippets in [data/snippets.json](./data/snippets.json) or in the following pages:
 
--   [Product Selector (string)](./docs/snippets/product-selector-string.md)
--   [Product Selector (enforced string)](./docs/snippets/product-selector-enforced-string.md)
--   [Product Selector (strings)](./docs/snippets/product-selector-strings.md)
--   [Product Selector (enforced strings)](./docs/snippets/product-selector-enforced-strings.md)
--   [Category (string)](./docs/snippets/category-string.md)
--   [Category (enforced string)](./docs/snippets/category-enforced-string.md)
--   [Category (object)](./docs/snippets/category-object.md)
--   [Category Tree (string)](./docs/snippets/category-tree-string.md)
--   [Category Tree (enforced string)](./docs/snippets/category-tree-enforced-string.md)
--   [User Segments (strings)](./docs/snippets/user-segments-strings.md)
--   [User Segments (objects)](./docs/snippets/user-segments-objects.md)
+- **Products**
+  - [Product Selector (string)](./docs/snippets/product-selector-string.md)
+  - [Product Selector (enforced string)](./docs/snippets/product-selector-enforced-string.md)
+  - [Product Selector (strings)](./docs/snippets/product-selector-strings.md)
+  - [Product Selector (enforced strings)](./docs/snippets/product-selector-enforced-strings.md)
+- **Categories**
+  - [Category (string)](./docs/snippets/category-string.md)
+  - [Category (enforced string)](./docs/snippets/category-enforced-string.md)
+  - [Category (object)](./docs/snippets/category-object.md)
+  - [Category Tree (string)](./docs/snippets/category-tree-string.md)
+  - [Category Tree (enforced string)](./docs/snippets/category-tree-enforced-string.md)
+- **User Segments**
+  - [User Segments (strings)](./docs/snippets/user-segments-strings.md)
+  - [User Segments (objects)](./docs/snippets/user-segments-objects.md)
 
 ## 🌍 Useful Links
 
