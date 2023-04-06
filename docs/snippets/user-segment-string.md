@@ -3,7 +3,7 @@
 Single-select User Segment, and store Segment ID as string:
 
 ```json
-"": {
+{
     "title": "User Segment (string)",
     "description": "Single-select User Segment, and store Segment ID as string",
     "type": "string",
