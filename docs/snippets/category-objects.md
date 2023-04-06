@@ -39,17 +39,17 @@ Sample content:
 
 ```json
 {
-	"categoryArrayObject": [
-		{
-			"name": "(shop-all) Shop All",
-			"slug": "shop-all",
-			"id": "23"
-		},
-		{
-			"name": "(bath) Bath",
-			"slug": "bath",
-			"id": "18"
-		}
-	]
+    "categoryArrayObject": [
+        {
+            "name": "(shop-all) Shop All",
+            "slug": "shop-all",
+            "id": "23"
+        },
+        {
+            "name": "(bath) Bath",
+            "slug": "bath",
+            "id": "18"
+        }
+    ]
 }
 ```
