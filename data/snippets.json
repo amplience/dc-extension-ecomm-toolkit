@@ -190,6 +190,20 @@
             }
         }
     },
+    "segmentSingleSelectString": {
+        "title": "User Segment (string)",
+        "description": "Single-select User Segment, and store Segment ID as string",
+        "type": "string",
+        "ui:extension": {
+            "name": "ecomm-toolkit",
+            "params": {
+                "label": "User Segment",
+                "view": "single",
+                "data": "segment",
+                "type": "string"
+            }
+        }
+    },
     "segmentMultiSelectString": {
         "title": "User Segments (strings)",
         "description": "Multi-select User Segments, and store Segments as strings array",
@@ -206,6 +220,30 @@
                 "view": "multi",
                 "data": "segment",
                 "type": "string"
+            }
+        }
+    },
+    "segmentSingleSelectObject": {
+        "title": "User Segment (object)",
+        "description": "Single-select User Segment, and store as object",
+        "type": "object",
+        "properties": {
+            "id": {
+                "title": "ID",
+                "type": "string"
+            },
+            "name": {
+                "title": "Name",
+                "type": "string"
+            }
+        },
+        "ui:extension": {
+            "name": "ecomm-toolkit",
+            "params": {
+                "label": "User Segment",
+                "view": "single",
+                "data": "segment",
+                "type": "object"
             }
         }
     },
