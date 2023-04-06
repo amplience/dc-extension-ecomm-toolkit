@@ -10,7 +10,7 @@ An active extension sdk connection to DC is required for most functionality to w
 
 Make sure that the extension is properly configured using the [installation parameters.](../docs/extension.md)
 
-### Dependency versions
+## Dependency versions
 This extension was developed and tested with:
 
 - Node version `14.x`
