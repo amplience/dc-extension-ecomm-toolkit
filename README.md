@@ -24,7 +24,7 @@
 
 ## 🏁 Quickstart
 
-We would reccomend that you build and host your own version of the extension so that you are in complete control of the the extension. Please see [Developing and Building Locally](./docs/developing%2Bbuilding-locally.md)
+We would reccomend that you build and host your own version of the extension so that you are in complete control of the the extension. Please see [Developing and Building Locally](./docs/developing%2Bbuilding-locally.md).
 
 Instructions for basic registration & setup of the ecomm-toolkit in your Amplience Dynamic Content box [are here](./docs/extension.md). Then come back to the Snippets section below.
 
