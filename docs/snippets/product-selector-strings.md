@@ -1,5 +1,7 @@
 # Product Selector (strings)
 
+## Snippet
+
 Keyword Search or Single-select Category, and store Product IDs as array of string:
 
 ```json
@@ -22,7 +24,7 @@ Keyword Search or Single-select Category, and store Product IDs as array of stri
 }
 ```
 
-Sample Content:
+## Sample Content
 
 ```json
 {
@@ -30,14 +32,13 @@ Sample Content:
 }
 ```
 
-Sample UI:
+## Sample UI
 
+Empty field:
 ![Sample UI](../../media/product-selector-strings.png)
 
-#### Sample Keyword Search
-
+Sample Keyword Search:
 ![Sample UI](../../media/product-selector-key2.png)
 
-#### Sample Category Search
-
+Sample Category Search:
 ![Sample UI](../../media/product-selector-cat2.png)

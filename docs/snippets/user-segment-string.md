@@ -1,5 +1,7 @@
 # User Segment (string)
 
+## Snippet
+
 Single-select User Segment, and store Segment ID as string:
 
 ```json
@@ -19,7 +21,7 @@ Single-select User Segment, and store Segment ID as string:
 }
 ```
 
-Sample content:
+## Sample content
 
 ```json
 {
@@ -27,6 +29,7 @@ Sample content:
 }
 ```
 
-Sample UI:
+## Sample UI
 
+Empty field:
 ![Sample UI](../../media/user-segment-string.png)

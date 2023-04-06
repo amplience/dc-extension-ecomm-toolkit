@@ -1,5 +1,7 @@
 # User Segments (strings)
 
+## Snippet
+
 Multi-select User Segments, and store Segments as strings array:
 
 ```json
@@ -24,7 +26,7 @@ Multi-select User Segments, and store Segments as strings array:
 }
 ```
 
-Sample content:
+## Sample content
 
 ```json
 {
@@ -32,6 +34,7 @@ Sample content:
 }
 ```
 
-Sample UI:
+## Sample UI
 
+Multiple segments selected:
 ![Sample UI](../../media/user-segment-strings.png)

@@ -1,5 +1,7 @@
 # User Segments (objects)
 
+## Snippet
+
 Multi-select User Segments, and store as object:
 
 ```json
@@ -34,7 +36,7 @@ Multi-select User Segments, and store as object:
 }
 ```
 
-Sample content:
+## Sample content
 
 ```json
 {
@@ -51,6 +53,7 @@ Sample content:
 }
 ```
 
-Sample UI:
+## Sample UI
 
+Multiple segments selected:
 ![Sample UI](../../media/user-segment-objects.png)

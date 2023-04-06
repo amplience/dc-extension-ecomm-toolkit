@@ -1,5 +1,7 @@
 # User Segment (object)
 
+## Snippet
+
 Single-select a User Segment, and store as object:
 
 ```json
@@ -29,7 +31,7 @@ Single-select a User Segment, and store as object:
 }
 ```
 
-Sample content:
+## Sample content
 
 ```json
 {
@@ -40,6 +42,7 @@ Sample content:
 }
 ```
 
-Sample UI:
+## Sample UI
 
+Selected segment:
 ![Sample UI](../../media/user-segment-object.png)
