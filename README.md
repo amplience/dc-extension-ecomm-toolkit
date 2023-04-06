@@ -6,11 +6,11 @@
 
 ## 🏢 Supported platforms
 
--   [Salesforce Commerce Cloud (SFCC)](./docs/sfcc.md)
--   [Big Commerce](./docs/bigcommerce.md)
--   [Commercetools](./docs/commercetools.md)
--   [Shopify](./docs/shopify.md)
--   [REST (JSON Sample Data)](./docs/rest.md)
+-   [Salesforce Commerce Cloud (SFCC)](./docs/commerce/sfcc.md)
+-   [Big Commerce](./docs/commerce/bigcommerce.md)
+-   [Commercetools](./docs/commerce/commercetools.md)
+-   [Shopify](./docs/commerce/shopify.md)
+-   [REST (JSON Sample Data)](./docs/commerce/rest.md)
 
 ## ⚙️ Features
 
