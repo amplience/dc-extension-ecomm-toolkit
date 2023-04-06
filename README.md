@@ -2,23 +2,26 @@
 
 # eComm Toolkit
 
-`dc-extension-ecomm-toolkit` is an Amplience Dynamic Content extension written in React/MUI/Typescript that provides an easy way to interface with eComm platforms for multiple use cases.
+`dc-extension-ecomm-toolkit` is an Amplience Dynamic Content extension written in React/MUI/Typescript that provides an easy way to interface with platforms in the eCommerce ecosystem for multiple use cases.
 
 ## 🏢 Supported platforms
 
+### 🛒 Commerce
 -   [Salesforce Commerce Cloud (SFCC)](./docs/commerce/sfcc.md)
 -   [BigCommerce](./docs/commerce/bigcommerce.md)
 -   [Commercetools](./docs/commerce/commercetools.md)
 -   [Shopify](./docs/commerce/shopify.md)
 -   [REST (JSON Sample Data)](./docs/commerce/rest.md)
 
-## ⚙️ Features
+#### ⚙️ Features
 
 -   Category selector
 -   User Segment selector
 -   Product Finder
 
 ## 🏁 Quickstart
+
+We would reccomend that you build and host your own version of the extension so that you are in complete control of the the extension. Please see [Developing and Building Locally](./docs/developing%2Bbuilding-locally.md)
 
 Instructions for basic registration & setup of the ecomm-toolkit in your Amplience Dynamic Content box [are here](./docs/extension.md). Then come back to the Snippets section below.
 
