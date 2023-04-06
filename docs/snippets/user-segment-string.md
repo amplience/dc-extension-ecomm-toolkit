@@ -23,7 +23,7 @@ Sample content:
 
 ```json
 {
-	"segmentSingleSelectString": "1"
+    "segmentSingleSelectString": "1"
 }
 ```
 
