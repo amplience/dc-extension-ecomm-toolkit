@@ -23,10 +23,10 @@ Under the Permissions tab, select the following:
 ![Extension Permissions](../media/ext-perms.png)
 
 -   API Permissions:
-    -   Read Access ✅
-    -   Modify Access ✅
+    -   ✅ Read Access
+    -   ✅ Modify Access
 -   Sandbox Permissions:
-    -   Allow Same Origin ✅
+    -   ✅ Allow Same Origin 
 
 ## Extensions Installation Parameters & Setup
 
