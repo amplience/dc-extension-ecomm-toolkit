@@ -44,6 +44,10 @@ Single-select a User Segment, and store as object:
 
 ## Sample UI
 
-Selected segment:
+Empty field:
 
-![Sample UI](../../media/user-segment-object.png)
+![Sample UI](../../media/user-segment-object-1.png)
+
+Selecting segment:
+
+![Sample UI](../../media/user-segment-object-2.png)

@@ -30,12 +30,19 @@ Multi-select User Segments, and store Segments as strings array:
 
 ```json
 {
-    "segmentMultiSelectStrings": ["1", "2"]
+    "segmentMultiSelectStrings": [
+        "1", 
+        "2"
+    ]
 }
 ```
 
 ## Sample UI
 
-Multiple segments selected:
+Empty field:
 
-![Sample UI](../../media/user-segment-strings.png)
+![Sample UI](../../media/user-segment-strings-1.png)
+
+Selecting multiple segments:
+
+![Sample UI](../../media/user-segment-strings-2.png)

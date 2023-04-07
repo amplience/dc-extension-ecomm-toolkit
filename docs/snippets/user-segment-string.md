@@ -33,4 +33,8 @@ Single-select User Segment, and store Segment ID as string:
 
 Empty field:
 
-![Sample UI](../../media/user-segment-string.png)
+![Sample UI](../../media/user-segment-string-1.png)
+
+Selecting segment:
+
+![Sample UI](../../media/user-segment-string-2.png)

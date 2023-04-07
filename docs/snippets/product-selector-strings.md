@@ -28,7 +28,13 @@ Keyword Search or Single-select Category, and store Product IDs as array of stri
 
 ```json
 {
-    "productArrayStrings": ["25591072M", "25517823M", "25050730M", "25594776M", "25501952M"]
+    "productArrayStrings": [
+        "25591072M", 
+        "25517823M", 
+        "25050730M", 
+        "25594776M", 
+        "25501952M"
+    ]
 }
 ```
 

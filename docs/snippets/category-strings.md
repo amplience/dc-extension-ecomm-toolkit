@@ -28,7 +28,11 @@ Multi-select Categories, and store Category IDs as array of string:
 
 ```json
 {
-    "categoryArrayStrings": ["23", "24", "18"]
+    "categoryArrayStrings": [
+        "23", 
+        "24", 
+        "18"
+    ]
 }
 ```
 
