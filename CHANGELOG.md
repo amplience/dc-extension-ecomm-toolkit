@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://github.com/amplience/dc-extension-ecomm-toolkit/compare/v1.2.0...v1.3.0) (2023-04-11)
+
+
+### Features
+
+* added product single object ([cd89092](https://github.com/amplience/dc-extension-ecomm-toolkit/commit/cd8909200f89bb5aaa9820dc5b0c34cd831d5b07))
+* added single segment ([07cb158](https://github.com/amplience/dc-extension-ecomm-toolkit/commit/07cb15857fe9a97badc5d49abdc79d2c238c1f7c))
+
+
+### Bug Fixes
+
+* category multi-select fix ([05bb4a4](https://github.com/amplience/dc-extension-ecomm-toolkit/commit/05bb4a41af7c8a4286bd4adc849f4665c0d7f4d2))
+* checking images[0] ([827a3ae](https://github.com/amplience/dc-extension-ecomm-toolkit/commit/827a3ae533ef609e2dbb40075ed3db863dee1a08))
+* empty images ([a76e688](https://github.com/amplience/dc-extension-ecomm-toolkit/commit/a76e6885dbdef0aa406ad0311f0eda9db6e3261c))
+* fix customer groups string mode ([ec2cff8](https://github.com/amplience/dc-extension-ecomm-toolkit/commit/ec2cff8296faecf78f2c8b04bcc4f82f7e195113))
+* fix product list by category height ([226dcc9](https://github.com/amplience/dc-extension-ecomm-toolkit/commit/226dcc92892a312a68d4f5077dc94bae9aaf13e6))
+* fix product selector (object) ([0384fbf](https://github.com/amplience/dc-extension-ecomm-toolkit/commit/0384fbfb2814f51e93890780d9b1688655194085))
+* patch release ([7cc9855](https://github.com/amplience/dc-extension-ecomm-toolkit/commit/7cc985595d2c661de9fdd230bd02564eba2c114f))
+* product selector shouldn't update field value when loading ([f88b225](https://github.com/amplience/dc-extension-ecomm-toolkit/commit/f88b2256ddfa0b575155c91bbe8b8d59cdc5ec00))
+* set loading to false when there is no value ([a2ae7d9](https://github.com/amplience/dc-extension-ecomm-toolkit/commit/a2ae7d99c1c3a5b7ac036c2bfd4e8772c301b559))
+* using category tree ([a13bf5a](https://github.com/amplience/dc-extension-ecomm-toolkit/commit/a13bf5a79e976bf990089c6d371ee87fdddb1962))
+* using slug ([52ab98b](https://github.com/amplience/dc-extension-ecomm-toolkit/commit/52ab98b7344c9f58d50facb2efd1ea5dd2202fa4))
+
 ## [1.2.0](https://github.com/amplience/dc-extension-ecomm-toolkit/compare/v1.1.0...v1.2.0) (2022-11-17)
 
 
