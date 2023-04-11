@@ -22,7 +22,7 @@ const AutoCompleteSingle: React.FC<AmpSDKProps> = ({ ampSDK }) => {
         }
       }}
       onClose={() => {
-        ampSDK.setHeight(70)
+        ampSDK.setHeight(130)
       }}
       onOpen={() => {
         ampSDK.setHeight(540)

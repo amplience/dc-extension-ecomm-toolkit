@@ -1,4 +1,4 @@
-import { Identifiable, flattenCategories } from "@amplience/dc-demostore-integration";
+import { Identifiable, flattenCategories } from "@amplience/dc-integration-middleware";
 import { ContentFieldExtension, init } from 'dc-extensions-sdk';
 import { initCommerceApi } from "../pages/api";
 import { ExtParameters, FieldModel } from "./models/extensionParams";
@@ -21,11 +21,11 @@ const amplienceSDK = async () => {
         if (typeof value !== 'string') {
             val = value.id
         }
-        if(isEnforced()) {
+        if (isEnforced()) {
             let pattern = sdk.field.schema?.pattern.split('/')
             pattern.pop()
             return `${pattern.join('/')}/${val}`
-        }else{
+        } else {
             return val
         }
     }
@@ -35,34 +35,45 @@ const amplienceSDK = async () => {
     let value: any = await sdk.field.getValue()
     let storedVal: any = await sdk.field.getValue()
     let values: any[] = []
+    let title: string = sdk.field.schema?.title
+    let description: string = sdk.field.schema?.description
     // end
 
     let { instance, installation } = sdk.params as ExtParameters
-    let commerceApi = await initCommerceApi(installation) 
-
-    console.log(`installation params: ${JSON.stringify(installation, undefined, 4)}`)
+    let commerceApi = await initCommerceApi(installation)
 
     if (instance.data === 'category') {
         if (instance.view === 'tree') {
-            values = await commerceApi.getMegaMenu({})
+            values = await commerceApi.getCategoryTree({})
         }
-        else { // a.view === 'single'
-            let megaMenu: any[] = await commerceApi.getMegaMenu({})
-            values = flattenCategories(megaMenu).map(cat => ({ name: `(${cat.slug}) ${cat.name}`, id: cat.id }))
-            value = instance.type === 'string' && value ? values.find(opt => cleanValue(value) == opt.id) : value
+        else {
+            let categoryTree: any[] = await commerceApi.getCategoryTree({})
+            values = flattenCategories(categoryTree).map(cat => ({ name: `(${cat.slug}) ${cat.name}`, slug: cat.slug, id: cat.id }))
+
+            value = instance.type === 'string' && value ? 
+                (instance.view === 'multi' ? 
+                    values.filter(opt => value.includes(opt.id)) : 
+                    values.find(opt => value.includes(opt.id))) :
+                value
         }
-    }else if(instance.data === 'product'){
-        let megaMenu: any[] = await commerceApi.getMegaMenu({})
-        values = flattenCategories(megaMenu).map(cat => ({ name: `(${cat.slug}) ${cat.name}`, id: cat.id }))
+    } else if (instance.data === 'product') {
+        let categoryTree: any[] = await commerceApi.getCategoryTree({})
+        values = flattenCategories(categoryTree).map(cat => ({ name: `(${cat.slug}) ${cat.name}`, slug: cat.slug, id: cat.id }))
         value = instance.type === 'string' && value ? values.find(opt => cleanValue(value) == opt.id) : value
     }
     else { // a.data === 'customerGroups'
         values = await commerceApi.getCustomerGroups({})
-        value = instance.type === 'string' && value ? values.filter(opt => value.includes(opt.id)) : value
+        value = instance.type === 'string' && value ? 
+            (instance.view === 'multi' ? 
+                values.filter(opt => value.includes(opt.id)) :
+                values.find(opt => value.includes(opt.id))) :
+            value
     }
 
     let ampSDK = {
         ...instance,
+        getTitle: () => title,
+        getDescription: () => description,
         getValue: () => value,
         getValues: () => values,
         getStoredValue: () => storedVal,

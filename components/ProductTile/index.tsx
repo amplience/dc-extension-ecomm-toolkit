@@ -102,7 +102,7 @@ const ProductTile = ({
     const [selectedIndex, setSelectedIndex] = React.useState(0)
     const ref = useRef(null)
     const [imageLoaded, setImageLoaded] = useState(false)
-    const [imgUrl, setImgUrl] = useState(variant.images[0].url)
+    const [imgUrl, setImgUrl] = useState((variant.images && variant.images[0] && variant.images[0].url) || null)
 
     const handleClick = () => {
         if (selectProduct !== undefined) {
@@ -119,7 +119,7 @@ const ProductTile = ({
             ? product.selectedVariant
             : product.variants[0]
         setVariant(vari)
-        if (imgUrl !== vari.images[0].url) {
+        if (vari.images && vari.images[0] && imgUrl !== vari.images[0].url) {
             setImageLoaded(false)
             setImgUrl(vari.images[0].url)
         }
@@ -197,7 +197,7 @@ const ProductTile = ({
                                     <Avatar
                                         variant='square'
                                         alt={product.name}
-                                        src={variant.images[0].url}
+                                        src={(variant.images && variant.images[0] && variant.images[0].url) || null}
                                     />
                                 </ListItemAvatar>
                                 <ListItemText
@@ -218,10 +218,10 @@ const ProductTile = ({
                     <img
                         onLoad={handleLoaded}
                         className={!imageLoaded ? 'hidden' : ''}
-                        src={`${variant.images[0].url}?sw=${
+                        src={`${(variant.images && variant.images[0] && variant.images[0].url)}?sw=${
                             size * 2
                         }&fit=crop&auto=format`}
-                        srcSet={`${variant.images[0].url}?sw=${
+                        srcSet={`${(variant.images && variant.images[0] && variant.images[0].url)}?sw=${
                             size * 2
                         }&fit=crop&auto=format&dpr=2 2x`}
                         alt={product.name}

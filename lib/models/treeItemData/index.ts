@@ -1,4 +1,4 @@
-import { CommerceAPI } from "@amplience/dc-demostore-integration";
+import { CommerceAPI } from "@amplience/dc-integration-middleware";
 import { InstanceParams } from "../extensionParams";
 
 export interface TreeItemData {
@@ -19,6 +19,8 @@ export interface DataTreeViewProps {
 
 export interface AmpSDKProps {
     ampSDK: InstanceParams & {
+        getTitle: () => string
+        getDescription: () => string 
         getValue: () => any
         getValues: () => any
         getStoredValue: () => any

@@ -19,6 +19,7 @@ import SearchIcon from '@mui/icons-material/Search'
 import ProductTile from '../ProductTile'
 import SortableList from '../SortableList'
 import { AmpSDKProps } from '../../lib/models/treeItemData'
+import { isEqual } from 'lodash'
 
 interface TabPanelProps {
     children?: React.ReactNode
@@ -46,10 +47,11 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
     const [storedValue] = useState(ampSDK.getStoredValue())
     const [mode, setMode] = useState(0)
     const [keyword, setKeyword] = useState('')
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(true)
     const [showAlert, setShowAlert] = useState(false)
     const [alertMessage, setAlertMessage] = useState('')
     const [results, setResults] = useState([])
+    const [lastValue, setLastValue] = useState()
     const [selectedProducts, setSelectedProducts] = useState([])
     const keywordInput = useRef(null)
     const container = useRef(null)
@@ -69,23 +71,26 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
         setMode(newValue)
     }
 
-    const searchByCategory = async (catId: string) => {
+    const searchByCategory = async (catSlug: string) => {
         setResults([])
         setLoading(true)
-        const p = await ampSDK.commerceApi.getCategory({ slug: catId })
-        setResults(p.products)
+        if (catSlug !== '') {
+            const p = await ampSDK.commerceApi.getCategory({ slug: catSlug })
+            setResults(p.products)
+        }
         setLoading(false)
     }
 
     const searchByKeyword = async () => {
         setResults([])
         setLoading(true)
-        const p = await ampSDK.commerceApi.getProducts({
-            keyword: keywordInput.current.value
-        })
-
+        if (keywordInput.current.value !== '') {
+            const p = await ampSDK.commerceApi.getProducts({
+                keyword: keywordInput.current.value
+            })
+            setResults(p)
+        }
         setLoading(false)
-        setResults(p)
     }
 
     const handleKeyWordKeydown = (event: React.KeyboardEvent<HTMLElement>) => {
@@ -159,39 +164,50 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
 
     const updateSelected = useCallback(
         (selectedProducts) => {
+            if (loading) {
+                return;
+            }
+
             if (selectedProducts.length) {
+                let result
                 switch (ampSDK?.type) {
                     case 'string':
                         const formStr = selectedProducts.map((prod) => prod.id)
-                        ampSDK.setValue(formStr[0])
+                        result = formStr[0]
                         break
                     case 'strings':
                         const formStrs = selectedProducts.map((prod) => prod.id)
-                        ampSDK.setValue(formStrs)
+                        result = formStrs
                         break
                     case 'object':
                         const formVal = {
                             id: selectedProducts[0].id,
                             variant: selectedProducts[0].selectedVariant?.sku
                         }
-                        ampSDK.setValue(formVal)
+                        result = formVal
                         break
                     case 'objects':
                         const formVals = selectedProducts.map((prod) => ({
                             id: prod.id,
                             variant: prod.selectedVariant?.sku
                         }))
-                        ampSDK.setValue(formVals)
+                        result = formVals
                         break
 
                     default:
                         break
                 }
-            } else {
+
+                if (!isEqual(lastValue, result)) {
+                    ampSDK.setValue(result)
+                    setLastValue(result)
+                }
+            } else if (lastValue != null) {
                 ampSDK.clearValue()
+                setLastValue(undefined)
             }
         },
-        [ampSDK]
+        [ampSDK, loading, lastValue]
     )
 
     useEffect(() => {
@@ -219,7 +235,7 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
     }, [getContainerHeight])
 
     useEffect(() => {
-        ampSDK.setHeight(height + 20)
+        ampSDK.setHeight(height + 100)
     }, [height, ampSDK])
 
     // Whenever selectedProducts list changes, save to dc form
@@ -230,10 +246,13 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
     // Process values stored in the dc form to put into selecteProducts
     useEffect(() => {
         const getProducts = async (ids) => {
+            if (ids === '' || ids == null) { 
+                return []
+            }
             const p = await ampSDK.commerceApi.getProducts({
                 productIds: ids
             })
-            return p
+            return p.filter((item: any) => item !== null)
         }
         // form comma-delim ID string
         if (storedValue != undefined) {
@@ -273,6 +292,8 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
 
                 setSelectedProducts(prod)
             })
+        } else {
+            setLoading(false)
         }
     }, [storedValue, ampSDK])
 
@@ -302,7 +323,7 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
                         variant='h3'
                         fontSize={'12px'}
                         fontWeight={'normal'}
-                        color='#666'
+                        color='#333'
                     >
                         Selected Products
                     </Typography>
@@ -368,14 +389,15 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
                     value={storedValue}
                     onChange={(event, val) => {
                         if (val !== null) {
-                            searchByCategory(val.id)
+                            console.log("VALUE", val)
+                            searchByCategory(val.slug)
                         }
                     }}
                     onClose={() => {
-                        ampSDK.setHeight(200)
+                        ampSDK.setHeight(Math.max(height + 100, 260))
                     }}
                     onOpen={() => {
-                        ampSDK.setHeight(540)
+                        ampSDK.setHeight(Math.max(height + 100, 540))
                     }}
                     renderInput={(params) => (
                         <TextField {...params} label={ampSDK.label} />
