@@ -21,6 +21,8 @@ import SortableList from '../SortableList'
 import { AmpSDKProps } from '../../lib/models/treeItemData'
 import { isEqual } from 'lodash'
 
+import { PageCache, Product } from '@amplience/dc-integration-middleware'
+
 interface TabPanelProps {
     children?: React.ReactNode
     index: number
@@ -43,6 +45,22 @@ function TabPanel(props: TabPanelProps) {
     )
 }
 
+const pageCountFromCache = (cache: PageCache<unknown>, itemsPerPage: number): number => {
+    if (cache != null) {
+        const total = cache.getTotal()
+        if (total != null) {
+            return Math.floor(total / itemsPerPage)
+        }
+
+        const maxPage = cache.getMaxPage()
+        if (maxPage > 0) {
+            return maxPage + 1
+        }
+    }
+
+    return 0
+}
+
 const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
     const [storedValue] = useState(ampSDK.getStoredValue())
     const [mode, setMode] = useState(0)
@@ -50,6 +68,7 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
     const [loading, setLoading] = useState(true)
     const [showAlert, setShowAlert] = useState(false)
     const [alertMessage, setAlertMessage] = useState('')
+    const [pageCache, setPageCache] = useState<PageCache<Product> | undefined>()
     const [results, setResults] = useState([])
     const [lastValue, setLastValue] = useState()
     const [selectedProducts, setSelectedProducts] = useState([])
@@ -60,23 +79,51 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
     const itemsPerPage = 12
     const [page, setPage] = React.useState(1)
     const [noOfPages, setNoOfPages] = React.useState(
-        Math.ceil(results.length / itemsPerPage)
+        pageCountFromCache(pageCache, itemsPerPage)
     )
 
     const handlePageChange = (event, value) => {
-        setPage(value)
+        setLoading(true);
+        setPage(value);
+
+        pageCache?.getPage(value - 1).then(result => {
+            setResults(result);
+            setLoading(false);
+            setNoOfPages(pageCountFromCache(pageCache, itemsPerPage));
+        })
+        .catch((e) => {
+            setLoading(false);
+        })
     }
 
     const tabChange = (event: React.SyntheticEvent, newValue: number) => {
         setMode(newValue)
     }
 
-    const searchByCategory = async (catSlug: string) => {
+    const setPageWithCache = (cache: PageCache<Product>, pageNum: number) => {
+        setPageCache(cache);
+        setLoading(true);
+        setPage(pageNum);
+
+        cache.getPage(pageNum - 1).then(result => {
+            setResults(result);
+            setLoading(false);
+            setNoOfPages(pageCountFromCache(cache, itemsPerPage));
+        })
+        .catch((e) => {
+            setLoading(false);
+        })
+    }
+
+    const searchByCategory = async (category: string) => {
         setResults([])
         setLoading(true)
-        if (catSlug !== '') {
-            const p = await ampSDK.commerceApi.getCategory({ slug: catSlug })
-            setResults(p.products)
+        if (category !== '') {
+            const cache = new PageCache(ampSDK.commerceApi.getProducts, {
+                category
+            } as any, itemsPerPage)
+
+            setPageWithCache(cache, 1);
         }
         setLoading(false)
     }
@@ -85,10 +132,11 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
         setResults([])
         setLoading(true)
         if (keywordInput.current.value !== '') {
-            const p = await ampSDK.commerceApi.getProducts({
+            const cache = new PageCache(ampSDK.commerceApi.getProducts, {
                 keyword: keywordInput.current.value
-            })
-            setResults(p)
+            } as any, itemsPerPage)
+
+            setPageWithCache(cache, 1);
         }
         setLoading(false)
     }
@@ -214,11 +262,6 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
         if (!mode) keywordInput.current.value = ''
         setResults([])
     }, [mode])
-
-    useEffect(() => {
-        setPage(1)
-        setNoOfPages(Math.ceil(results.length / itemsPerPage))
-    }, [results])
 
     useEffect(() => {
         setTimeout(() => {
@@ -390,7 +433,7 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
                     onChange={(event, val) => {
                         if (val !== null) {
                             console.log("VALUE", val)
-                            searchByCategory(val.slug)
+                            searchByCategory(val)
                         }
                     }}
                     onClose={() => {
@@ -406,7 +449,7 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
             </TabPanel>
 
             {/* Search Results */}
-            {results.length ? (
+            {noOfPages > 0 ? (
                 <>
                     <Typography
                         mt={2}
@@ -426,10 +469,6 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
                         rowHeight={140}
                     >
                         {results
-                            .slice(
-                                (page - 1) * itemsPerPage,
-                                page * itemsPerPage
-                            )
                             .map((product: any, index: number) => {
                                 return (
                                     <ProductTile
