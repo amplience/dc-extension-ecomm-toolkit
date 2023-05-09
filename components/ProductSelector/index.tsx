@@ -78,7 +78,7 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
     const container = useRef(null)
     const [height, setHeight] = useState(200)
 
-    const itemsPerPage = 2
+    const itemsPerPage = 12
     const [page, setPage] = React.useState(1)
     const [loadedPage, setLoadedPage] = React.useState(1)
     const [noOfPages, setNoOfPages] = React.useState(
