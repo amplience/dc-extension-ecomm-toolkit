@@ -13,7 +13,8 @@ import {
     Pagination,
     Tabs,
     Tab,
-    Box
+    Box,
+    PaginationItem
 } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search'
 import ProductTile from '../ProductTile'
@@ -45,20 +46,20 @@ function TabPanel(props: TabPanelProps) {
     )
 }
 
-const pageCountFromCache = (cache: PageCache<unknown>, itemsPerPage: number): number => {
+const pageCountFromCache = (cache: PageCache<unknown>, itemsPerPage: number): [boolean, number] => {
     if (cache != null) {
         const total = cache.getTotal()
         if (total != null) {
-            return Math.floor(total / itemsPerPage)
+            return [true, Math.ceil(total / itemsPerPage)]
         }
 
         const maxPage = cache.getMaxPage()
         if (maxPage > 0) {
-            return maxPage + 1
+            return [false, maxPage + 1]
         }
     }
 
-    return 0
+    return [true, 0]
 }
 
 const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
@@ -66,6 +67,7 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
     const [mode, setMode] = useState(0)
     const [keyword, setKeyword] = useState('')
     const [loading, setLoading] = useState(true)
+    const [loadingResults, setLoadingResults] = useState(false)
     const [showAlert, setShowAlert] = useState(false)
     const [alertMessage, setAlertMessage] = useState('')
     const [pageCache, setPageCache] = useState<PageCache<Product> | undefined>()
@@ -76,23 +78,33 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
     const container = useRef(null)
     const [height, setHeight] = useState(200)
 
-    const itemsPerPage = 12
+    const itemsPerPage = 2
     const [page, setPage] = React.useState(1)
+    const [loadedPage, setLoadedPage] = React.useState(1)
     const [noOfPages, setNoOfPages] = React.useState(
         pageCountFromCache(pageCache, itemsPerPage)
     )
 
+    const [requestInfo] = useState({ id: 0 })
+
     const handlePageChange = (event, value) => {
-        setLoading(true);
-        setPage(value);
+        setLoadingResults(true)
+        setPage(value)
+        const requestId = ++requestInfo.id
 
         pageCache?.getPage(value - 1).then(result => {
-            setResults(result);
-            setLoading(false);
-            setNoOfPages(pageCountFromCache(pageCache, itemsPerPage));
+            if (requestId !== requestInfo.id) {
+                // Request cancelled.
+                return;
+            }
+
+            setResults(result)
+            setLoadingResults(false)
+            setLoadedPage(value)
+            setNoOfPages(pageCountFromCache(pageCache, itemsPerPage))
         })
         .catch((e) => {
-            setLoading(false);
+            setLoadingResults(false)
         })
     }
 
@@ -101,36 +113,40 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
     }
 
     const setPageWithCache = (cache: PageCache<Product>, pageNum: number) => {
-        setPageCache(cache);
-        setLoading(true);
-        setPage(pageNum);
+        setPageCache(cache)
+        setLoadingResults(true)
+        setPage(pageNum)
+        const requestId = ++requestInfo.id
 
         cache.getPage(pageNum - 1).then(result => {
-            setResults(result);
-            setLoading(false);
-            setNoOfPages(pageCountFromCache(cache, itemsPerPage));
+            if (requestId !== requestInfo.id) {
+                // Request cancelled.
+                return;
+            }
+
+            setResults(result)
+            setLoadingResults(false)
+            setLoadedPage(pageNum)
+            setNoOfPages(pageCountFromCache(cache, itemsPerPage))
         })
         .catch((e) => {
-            setLoading(false);
+            setLoadingResults(false)
         })
     }
 
     const searchByCategory = async (category: string) => {
         setResults([])
-        setLoading(true)
         if (category !== '') {
             const cache = new PageCache(ampSDK.commerceApi.getProducts, {
                 category
             } as any, itemsPerPage)
 
-            setPageWithCache(cache, 1);
+            setPageWithCache(cache, 1)
         }
-        setLoading(false)
     }
 
     const searchByKeyword = async () => {
         setResults([])
-        setLoading(true)
         if (keywordInput.current.value !== '') {
             const cache = new PageCache(ampSDK.commerceApi.getProducts, {
                 keyword: keywordInput.current.value
@@ -138,7 +154,6 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
 
             setPageWithCache(cache, 1);
         }
-        setLoading(false)
     }
 
     const handleKeyWordKeydown = (event: React.KeyboardEvent<HTMLElement>) => {
@@ -261,7 +276,10 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
     useEffect(() => {
         if (!mode) keywordInput.current.value = ''
         setResults([])
-    }, [mode])
+        setNoOfPages([true, 0])
+        setLoadingResults(false)
+        requestInfo.id++
+    }, [mode, requestInfo])
 
     useEffect(() => {
         setTimeout(() => {
@@ -448,55 +466,72 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
                 />
             </TabPanel>
 
-            {/* Search Results */}
-            {noOfPages > 0 ? (
-                <>
-                    <Typography
-                        mt={2}
-                        variant='h3'
-                        fontSize={'12px'}
-                        fontWeight={'normal'}
-                        color='#666'
-                    >
-                        Search Results
-                    </Typography>
-                    <ImageList
-                        sx={{
-                            width: '100%',
-                            display: 'flex',
-                            flexWrap: 'wrap'
-                        }}
-                        rowHeight={140}
-                    >
-                        {results
-                            .map((product: any, index: number) => {
-                                return (
-                                    <ProductTile
-                                        key={
-                                            index +
-                                            page * itemsPerPage +
-                                            product.id
-                                        }
-                                        dataType={ampSDK?.type}
-                                        size={140}
-                                        product={product}
-                                        selectProduct={selectProduct}
-                                    />
-                                )
-                            })}
-                    </ImageList>
-                    {noOfPages > 1 && (
-                        <Pagination
-                            count={noOfPages}
-                            page={page}
-                            onChange={handlePageChange}
-                            defaultPage={1}
-                        />
-                    )}
-                </>
-            ) : (
-                <></>
-            )}
+            <div style={{position: 'relative'}}>
+                <Backdrop
+                    sx={{
+                        color: '#77f',
+                        backgroundColor: 'rgba(200,200,200,0.6)',
+                        zIndex: (theme) => theme.zIndex.drawer + 1,
+                        position: 'absolute'
+                    }}
+                    open={loadingResults}
+                >
+                    <CircularProgress color='inherit' />
+                </Backdrop>
+                {/* Search Results */}
+                {noOfPages[1] > 0 ? (
+                    <>
+                        <Typography
+                            mt={2}
+                            variant='h3'
+                            fontSize={'12px'}
+                            fontWeight={'normal'}
+                            color='#666'
+                        >
+                            Search Results
+                        </Typography>
+                        <ImageList
+                            sx={{
+                                width: '100%',
+                                display: 'flex',
+                                flexWrap: 'wrap'
+                            }}
+                            rowHeight={140}
+                        >
+                            {results
+                                .map((product: any, index: number) => {
+                                    return (
+                                        <ProductTile
+                                            key={
+                                                index +
+                                                loadedPage * itemsPerPage +
+                                                product.id
+                                            }
+                                            dataType={ampSDK?.type}
+                                            size={140}
+                                            product={product}
+                                            selectProduct={selectProduct}
+                                        />
+                                    )
+                                })}
+                        </ImageList>
+                        {noOfPages[1] > 1 && (
+                            <Pagination
+                                count={noOfPages[1]}
+                                page={page}
+                                onChange={handlePageChange}
+                                defaultPage={1}
+                                renderItem={(item) => <div style={{display: 'flex'}}>
+                                    <PaginationItem {...item} />
+                                    {!noOfPages[0] && item.type === 'page' && item.page === noOfPages[1] && <PaginationItem type="end-ellipsis" />}
+                                </div>}
+                            />
+                        )}
+                    </>
+                ) : (
+                    <></>
+                )}
+            </div>
         </div>
     )
 }
