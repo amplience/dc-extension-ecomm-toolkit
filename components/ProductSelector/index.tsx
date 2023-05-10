@@ -302,7 +302,7 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
     // Whenever selectedProducts list changes, save to dc form
     useEffect(() => {
         updateSelected(selectedProducts)
-    }, [selectedProducts, ampSDK, updateSelected])
+    }, [selectedProducts])
 
     // Process values stored in the dc form to put into selecteProducts
     useEffect(() => {
