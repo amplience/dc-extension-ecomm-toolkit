@@ -198,8 +198,6 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
                         break
                 }
 
-
-
                 if (!isEqual(lastValue, result)) {
                     ampSDK.setValue(result)
                     setLastValue(result)
