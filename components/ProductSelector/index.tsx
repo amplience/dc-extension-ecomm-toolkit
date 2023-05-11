@@ -185,7 +185,15 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
         } else {
             // TODO: [NOVADEV-980] Update UX to validate if user wants to add variants of a master
             const match = selectedProducts.find(
-                (p) => p.selectedVariant.sku === product.variants[0].sku
+                (p) => {
+                    // if there is a sku
+                    if(  p.selectedVariant.sku ){
+                        return p.selectedVariant.sku === product.variants[0].sku
+                    } else {
+                        // The is no sku so use the ID to match
+                        return p.selectedVariant.id === product.variants[0].id
+                    }
+                }
             )
             if (match) {
                 setAlertMessage("You've already selected this item")
