@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.4.0](https://github.com/amplience/dc-extension-ecomm-toolkit/compare/v1.3.1...v1.4.0) (2023-05-12)
+
+
+### Features
+
+* improve ui ([220d575](https://github.com/amplience/dc-extension-ecomm-toolkit/commit/220d5754c9719458a5905493ef67ae77643a398e))
+* page count back to 12 ([798e340](https://github.com/amplience/dc-extension-ecomm-toolkit/commit/798e340728b382b371f8bb2eb31bd203fa6222ab))
+* WIP pagination ([5df6717](https://github.com/amplience/dc-extension-ecomm-toolkit/commit/5df67174e483fffe8580e2fbc9c2dfae0d66630a))
+
+
+### Bug Fixes
+
+* Implemented a fix for matching. If there is no sku data fallback to ID ([91e8991](https://github.com/amplience/dc-extension-ecomm-toolkit/commit/91e899189d664e66e7aa95b2ac002473c70e8ea4))
+* Looping DND fix from main branch to be safe ([821a13a](https://github.com/amplience/dc-extension-ecomm-toolkit/commit/821a13a65407e07100f6493b77bdd2568cb325f7))
+
 ## [1.3.0](https://github.com/amplience/dc-extension-ecomm-toolkit/compare/v1.2.0...v1.3.0) (2023-04-11)
 
 
