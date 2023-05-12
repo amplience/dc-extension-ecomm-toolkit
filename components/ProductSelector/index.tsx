@@ -13,13 +13,16 @@ import {
     Pagination,
     Tabs,
     Tab,
-    Box
+    Box,
+    PaginationItem
 } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search'
 import ProductTile from '../ProductTile'
 import SortableList from '../SortableList'
 import { AmpSDKProps } from '../../lib/models/treeItemData'
 import { isEqual } from 'lodash'
+
+import { PageCache, Product } from '@amplience/dc-integration-middleware'
 
 interface TabPanelProps {
     children?: React.ReactNode
@@ -43,13 +46,31 @@ function TabPanel(props: TabPanelProps) {
     )
 }
 
+const pageCountFromCache = (cache: PageCache<unknown>, itemsPerPage: number): [boolean, number] => {
+    if (cache != null) {
+        const total = cache.getTotal()
+        if (total != null) {
+            return [true, Math.ceil(total / itemsPerPage)]
+        }
+
+        const maxPage = cache.getMaxPage()
+        if (maxPage > 0) {
+            return [false, maxPage + 1]
+        }
+    }
+
+    return [true, 0]
+}
+
 const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
     const [storedValue] = useState(ampSDK.getStoredValue())
     const [mode, setMode] = useState(0)
     const [keyword, setKeyword] = useState('')
     const [loading, setLoading] = useState(true)
+    const [loadingResults, setLoadingResults] = useState(false)
     const [showAlert, setShowAlert] = useState(false)
     const [alertMessage, setAlertMessage] = useState('')
+    const [pageCache, setPageCache] = useState<PageCache<Product> | undefined>()
     const [results, setResults] = useState([])
     const [lastValue, setLastValue] = useState()
     const [selectedProducts, setSelectedProducts] = useState([])
@@ -59,38 +80,80 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
 
     const itemsPerPage = 12
     const [page, setPage] = React.useState(1)
+    const [loadedPage, setLoadedPage] = React.useState(1)
     const [noOfPages, setNoOfPages] = React.useState(
-        Math.ceil(results.length / itemsPerPage)
+        pageCountFromCache(pageCache, itemsPerPage)
     )
 
+    const [requestInfo] = useState({ id: 0 })
+
     const handlePageChange = (event, value) => {
+        setLoadingResults(true)
         setPage(value)
+        const requestId = ++requestInfo.id
+
+        pageCache?.getPage(value - 1).then(result => {
+            if (requestId !== requestInfo.id) {
+                // Request cancelled.
+                return;
+            }
+
+            setResults(result)
+            setLoadingResults(false)
+            setLoadedPage(value)
+            setNoOfPages(pageCountFromCache(pageCache, itemsPerPage))
+        })
+        .catch((e) => {
+            setLoadingResults(false)
+        })
     }
 
     const tabChange = (event: React.SyntheticEvent, newValue: number) => {
         setMode(newValue)
     }
 
-    const searchByCategory = async (catSlug: string) => {
+    const setPageWithCache = (cache: PageCache<Product>, pageNum: number) => {
+        setPageCache(cache)
+        setLoadingResults(true)
+        setPage(pageNum)
+        const requestId = ++requestInfo.id
+
+        cache.getPage(pageNum - 1).then(result => {
+            if (requestId !== requestInfo.id) {
+                // Request cancelled.
+                return;
+            }
+
+            setResults(result)
+            setLoadingResults(false)
+            setLoadedPage(pageNum)
+            setNoOfPages(pageCountFromCache(cache, itemsPerPage))
+        })
+        .catch((e) => {
+            setLoadingResults(false)
+        })
+    }
+
+    const searchByCategory = async (category: string) => {
         setResults([])
-        setLoading(true)
-        if (catSlug !== '') {
-            const p = await ampSDK.commerceApi.getCategory({ slug: catSlug })
-            setResults(p.products)
+        if (category !== '') {
+            const cache = new PageCache(ampSDK.commerceApi.getProducts, {
+                category
+            } as any, itemsPerPage)
+
+            setPageWithCache(cache, 1)
         }
-        setLoading(false)
     }
 
     const searchByKeyword = async () => {
         setResults([])
-        setLoading(true)
         if (keywordInput.current.value !== '') {
-            const p = await ampSDK.commerceApi.getProducts({
+            const cache = new PageCache(ampSDK.commerceApi.getProducts, {
                 keyword: keywordInput.current.value
-            })
-            setResults(p)
+            } as any, itemsPerPage)
+
+            setPageWithCache(cache, 1);
         }
-        setLoading(false)
     }
 
     const handleKeyWordKeydown = (event: React.KeyboardEvent<HTMLElement>) => {
@@ -122,7 +185,15 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
         } else {
             // TODO: [NOVADEV-980] Update UX to validate if user wants to add variants of a master
             const match = selectedProducts.find(
-                (p) => p.selectedVariant.sku === product.variants[0].sku
+                (p) => {
+                    // if there is a sku
+                    if(  p.selectedVariant.sku ){
+                        return p.selectedVariant.sku === product.variants[0].sku
+                    } else {
+                        // The is no sku so use the ID to match
+                        return p.selectedVariant.id === product.variants[0].id
+                    }
+                }
             )
             if (match) {
                 setAlertMessage("You've already selected this item")
@@ -213,12 +284,10 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
     useEffect(() => {
         if (!mode) keywordInput.current.value = ''
         setResults([])
-    }, [mode])
-
-    useEffect(() => {
-        setPage(1)
-        setNoOfPages(Math.ceil(results.length / itemsPerPage))
-    }, [results])
+        setNoOfPages([true, 0])
+        setLoadingResults(false)
+        requestInfo.id++
+    }, [mode, requestInfo])
 
     useEffect(() => {
         setTimeout(() => {
@@ -241,7 +310,7 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
     // Whenever selectedProducts list changes, save to dc form
     useEffect(() => {
         updateSelected(selectedProducts)
-    }, [selectedProducts, ampSDK, updateSelected])
+    }, [selectedProducts])
 
     // Process values stored in the dc form to put into selecteProducts
     useEffect(() => {
@@ -390,7 +459,7 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
                     onChange={(event, val) => {
                         if (val !== null) {
                             console.log("VALUE", val)
-                            searchByCategory(val.slug)
+                            searchByCategory(val)
                         }
                     }}
                     onClose={() => {
@@ -405,59 +474,72 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
                 />
             </TabPanel>
 
-            {/* Search Results */}
-            {results.length ? (
-                <>
-                    <Typography
-                        mt={2}
-                        variant='h3'
-                        fontSize={'12px'}
-                        fontWeight={'normal'}
-                        color='#666'
-                    >
-                        Search Results
-                    </Typography>
-                    <ImageList
-                        sx={{
-                            width: '100%',
-                            display: 'flex',
-                            flexWrap: 'wrap'
-                        }}
-                        rowHeight={140}
-                    >
-                        {results
-                            .slice(
-                                (page - 1) * itemsPerPage,
-                                page * itemsPerPage
-                            )
-                            .map((product: any, index: number) => {
-                                return (
-                                    <ProductTile
-                                        key={
-                                            index +
-                                            page * itemsPerPage +
-                                            product.id
-                                        }
-                                        dataType={ampSDK?.type}
-                                        size={140}
-                                        product={product}
-                                        selectProduct={selectProduct}
-                                    />
-                                )
-                            })}
-                    </ImageList>
-                    {noOfPages > 1 && (
-                        <Pagination
-                            count={noOfPages}
-                            page={page}
-                            onChange={handlePageChange}
-                            defaultPage={1}
-                        />
-                    )}
-                </>
-            ) : (
-                <></>
-            )}
+            <div style={{position: 'relative'}}>
+                <Backdrop
+                    sx={{
+                        color: '#77f',
+                        backgroundColor: 'rgba(200,200,200,0.6)',
+                        zIndex: (theme) => theme.zIndex.drawer + 1,
+                        position: 'absolute'
+                    }}
+                    open={loadingResults}
+                >
+                    <CircularProgress color='inherit' />
+                </Backdrop>
+                {/* Search Results */}
+                {noOfPages[1] > 0 ? (
+                    <>
+                        <Typography
+                            mt={2}
+                            variant='h3'
+                            fontSize={'12px'}
+                            fontWeight={'normal'}
+                            color='#666'
+                        >
+                            Search Results
+                        </Typography>
+                        <ImageList
+                            sx={{
+                                width: '100%',
+                                display: 'flex',
+                                flexWrap: 'wrap'
+                            }}
+                            rowHeight={140}
+                        >
+                            {results
+                                .map((product: any, index: number) => {
+                                    return (
+                                        <ProductTile
+                                            key={
+                                                index +
+                                                loadedPage * itemsPerPage +
+                                                product.id
+                                            }
+                                            dataType={ampSDK?.type}
+                                            size={140}
+                                            product={product}
+                                            selectProduct={selectProduct}
+                                        />
+                                    )
+                                })}
+                        </ImageList>
+                        {noOfPages[1] > 1 && (
+                            <Pagination
+                                count={noOfPages[1]}
+                                page={page}
+                                onChange={handlePageChange}
+                                defaultPage={1}
+                                renderItem={(item) => <div style={{display: 'flex'}}>
+                                    <PaginationItem {...item} />
+                                    {!noOfPages[0] && item.type === 'page' && item.page === noOfPages[1] && <PaginationItem type="end-ellipsis" />}
+                                </div>}
+                            />
+                        )}
+                    </>
+                ) : (
+                    <></>
+                )}
+            </div>
         </div>
     )
 }
