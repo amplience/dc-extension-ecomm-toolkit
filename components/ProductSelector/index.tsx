@@ -137,7 +137,7 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
     const searchByCategory = async (category: string) => {
         setResults([])
         if (category !== '') {
-            const cache = new PageCache(ampSDK.commerceApi.getProducts, {
+            const cache = new PageCache<Product>(ampSDK.commerceApi.getProducts.bind(ampSDK.commerceApi), {
                 category
             } as any, itemsPerPage)
 
@@ -148,7 +148,7 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
     const searchByKeyword = async () => {
         setResults([])
         if (keywordInput.current.value !== '') {
-            const cache = new PageCache(ampSDK.commerceApi.getProducts, {
+            const cache = new PageCache<Product>(ampSDK.commerceApi.getProducts.bind(ampSDK.commerceApi), {
                 keyword: keywordInput.current.value
             } as any, itemsPerPage)
 
