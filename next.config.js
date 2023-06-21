@@ -4,6 +4,9 @@ module.exports = {
   images: {
     unoptimized: true
   },
+  env: {
+    INTEGRATION_MIDDLEWARE_SERVER: process.env.INTEGRATION_MIDDLEWARE_SERVER
+  },
   webpack: (config, { isServer }) => {
     if (!isServer) {
       return {

@@ -28,6 +28,12 @@ We would reccomend that you build and host your own version of the extension so 
 
 Instructions for basic registration & setup of the ecomm-toolkit in your Amplience Dynamic Content box [are here](./docs/extension.md). Then come back to the Snippets section below.
 
+Most backends will require you to add the extension URL (self-hosted, localhost or otherwise) to their CORS allowed origins list to allow requests. See the commerce platform documentation above for more information on what needs to be done and available features.
+
+If you're hosting the extension yourself and want to use features that are not allowed by CORS versions of vendor APIs, you can define the environment variable `INTEGRATION_MIDDLEWARE_SERVER=1` to allow the next server to host the middleware proxy, which should allow use of any API. This will also switch builds of the extension to attempt to use the middleware API by default instead of making CORS requests.
+
+`middleware_api` can be provided on the extension config to use any middleware API server regardless of environment variable.
+
 ## 🧩 Extension Snippets
 
 Since the eComm Toolkit requires a number of "Instance Parameters", we recommend providing a number of extension snippets for ease of use and to ensure functionality. By including Snippets in an extension registration, you'll be able to quickly configure properties when you're editing/creating a Content Schema that are automatically associated with an extension.
