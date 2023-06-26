@@ -18,9 +18,9 @@
 
 #### ⚙️ Features
 
+-   Product Finder
 -   Category selector
 -   User Segment selector
--   Product Finder
 
 ## 🏁 Quickstart
 
