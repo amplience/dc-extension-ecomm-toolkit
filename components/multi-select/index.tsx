@@ -10,22 +10,28 @@ import TreeViewSingle from '../TreeViewSingle/TreeViewSingle'
 import ProductSelector from '../ProductSelector'
 
 import amplienceSDK from '../../lib/sdk'
-import { Typography, Divider } from '@mui/material'
+import { Typography, Divider, Dialog, Card, CardContent } from '@mui/material'
+import { Utils } from '../../lib/util'
 
 function App() {
     const [ampSDK, setAmpSDK] = useState<any>(undefined)
+    const [errorText, setErrorText] = useState<any>(undefined)
 
     useEffect(() => {
-        try {
-            amplienceSDK().then(setAmpSDK)
-        } catch (e) {
-            console.log("ERROR", e)
-        }
+        amplienceSDK().then(setAmpSDK).catch((e) => {
+            setErrorText(Utils.errorToString(e))
+        })
     }, [ampSDK])
 
     let component = <></>
 
-    if (ampSDK?.view === 'single') {
+    if (errorText) {
+        component = <Dialog open={true}>
+            <Card variant='outlined'>
+                <CardContent>{errorText}</CardContent>
+            </Card>
+        </Dialog>
+    } else if (ampSDK?.view === 'single') {
         component = <AutoCompleteSingle ampSDK={ampSDK} />
     } else if (ampSDK?.view === 'multi') {
         component = <AutoCompleteMultiple ampSDK={ampSDK} />

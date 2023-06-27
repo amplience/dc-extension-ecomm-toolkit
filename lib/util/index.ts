@@ -1,5 +1,6 @@
 import { Identifiable } from '@amplience/dc-integration-middleware'
 import { SFCCTreeItemData } from "../models/treeItemData";
+import { CodecErrorType } from '@amplience/dc-integration-middleware';
 export module Utils {
 
     export function flatten (node: any, key = 'categories') : Identifiable[]  {
@@ -62,5 +63,22 @@ export module Utils {
             arr.push({name: array[i].id, id: array[i].id});
         }
         return arr;
+    }
+
+    export function errorToString(e: any) {
+        if (e.type) {
+            switch (e.type) {
+                case CodecErrorType.Cors:
+                    return `Cross-Origin Request Blocked. Make sure that you have properly configured your vendor to accept requests from ${window.location.origin}.`
+                case CodecErrorType.NotAuthenticated:
+                    return `Authentication error, make sure your authentication params are properly configured.\n\n${e.message}`
+                case CodecErrorType.ApiError:
+                    return `API Error, make sure your params are properly configured.\n\n${e.message}`
+            }
+
+            return e.message;
+        } else {
+            return e.toString();
+        }
     }
 }

@@ -42,38 +42,32 @@ const amplienceSDK = async () => {
     let { instance, installation } = sdk.params as ExtParameters
     let commerceApi = await initCommerceApi(installation)
 
-    try {
-        if (instance.data === 'category') {
-            if (instance.view === 'tree') {
-                values = await commerceApi.getCategoryTree({})
-            }
-            else {
-                let categoryTree: any[] = await commerceApi.getCategoryTree({})
-                values = flattenCategories(categoryTree).map(cat => ({ name: `(${cat.slug}) ${cat.name}`, slug: cat.slug, id: cat.id }))
-
-                value = instance.type === 'string' && value ? 
-                    (instance.view === 'multi' ? 
-                        values.filter(opt => value.includes(opt.id)) : 
-                        values.find(opt => value.includes(opt.id))) :
-                    value
-            }
-        } else if (instance.data === 'product') {
+    if (instance.data === 'category') {
+        if (instance.view === 'tree') {
+            values = await commerceApi.getCategoryTree({})
+        }
+        else {
             let categoryTree: any[] = await commerceApi.getCategoryTree({})
             values = flattenCategories(categoryTree).map(cat => ({ name: `(${cat.slug}) ${cat.name}`, slug: cat.slug, id: cat.id }))
-            value = instance.type === 'string' && value ? values.find(opt => cleanValue(value) == opt.id) : value
-        }
-        else { // a.data === 'customerGroups'
-            values = await commerceApi.getCustomerGroups({})
+
             value = instance.type === 'string' && value ? 
                 (instance.view === 'multi' ? 
-                    values.filter(opt => value.includes(opt.id)) :
+                    values.filter(opt => value.includes(opt.id)) : 
                     values.find(opt => value.includes(opt.id))) :
                 value
         }
-    } catch (e) {
-        // TODO: show modal error
-        console.log("ERROR", e)
-
+    } else if (instance.data === 'product') {
+        let categoryTree: any[] = await commerceApi.getCategoryTree({})
+        values = flattenCategories(categoryTree).map(cat => ({ name: `(${cat.slug}) ${cat.name}`, slug: cat.slug, id: cat.id }))
+        value = instance.type === 'string' && value ? values.find(opt => cleanValue(value) == opt.id) : value
+    }
+    else { // a.data === 'customerGroups'
+        values = await commerceApi.getCustomerGroups({})
+        value = instance.type === 'string' && value ? 
+            (instance.view === 'multi' ? 
+                values.filter(opt => value.includes(opt.id)) :
+                values.find(opt => value.includes(opt.id))) :
+            value
     }
 
     let ampSDK = {

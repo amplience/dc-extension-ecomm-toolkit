@@ -23,6 +23,7 @@ import { AmpSDKProps } from '../../lib/models/treeItemData'
 import { isEqual } from 'lodash'
 
 import { PageCache, Product } from '@amplience/dc-integration-middleware'
+import { Utils } from '../../lib/util'
 
 interface TabPanelProps {
     children?: React.ReactNode
@@ -87,6 +88,11 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
 
     const [requestInfo] = useState({ id: 0 })
 
+    const showError = (error) => {
+        setAlertMessage(Utils.errorToString(error));
+        setShowAlert(true);
+    }
+
     const handlePageChange = (event, value) => {
         setLoadingResults(true)
         setPage(value)
@@ -144,8 +150,7 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
 
                 setPageWithCache(cache, 1)
             } catch(e) {
-                // TODO: show modal error
-                console.log("ERROR", e)
+                showError(e)
             }
         }
     }
@@ -160,8 +165,7 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
 
                 setPageWithCache(cache, 1);
             } catch(e) {
-                // TODO: show modal error
-                console.log("ERROR", e) 
+                showError(e) 
             }
         }
     }
@@ -334,8 +338,7 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
                 })
                 return p.filter((item: any) => item !== null)
             } catch(e) {
-                // TODO: show modal error
-                console.log("ERROR", e)
+                showError(e)
                 return []
             }
         }
