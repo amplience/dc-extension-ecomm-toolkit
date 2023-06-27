@@ -16,7 +16,11 @@ function App() {
     const [ampSDK, setAmpSDK] = useState<any>(undefined)
 
     useEffect(() => {
-        amplienceSDK().then(setAmpSDK)
+        try {
+            amplienceSDK().then(setAmpSDK)
+        } catch (e) {
+            console.log("ERROR", e)
+        }
     }, [ampSDK])
 
     let component = <></>

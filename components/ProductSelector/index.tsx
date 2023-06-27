@@ -137,22 +137,32 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
     const searchByCategory = async (category: string) => {
         setResults([])
         if (category !== '') {
-            const cache = new PageCache<Product>(ampSDK.commerceApi.getProducts.bind(ampSDK.commerceApi), {
-                category
-            } as any, itemsPerPage)
+            try {
+                const cache = new PageCache<Product>(ampSDK.commerceApi.getProducts.bind(ampSDK.commerceApi), {
+                    category
+                } as any, itemsPerPage)
 
-            setPageWithCache(cache, 1)
+                setPageWithCache(cache, 1)
+            } catch(e) {
+                // TODO: show modal error
+                console.log("ERROR", e)
+            }
         }
     }
 
     const searchByKeyword = async () => {
         setResults([])
         if (keywordInput.current.value !== '') {
-            const cache = new PageCache<Product>(ampSDK.commerceApi.getProducts.bind(ampSDK.commerceApi), {
-                keyword: keywordInput.current.value
-            } as any, itemsPerPage)
+            try {
+                const cache = new PageCache<Product>(ampSDK.commerceApi.getProducts.bind(ampSDK.commerceApi), {
+                    keyword: keywordInput.current.value
+                } as any, itemsPerPage)
 
-            setPageWithCache(cache, 1);
+                setPageWithCache(cache, 1);
+            } catch(e) {
+                // TODO: show modal error
+                console.log("ERROR", e) 
+            }
         }
     }
 
@@ -318,10 +328,16 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
             if (ids === '' || ids == null) { 
                 return []
             }
-            const p = await ampSDK.commerceApi.getProducts({
-                productIds: ids
-            })
-            return p.filter((item: any) => item !== null)
+            try { 
+                const p = await ampSDK.commerceApi.getProducts({
+                    productIds: ids
+                })
+                return p.filter((item: any) => item !== null)
+            } catch(e) {
+                // TODO: show modal error
+                console.log("ERROR", e)
+                return []
+            }
         }
         // form comma-delim ID string
         if (storedValue != undefined) {
