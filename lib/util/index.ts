@@ -66,17 +66,24 @@ export module Utils {
     }
 
     export function errorToString(e: any) {
+        const docsUrl = 'https://github.com/amplience/dc-extension-ecomm-toolkit/blob/main/docs/errors.md'
+
         if (e.type) {
             switch (e.type) {
                 case CodecErrorType.Cors:
-                    return `Cross-Origin Request Blocked. Make sure that you have properly configured your vendor to accept requests from ${window.location.origin}.`
+                    return `Cross-Origin Request Blocked. Make sure that you have properly configured your vendor to accept requests from ${window.location.origin}.\n\nSee ${docsUrl}#cors for more information.`
                 case CodecErrorType.NotAuthenticated:
-                    return `Authentication error, make sure your authentication params are properly configured.\n\n${e.message}`
+                case CodecErrorType.AuthError:
+                case CodecErrorType.AuthUnreachable:
+                    return `Authentication error, make sure your authentication params are properly configured.\n\nSee ${docsUrl}#authentication-error for more information.\n\n${e.message}`
                 case CodecErrorType.ApiError:
-                    return `API Error, make sure your params are properly configured.\n\n${e.message}`
+                case CodecErrorType.ApiGraphQL:
+                    return `API Error, make sure your params are properly configured.\n\nSee ${docsUrl}#api-error for more information.\n\n${e.message}`
+                case CodecErrorType.NotSupported:
+                    return `Method not supported by vendor.\n\nSee ${docsUrl}#not-supported for more information.\n\n${e.message}`
             }
 
-            return e.message;
+            return `Encountered error '${CodecErrorType[e.type]}'. See ${docsUrl}#other for more information.\n\n${e.message}`;
         } else {
             return e.toString();
         }

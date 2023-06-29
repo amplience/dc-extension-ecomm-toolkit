@@ -28,7 +28,7 @@ function App() {
     if (errorText) {
         component = <Dialog open={true}>
             <Card variant='outlined'>
-                <CardContent>{errorText}</CardContent>
+                <CardContent style={{whiteSpace: "pre-wrap"}}>{errorText}</CardContent>
             </Card>
         </Dialog>
     } else if (ampSDK?.view === 'single') {

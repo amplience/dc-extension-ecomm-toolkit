@@ -389,7 +389,7 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
         <div ref={container}>
             <Dialog open={showAlert} onClose={() => setShowAlert(false)}>
                 <Card variant='outlined'>
-                    <CardContent>{alertMessage}</CardContent>
+                    <CardContent style={{whiteSpace: "pre-wrap"}}>{alertMessage}</CardContent>
                 </Card>
             </Dialog>
             <Backdrop
