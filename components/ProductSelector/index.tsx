@@ -23,6 +23,7 @@ import { AmpSDKProps } from '../../lib/models/treeItemData'
 import { isEqual } from 'lodash'
 
 import { PageCache, Product } from '@amplience/dc-integration-middleware'
+import { Utils } from '../../lib/util'
 
 interface TabPanelProps {
     children?: React.ReactNode
@@ -87,6 +88,11 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
 
     const [requestInfo] = useState({ id: 0 })
 
+    const showError = (error) => {
+        setAlertMessage(Utils.errorToString(error));
+        setShowAlert(true);
+    }
+
     const handlePageChange = (event, value) => {
         setLoadingResults(true)
         setPage(value)
@@ -137,22 +143,30 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
     const searchByCategory = async (category: string) => {
         setResults([])
         if (category !== '') {
-            const cache = new PageCache(ampSDK.commerceApi.getProducts, {
-                category
-            } as any, itemsPerPage)
+            try {
+                const cache = new PageCache<Product>(ampSDK.commerceApi.getProducts.bind(ampSDK.commerceApi), {
+                    category
+                } as any, itemsPerPage)
 
-            setPageWithCache(cache, 1)
+                setPageWithCache(cache, 1)
+            } catch(e) {
+                showError(e)
+            }
         }
     }
 
     const searchByKeyword = async () => {
         setResults([])
         if (keywordInput.current.value !== '') {
-            const cache = new PageCache(ampSDK.commerceApi.getProducts, {
-                keyword: keywordInput.current.value
-            } as any, itemsPerPage)
+            try {
+                const cache = new PageCache<Product>(ampSDK.commerceApi.getProducts.bind(ampSDK.commerceApi), {
+                    keyword: keywordInput.current.value
+                } as any, itemsPerPage)
 
-            setPageWithCache(cache, 1);
+                setPageWithCache(cache, 1);
+            } catch(e) {
+                showError(e) 
+            }
         }
     }
 
@@ -318,10 +332,15 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
             if (ids === '' || ids == null) { 
                 return []
             }
-            const p = await ampSDK.commerceApi.getProducts({
-                productIds: ids
-            })
-            return p.filter((item: any) => item !== null)
+            try { 
+                const p = await ampSDK.commerceApi.getProducts({
+                    productIds: ids
+                })
+                return p.filter((item: any) => item !== null)
+            } catch(e) {
+                showError(e)
+                return []
+            }
         }
         // form comma-delim ID string
         if (storedValue != undefined) {
@@ -370,7 +389,7 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
         <div ref={container}>
             <Dialog open={showAlert} onClose={() => setShowAlert(false)}>
                 <Card variant='outlined'>
-                    <CardContent>{alertMessage}</CardContent>
+                    <CardContent style={{whiteSpace: "pre-wrap"}}>{alertMessage}</CardContent>
                 </Card>
             </Dialog>
             <Backdrop
