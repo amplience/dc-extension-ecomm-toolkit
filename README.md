@@ -28,11 +28,13 @@ We would reccomend that you build and host your own version of the extension so 
 
 Instructions for basic registration & setup of the ecomm-toolkit in your Amplience Dynamic Content box [are here](./docs/extension.md). Then come back to the Snippets section below.
 
-Most backends will require you to add the extension URL (self-hosted, localhost or otherwise) to their CORS allowed origins list to allow requests. See the commerce platform documentation above for more information on what needs to be done and available features.
+Most backends will require you to add the extension URL (Amplience hosted, self-hosted, localhost or otherwise) to their CORS allowed origins list to allow requests. See the commerce platform documentation above for more information on what needs to be done and available features.
 
 If you're hosting the extension yourself and want to use features that are not allowed by CORS versions of vendor APIs, you can define the environment variable `INTEGRATION_MIDDLEWARE_SERVER=1` to allow the next server to host the middleware proxy, which should allow use of any API. This will also switch builds of the extension to attempt to use the middleware API by default instead of making CORS requests.
 
 `middleware_url` can be provided on the extension config to use any middleware API server regardless of environment variable.
+
+> Note: This extension also supports Big Commerce Server calls for access to 'customer groups'. This is an example of the server implementation and self hosting as per above. Configuration and codec parameters for this are here: [BigCommerce](./docs/commerce/bigcommerce.md)
 
 ## 🧩 Extension Snippets
 
@@ -67,3 +69,4 @@ You can find the code for all snippets in [data/snippets.json](./data/snippets.j
 -   [Contributing](./CONTRIBUTING.md)
 -   [Support](./support.md)
 -   [Licensing](./LICENSE)
+-   [Codec Errors](./docs/errors.md)
