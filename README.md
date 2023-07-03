@@ -11,7 +11,7 @@
 ### 🛒 Commerce
 
 -   [Salesforce Commerce Cloud (SFCC)](./docs/commerce/sfcc.md)
--   [BigCommerce](./docs/commerce/bigcommerce.md)
+-   [BigCommerce CORS](./docs/commerce/bigcommerce-cors.md)
 -   [Commercetools](./docs/commerce/commercetools.md)
 -   [Shopify](./docs/commerce/shopify.md)
 -   [REST (JSON Sample Data)](./docs/commerce/rest.md)
