@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0](https://github.com/amplience/dc-extension-ecomm-toolkit/compare/v1.4.0...v2.0.0) (2023-07-03)
+
+
+### ⚠ BREAKING CHANGES
+
+* page cache fix, prefer cors for requests, add bigcommerce-cors docs (#12)
+
+### Features
+
+* add amplify deployment configuration ([#13](https://github.com/amplience/dc-extension-ecomm-toolkit/issues/13)) ([6b59402](https://github.com/amplience/dc-extension-ecomm-toolkit/commit/6b59402d39c740ccd69e0aa10a7d918ae8d309dc))
+* page cache fix, prefer cors for requests, add bigcommerce-cors docs ([#12](https://github.com/amplience/dc-extension-ecomm-toolkit/issues/12)) ([b0680a2](https://github.com/amplience/dc-extension-ecomm-toolkit/commit/b0680a20c058a053b1b65a29cf9f3e57c4b48744))
+
 ## [1.4.0](https://github.com/amplience/dc-extension-ecomm-toolkit/compare/v1.3.1...v1.4.0) (2023-05-12)
 
 
