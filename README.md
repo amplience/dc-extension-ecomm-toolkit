@@ -11,7 +11,7 @@
 ### 🛒 Commerce
 
 -   [Salesforce Commerce Cloud (SFCC)](./docs/commerce/sfcc.md)
--   [BigCommerce](./docs/commerce/bigcommerce.md)
+-   [BigCommerce CORS](./docs/commerce/bigcommerce-cors.md)
 -   [Commercetools](./docs/commerce/commercetools.md)
 -   [Shopify](./docs/commerce/shopify.md)
 -   [REST (JSON Sample Data)](./docs/commerce/rest.md)
@@ -32,7 +32,7 @@ Most backends will require you to add the extension URL (self-hosted, localhost 
 
 If you're hosting the extension yourself and want to use features that are not allowed by CORS versions of vendor APIs, you can define the environment variable `INTEGRATION_MIDDLEWARE_SERVER=1` to allow the next server to host the middleware proxy, which should allow use of any API. This will also switch builds of the extension to attempt to use the middleware API by default instead of making CORS requests.
 
-`middleware_api` can be provided on the extension config to use any middleware API server regardless of environment variable.
+`middleware_url` can be provided on the extension config to use any middleware API server regardless of environment variable.
 
 ## 🧩 Extension Snippets
 

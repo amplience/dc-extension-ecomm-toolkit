@@ -33,7 +33,7 @@ Under the Permissions tab, select the following:
 Your `json` in the Installation Parameters will depend on the ecommerce platform you're connecting to.
 
 -   [Salesforce Commerce Cloud (SFCC)](./commerce/sfcc.md)
--   [Big Commerce](./commerce/bigcommerce.md)
+-   [Big Commerce CORS](./commerce/bigcommerce-cors.md)
 -   [Commerce Tools](./commerce/commercetools.md)
 -   [Shopify](./commerce/shopify.md)
 -   [Rest (JSON Sample Data)](./commerce/rest.md)
