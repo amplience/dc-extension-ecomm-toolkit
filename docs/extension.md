@@ -10,9 +10,10 @@ Login to your Hub and head to Development > Extensions and click the "Register" 
 
 Under the setup tab put the URL where your extension is hosted:
 
--   Developement: This will either be `http://localhost:3000` of your dev branch deployement url
+-   Amplience hosted (if you are not self hosting): `https://ecomm-toolkit.extensions.content.amplience.net`
 -   Self hosted: This will be your main brand deployement URL
--   Amplience hosted (if you are not self hosting): `https://ecomm-toolkit.dc-demostore.com`
+-   Development: This will either be `http://localhost:3000` of your dev branch deployement url
+
 
 ![Extension Setup](../media/ext-setup.png)
 
