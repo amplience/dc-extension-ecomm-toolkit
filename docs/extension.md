@@ -11,7 +11,7 @@ Login to your Hub and head to Development > Extensions and click the "Register" 
 Under the setup tab put the URL where your extension is hosted:
 
 - Category: Content Field
-- Label: eCommerce Toolkit (this will appear as the tab title in the Dashboard)
+- Label: ecomm Toolkit (this will appear as the tab title in the Dashboard)
 - Name: ecomm-toolkit (needs to be unique with the Hub)
 - URL: https://ecomm-toolkit.extensions.content.amplience.net (see below for URL based on setup)
 - Description: eCommerce Toolkit provided a multi-user user interface that integrations with eCommerce platforms (can be left blank, if you wish)
