@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.1.0](https://github.com/amplience/dc-extension-ecomm-toolkit/compare/v1.4.0...v2.1.0) (2023-08-28)
+
+### Features
+
+* update dc-integration-middleware to new release version v2.1.0 ([#20](https://github.com/amplience/dc-extension-ecomm-toolkit/issues/20)) ([12fd9a9](https://github.com/amplience/dc-extension-ecomm-toolkit/commit/12fd9a9ff375f8796213159dec949f1941f89950))
+* eComm Toolkit - CORS update ([#15](https://github.com/amplience/dc-extension-ecomm-toolkit/issues/15)) ([a70a7b8](https://github.com/amplience/dc-extension-ecomm-toolkit/commit/a70a7b8058eb68e08363230ade1e6bb239b2ea8e))
+* remove Amplience DC header logo from README ([cc4c4c6](https://github.com/amplience/dc-extension-ecomm-toolkit/commit/cc4c4c6b9f8141a40fd54c62e5dd48ebcb94756c))
+* remove DC header asset ([7f465c3](https://github.com/amplience/dc-extension-ecomm-toolkit/commit/7f465c3a3f8922e77630e52741af32aab8d95fb1))
+
 ## [2.0.0](https://github.com/amplience/dc-extension-ecomm-toolkit/compare/v1.4.0...v2.0.0) (2023-07-03)
 
 
