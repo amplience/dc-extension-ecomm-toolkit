@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.2.0](https://github.com/amplience/dc-extension-ecomm-toolkit/compare/v2.1.0...v2.2.0) (2023-09-12)
+
+
+### Features
+
+* pointing to new package ([6e76498](https://github.com/amplience/dc-extension-ecomm-toolkit/commit/6e764982412fad31dff44f5a247a8ecaaa4bcc45))
+
+
+### Bug Fixes
+
+* Tree view selection ([ae0870a](https://github.com/amplience/dc-extension-ecomm-toolkit/commit/ae0870a211e72ae172b0fc1069b49c06003f28bb))
+
 ## [2.1.0](https://github.com/amplience/dc-extension-ecomm-toolkit/compare/v1.4.0...v2.1.0) (2023-08-28)
 
 ### Features
