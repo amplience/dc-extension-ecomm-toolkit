@@ -9,7 +9,6 @@ All notable changes to this project will be documented in this file. See [standa
 
 * pointing to new package ([6e76498](https://github.com/amplience/dc-extension-ecomm-toolkit/commit/6e764982412fad31dff44f5a247a8ecaaa4bcc45))
 
-
 ### Bug Fixes
 
 * Tree view selection ([ae0870a](https://github.com/amplience/dc-extension-ecomm-toolkit/commit/ae0870a211e72ae172b0fc1069b49c06003f28bb))
