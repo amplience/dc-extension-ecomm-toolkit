@@ -7,6 +7,7 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 
+let mapping: { id: any; name: any; }[] = [];
 
 const getTreeItemsFromData = (treeItems: TreeItemData[]) => {
   return treeItems.map((treeItemData: any) => {
@@ -14,6 +15,7 @@ const getTreeItemsFromData = (treeItems: TreeItemData[]) => {
     if (treeItemData.children && treeItemData.children.length > 0) {
       children = getTreeItemsFromData(treeItemData.children);
     }
+    mapping.push({id:treeItemData.id, name:treeItemData.name})
     return (
       <TreeItem
         key={treeItemData.id}
@@ -44,11 +46,16 @@ const TreeViewSingle: React.FC<AmpSDKProps> = ({ ampSDK }) => {
     }
   }, [trigger])
 
+  let displayValue = value;
+  const match = mapping?.find(x => x.id === value)
+  if(match) displayValue = `${match.name} (${match.id})`
+  
+
   return (
     <>
       <div ref={ref}>
         <Typography variant="body1" component="p">
-          Selected category: {value}
+          Selected category: {displayValue}
           {
             value != '' ? 
             <IconButton aria-label="delete" onClick={() => {
@@ -64,8 +71,10 @@ const TreeViewSingle: React.FC<AmpSDKProps> = ({ ampSDK }) => {
           defaultCollapseIcon={<ExpandMoreIcon />}
           defaultExpandIcon={<ChevronRightIcon />}
           onNodeSelect={(event, val) => { 
-            ampSDK.setValue(val) 
-            setValue(val)
+            if(event && event?.target && event?.target?.nodeName === "DIV"){
+              ampSDK.setValue(val) 
+              setValue(val)
+            } 
           }}
           onClick={updateHeight}
           /* onTransitionEnd={()=>{ this does not fire consistently
