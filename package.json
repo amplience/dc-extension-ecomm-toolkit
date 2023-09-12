@@ -17,7 +17,7 @@
         "prepare-major-release": "run-s build version:major"
     },
     "dependencies": {
-        "@amplience/dc-integration-middleware": "github:amplience/dc-integration-middleware#v2.1.0",
+        "@amplience/dc-integration-middleware": "github:amplience/dc-integration-middleware#v2.2.0",
         "@emotion/react": "^11.9.0",
         "@emotion/styled": "^11.8.1",
         "@mui/icons-material": "^5.6.0",
