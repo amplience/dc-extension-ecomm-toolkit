@@ -52,8 +52,8 @@ const amplienceSDK = async () => {
 
             value = instance.type === 'string' && value ? 
                 (instance.view === 'multi' ? 
-                    values.filter(opt => value.includes(opt.id)) : 
-                    values.find(opt => value.includes(opt.id))) :
+                    values.filter(opt => cleanValue(value) == opt.id) : 
+                    values.find(opt => cleanValue(value) == opt.id)) :
                 value
         }
     } else if (instance.data === 'product') {
@@ -65,8 +65,8 @@ const amplienceSDK = async () => {
         values = await commerceApi.getCustomerGroups({})
         value = instance.type === 'string' && value ? 
             (instance.view === 'multi' ? 
-                values.filter(opt => value.includes(opt.id)) :
-                values.find(opt => value.includes(opt.id))) :
+                values.filter(opt => cleanValue(value) == opt.id) :
+                values.find(opt => cleanValue(value) == opt.id)) :
             value
     }
 
