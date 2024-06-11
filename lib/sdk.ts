@@ -55,7 +55,9 @@ const amplienceSDK = async () => {
                 (instance.view === 'multi' ? 
                     values.filter(opt => value.includes(opt.id)) : 
                     values.find(opt => cleanValue(value) === opt.id)) :
-                value
+                instance.type === 'object' && value ?
+                    values.find(opt => value.id === opt.id) :
+                    value
         }
     } else if (instance.data === 'product') {
         let categoryTree: any[] = await commerceApi.getCategoryTree({})
