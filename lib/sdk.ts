@@ -52,21 +52,21 @@ const amplienceSDK = async () => {
 
             value = instance.type === 'string' && value ? 
                 (instance.view === 'multi' ? 
-                    values.filter(opt => cleanValue(value) == opt.id) : 
-                    values.find(opt => cleanValue(value) == opt.id)) :
+                    values.filter(opt => value.includes(opt.id)) : 
+                    values.find(opt => cleanValue(value) === opt.id)) :
                 value
         }
     } else if (instance.data === 'product') {
         let categoryTree: any[] = await commerceApi.getCategoryTree({})
         values = flattenCategories(categoryTree).map(cat => ({ name: `(${cat.slug}) ${cat.name}`, slug: cat.slug, id: cat.id }))
-        value = instance.type === 'string' && value ? values.find(opt => cleanValue(value) == opt.id) : value
+        value = instance.type === 'string' && value ? values.find(opt => cleanValue(value) === opt.id) : value
     }
     else { // a.data === 'customerGroups'
         values = await commerceApi.getCustomerGroups({})
         value = instance.type === 'string' && value ? 
             (instance.view === 'multi' ? 
-                values.filter(opt => cleanValue(value) == opt.id) :
-                values.find(opt => cleanValue(value) == opt.id)) :
+                values.filter(opt => value.includes(opt.id)) :
+                values.find(opt => cleanValue(value) === opt.id)) :
             value
     }
 
