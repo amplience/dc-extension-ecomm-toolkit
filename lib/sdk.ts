@@ -45,7 +45,7 @@ const amplienceSDK = async () => {
     if (instance.data === 'category') {
         if (instance.view === 'tree') {
             values = await commerceApi.getCategoryTree({})
-            value = cleanValue(value)
+            if(value) value = cleanValue(value)
         }
         else {
             let categoryTree: any[] = await commerceApi.getCategoryTree({})
