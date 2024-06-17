@@ -1,6 +1,6 @@
 {
     "name": "@amplience/dc-extension-ecomm-toolkit",
-    "version": "2.2.0",
+    "version": "2.2.1",
     "private": true,
     "scripts": {
         "dev": "next dev",
@@ -17,11 +17,11 @@
         "prepare-major-release": "run-s build version:major"
     },
     "dependencies": {
-        "@amplience/dc-integration-middleware": "github:amplience/dc-integration-middleware#v2.2.0",
+        "@amplience/dc-integration-middleware": "^2.3.1",
         "@emotion/react": "^11.9.0",
         "@emotion/styled": "^11.8.1",
         "@mui/icons-material": "^5.6.0",
-        "@mui/lab": "^5.0.0-alpha.76",
+        "@mui/x-tree-view": "^7.6.2",
         "@mui/material": "^5.6.0",
         "dc-extensions-sdk": "^2.1.0",
         "immutability-helper": "^3.1.1",

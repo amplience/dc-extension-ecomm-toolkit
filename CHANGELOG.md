@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.2.1](https://github.com/amplience/dc-extension-ecomm-toolkit/compare/v2.2.0...v2.2.1) (2024-06-17)
+
+
+### Bug Fixes
+
+* actual match of categories and customer groups rather than includes ([e17f901](https://github.com/amplience/dc-extension-ecomm-toolkit/commit/e17f9012f7302d4c6313b836a36a79f4254fac2f))
+* Category Object Selected state no having id ([ee4b72c](https://github.com/amplience/dc-extension-ecomm-toolkit/commit/ee4b72c23c6ba820b3390b25f7300d3582223fa0))
+* only clean value if there is a value ([b231a18](https://github.com/amplience/dc-extension-ecomm-toolkit/commit/b231a1857c5dace931ac72a832ebd0c0075542d2))
+* Selected item mapping for enforced category tree ([7c3ec7b](https://github.com/amplience/dc-extension-ecomm-toolkit/commit/7c3ec7baf21aacb5c8a0169d3d95b51bb1b1fd4f))
+* Selection logic ([af0baec](https://github.com/amplience/dc-extension-ecomm-toolkit/commit/af0baec0ab3745f555376e107d58babfb2187cfe))
+* updated version 2.2.0 ([6b5a7c3](https://github.com/amplience/dc-extension-ecomm-toolkit/commit/6b5a7c3297d614046f1a1f90c6745d7ffcd0cfa5))
+* using release tree view component and checkbox ([ef28fdf](https://github.com/amplience/dc-extension-ecomm-toolkit/commit/ef28fdf3c6b5be0272caf6fc61876b7be124dd25))
+
 ## [2.2.0](https://github.com/amplience/dc-extension-ecomm-toolkit/compare/v2.1.0...v2.2.0) (2023-09-12)
 
 
