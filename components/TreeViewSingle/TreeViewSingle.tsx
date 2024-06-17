@@ -1,9 +1,7 @@
 import React, { useState, createRef, useEffect } from "react";
 import { Typography } from '@mui/material';
 import { AmpSDKProps, TreeItemData } from "../../lib/models/treeItemData";
-import { TreeItem, TreeView } from "@mui/lab";
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import { TreeItem, SimpleTreeView } from "@mui/x-tree-view";
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 
@@ -19,7 +17,8 @@ const getTreeItemsFromData = (treeItems: TreeItemData[]) => {
     return (
       <TreeItem
         key={treeItemData.id}
-        nodeId={treeItemData.id}
+        id={treeItemData.id}
+        itemId={treeItemData.id}
         label={treeItemData.name}>
         {children}
       </TreeItem>
@@ -32,6 +31,17 @@ const TreeViewSingle: React.FC<AmpSDKProps> = ({ ampSDK }) => {
   const [value, setValue] = useState(ampSDK.getValue())
   const [totalHeight, setTotalHeight] = useState(200)
   const [trigger, setTrigger] = useState(0.1)
+
+  const handleItemSelectionToggle = (
+    event: React.SyntheticEvent,
+    itemId: string,
+    isSelected: boolean,
+  ) => {
+    if (isSelected) {
+      ampSDK.setValue(itemId) 
+      setValue(itemId)
+    }
+  };
 
   const updateHeight = () => {
     setTimeout(()=> {
@@ -67,22 +77,13 @@ const TreeViewSingle: React.FC<AmpSDKProps> = ({ ampSDK }) => {
             : '' 
           }
         </Typography>
-        <TreeView
-          defaultCollapseIcon={<ExpandMoreIcon />}
-          defaultExpandIcon={<ChevronRightIcon />}
-          onNodeSelect={(event, val) => { 
-            if(event && event?.target && event?.target?.nodeName === "DIV"){
-              ampSDK.setValue(val) 
-              setValue(val)
-            } 
-          }}
+        <SimpleTreeView
+          onItemSelectionToggle={handleItemSelectionToggle}
+          checkboxSelection={true}
           onClick={updateHeight}
-          /* onTransitionEnd={()=>{ this does not fire consistently
-            console.log('ended')
-          }} */
-          selected={value}>
+          selectedItems={value}>
           {getTreeItemsFromData(ampSDK.getValues())}
-        </TreeView>
+        </SimpleTreeView>
       </div>
     </>
   )
