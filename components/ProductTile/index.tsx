@@ -20,9 +20,10 @@ import styled from '@emotion/styled'
 const StyledItem = styled(Box)`
     cursor: pointer;
     border-radius: 4px;
-    border: 1px solid #ddd;
+    border: 1px solid #b4bef2;
     overflow: hidden;
     position: relative;
+    box-shadow: 0 1px 2px 1px #002c421f;
     img {
         ratio: 1;
         height: 100%;
@@ -65,6 +66,7 @@ const StyledItem = styled(Box)`
         border-radius: 3px;
         background: rgba(255, 255, 255, 0.75);
         z-index: 1;
+        color: #002c42
     }
     &:hover {
         text-decoration: none;
@@ -233,13 +235,13 @@ const ProductTile = ({
                         height={size}
                     />
                     <div className='text-box'>
-                        <Typography mb={0.5} variant='h3' fontSize={'10px'}>
+                        <Typography mb={0.5} variant='h3' fontSize={'11px'}>
                             {product.name}
                         </Typography>
                         <Typography
                             variant='h4'
                             fontStyle={'italic'}
-                            fontSize={'10px'}
+                            fontSize={'11px'}
                         >
                             ({product.id})
                         </Typography>

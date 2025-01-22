@@ -14,8 +14,9 @@ import {
     Tabs,
     Tab,
     Box,
-    PaginationItem
+    PaginationItem,
 } from '@mui/material'
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import SearchIcon from '@mui/icons-material/Search'
 import ProductTile from '../ProductTile'
 import SortableList from '../SortableList'
@@ -30,6 +31,16 @@ interface TabPanelProps {
     index: number
     value: number
 }
+
+const PaginationTheme = createTheme({
+    palette:{
+        primary:{
+          main: '#ecf1fc',
+          light: '#ecf1fc',
+          dark: '#b4bef2'
+        }
+      }
+})
 
 function TabPanel(props: TabPanelProps) {
     const { children, value, index, ...other } = props
@@ -411,9 +422,9 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
                         variant='h3'
                         fontSize={'12px'}
                         fontWeight={'normal'}
-                        color='#333'
+                        color={'#597684'}
                     >
-                        Selected Products
+                        Selected products
                     </Typography>
                     <SortableList
                         selectedProducts={selectedProducts}
@@ -432,18 +443,19 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
                 value={mode}
                 onChange={tabChange}
                 aria-label='search mode tabs'
-                sx={{ marginBottom: '14px' }}
+                sx={{ marginBottom: '14px', textTransform:'none' }}
             >
-                <Tab label='Keyword Search' />
-                <Tab label='Category Search' />
+                <Tab label='Keyword search' sx={{ textTransform:'none' }}/>
+                <Tab label='Category search' sx={{ textTransform:'none' }}/>
             </Tabs>
             <TabPanel value={mode} index={0}>
                 <Box sx={{ display: 'flex' }}>
                     <TextField
                         inputRef={keywordInput}
                         size='small'
-                        sx={{ ml: 1, flex: 1 }}
-                        label='Keyword Search (esc. to clear)'
+                        sx={{ ml: 1, flex: 1, "& label":{color: '#597681'},"& fieldset": { borderColor: '#b4c0f2', borderRadius: '.5rem' }, "& fieldset:hover": { borderColor: '#b4bef2' } }}
+                        label='Keyword search (esc. to clear)'
+                        color='primary'
                         variant='outlined'
                         inputProps={{
                             'aria-label': 'keyword search (escape key to clear)'
@@ -455,7 +467,7 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
                     <IconButton
                         type='button'
                         onClick={searchByKeyword}
-                        sx={{ ml: '5px', p: '8px' }}
+                        sx={{ ml: '5px', p: '8px',color:'#597684' }}
                         aria-label='search'
                     >
                         <SearchIcon />
@@ -472,7 +484,8 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
                     sx={{
                         width: '100%',
                         marginTop: '0',
-                        paddingLeft: '8px'
+                        paddingLeft: '8px',
+                        "& label":{color: '#597681'},"& fieldset": { borderColor: '#b4c0f2', borderRadius: '.5rem' }, "& fieldset:hover": { borderColor: '#b4bef2' } 
                     }}
                     value={storedValue}
                     onChange={(event, val) => {
@@ -513,9 +526,9 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
                             variant='h3'
                             fontSize={'12px'}
                             fontWeight={'normal'}
-                            color='#666'
+                            color={'#597684'}
                         >
-                            Search Results
+                            Search results (click to select products)
                         </Typography>
                         <ImageList
                             sx={{
@@ -523,6 +536,7 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
                                 display: 'flex',
                                 flexWrap: 'wrap'
                             }}
+                            gap={10}
                             rowHeight={140}
                         >
                             {results
@@ -543,16 +557,20 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
                                 })}
                         </ImageList>
                         {noOfPages[1] > 1 && (
-                            <Pagination
-                                count={noOfPages[1]}
-                                page={page}
-                                onChange={handlePageChange}
-                                defaultPage={1}
-                                renderItem={(item) => <div style={{display: 'flex'}}>
-                                    <PaginationItem {...item} />
-                                    {!noOfPages[0] && item.type === 'page' && item.page === noOfPages[1] && <PaginationItem type="end-ellipsis" />}
-                                </div>}
-                            />
+                            <ThemeProvider theme={PaginationTheme}>
+                                <Pagination
+                                    count={noOfPages[1]}
+                                    page={page}
+                                    color="primary"
+                                    onChange={handlePageChange}
+                                    defaultPage={1}
+                                    
+                                    renderItem={(item) => <div style={{display: 'flex'}}>
+                                        <PaginationItem {...item} />
+                                        {!noOfPages[0] && item.type === 'page' && item.page === noOfPages[1] && <PaginationItem type="end-ellipsis" />}
+                                    </div>}
+                                />
+                            </ThemeProvider>
                         )}
                     </>
                 ) : (
