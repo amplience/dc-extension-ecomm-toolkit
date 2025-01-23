@@ -48,6 +48,7 @@ const SortableList = ({ selectedProducts, updateSelected, removeProduct, dataTyp
                     <ImageList 
                         sx={{ width: '100%', display: 'flex', flexWrap: 'wrap'}}
                         rowHeight={140}
+                        gap={10}
                     >
                         <DndProvider backend={HTML5Backend}>
                         {cards.map((product: any, index: number) => {

@@ -12,6 +12,7 @@
 -   [BigCommerce CORS](./docs/commerce/bigcommerce-cors.md)
 -   [Commercetools](./docs/commerce/commercetools.md)
 -   [Shopify](./docs/commerce/shopify.md)
+-   [Scayle](./docs/commerce/scayle.md)
 -   [REST (JSON Sample Data)](./docs/commerce/rest.md)
 
 #### ⚙️ Features
