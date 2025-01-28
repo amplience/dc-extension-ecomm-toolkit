@@ -13,5 +13,5 @@ Make sure that the extension is properly configured using the [installation para
 ## Dependency versions
 This extension was developed and tested with:
 
-- Node version `16.x`
-- NPM version `8.x`
+- Node version `20.x`
+- NPM version `10.x`

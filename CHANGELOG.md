@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0](https://github.com/amplience/dc-extension-ecomm-toolkit/compare/v2.2.1...v2.3.0) (2025-01-28)
+
+
+### Features
+
+* bump integration middleware to make scayle available ([971807c](https://github.com/amplience/dc-extension-ecomm-toolkit/commit/971807c73605212684ee5412f8dffc8b19648c46))
+* scayle docs, npm and styling ([#28](https://github.com/amplience/dc-extension-ecomm-toolkit/issues/28)) ([f7bcaa2](https://github.com/amplience/dc-extension-ecomm-toolkit/commit/f7bcaa260cea625be65112414e387bc2b4189ac4))
+
+
+### Bug Fixes
+
+* package-lock bump to middleware v2.4.0 ([c953bc7](https://github.com/amplience/dc-extension-ecomm-toolkit/commit/c953bc70edd4671cb8a81c1be5678e81e7e7db07))
+
 ### [2.2.1](https://github.com/amplience/dc-extension-ecomm-toolkit/compare/v2.2.0...v2.2.1) (2024-06-17)
 
 

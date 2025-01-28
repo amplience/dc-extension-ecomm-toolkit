@@ -11,7 +11,8 @@ const AutoCompleteMultiple: React.FC<AmpSDKProps> = ({ ampSDK }) => {
       options={ampSDK.getValues()}
       getOptionLabel={(option) => option.name}
       value={value}
-      sx={{ width: '99%' }}
+      ChipProps={{color:'secondary'}}
+      sx={{ width: '99%', "& label":{color: '#597681'} }}
       onChange={(event, val) => {
         ampSDK.setValue(val)
         setValue(val) 

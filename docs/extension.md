@@ -45,6 +45,7 @@ Your `json` in the Installation Parameters will depend on the ecommerce platform
 -   [Big Commerce CORS](./commerce/bigcommerce-cors.md)
 -   [Commerce Tools](./commerce/commercetools.md)
 -   [Shopify](./commerce/shopify.md)
+-   [Scayle](./commerce/scayle.md)
 -   [Rest (JSON Sample Data)](./commerce/rest.md)
 
 For details of functionality support for commerce vendors and CORS / Server implementations, please refer to [CORS support table](https://github.com/amplience/dc-integration-middleware#cors-support-table) & [Server support Table](https://github.com/amplience/dc-integration-middleware#server-support-table)

@@ -53,15 +53,15 @@ function App() {
             <Stack spacing={0} sx={{ width: '100%' }}>
                 {
                     ampSDK?.getTitle() &&
-                    <Typography variant='body1' color={'#333333'}>{ampSDK?.getTitle()}</Typography>
+                    <Typography variant='body1' color={'#002C42'} sx={{fontWeight:700}}>{ampSDK?.getTitle()}</Typography>
                 }
                 {
                     ampSDK?.getDescription() &&
-                    <Typography variant='caption' color={'#808080'}>{ampSDK?.getDescription()}</Typography>
+                    <Typography variant='caption' color={'#597684'}>{ampSDK?.getDescription()}</Typography>
                 }
                 {
                     (ampSDK?.getDescription() || ampSDK?.getTitle()) &&
-                    <Divider sx={{marginTop:1, marginBottom:1}} variant="fullWidth"></Divider>
+                    <Divider sx={{marginTop:1, marginBottom:1, borderColor:'#d6dff8'}} variant="fullWidth"></Divider>
                 }
                 {component}
             </Stack>
