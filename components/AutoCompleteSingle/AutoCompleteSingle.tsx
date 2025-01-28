@@ -10,7 +10,7 @@ const AutoCompleteSingle: React.FC<AmpSDKProps> = ({ ampSDK }) => {
       id="combo-box-demo"
       options={ampSDK.getValues()}
       getOptionLabel={(option) => option.name || ''}
-      sx={{ width: '100%', marginTop: '6px' }}
+      sx={{ width: '100%', marginTop: '6px', "& label":{color: '#597681'},"& fieldset": { borderColor: '#b4c0f2', borderRadius: '.5rem' }, "& fieldset:hover": { borderColor: '#b4bef2' } }}
       value={value}
       onChange={(event, val) => {
         if(val !== null){
