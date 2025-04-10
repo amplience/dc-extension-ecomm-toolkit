@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.4.0](https://github.com/amplience/dc-extension-ecomm-toolkit/compare/v2.3.0...v2.4.0) (2025-04-10)
+
+
+### Features
+
+* bump integration middleware to support api base url override ([#30](https://github.com/amplience/dc-extension-ecomm-toolkit/issues/30)) ([32903d1](https://github.com/amplience/dc-extension-ecomm-toolkit/commit/32903d18b8efd73c81a13a91439546e9c1884a52))
+
 ## [2.3.0](https://github.com/amplience/dc-extension-ecomm-toolkit/compare/v2.2.1...v2.3.0) (2025-01-28)
 
 
