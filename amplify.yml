@@ -5,7 +5,7 @@ frontend:
       commands:
         - nvm install 20
         - nvm use 20
-        - npm ci
+        - npm ci --ignore-scripts
     build:
       commands:
         - CI=false npm run export
