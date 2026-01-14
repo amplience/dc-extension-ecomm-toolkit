@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.5.0](https://github.com/amplience/dc-extension-ecomm-toolkit/compare/v2.4.0...v2.5.0) (2026-01-14)
+
+
+### Features
+
+* shopify main image order ([#32](https://github.com/amplience/dc-extension-ecomm-toolkit/issues/32)) ([95793e1](https://github.com/amplience/dc-extension-ecomm-toolkit/commit/95793e155d7dccd4cb0691b4354f43923f648b7a))
+
 ## [2.4.0](https://github.com/amplience/dc-extension-ecomm-toolkit/compare/v2.3.0...v2.4.0) (2025-04-10)
 
 
