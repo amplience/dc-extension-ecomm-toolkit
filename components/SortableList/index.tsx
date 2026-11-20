@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from "react";
-import { ImageList } from "@mui/material";
+import { Box } from "@mui/material";
 import {Card} from "./Card";
 import update from "immutability-helper"
 import {DndProvider} from "react-dnd";
@@ -45,10 +45,13 @@ const SortableList = ({ selectedProducts, updateSelected, removeProduct, dataTyp
         <>
             {cards.length ?
                 <>
-                    <ImageList 
-                        sx={{ width: '100%', display: 'flex', flexWrap: 'wrap'}}
-                        rowHeight={140}
-                        gap={10}
+                    <Box
+                        py={1}
+                        sx={{ 
+                            display: 'grid',
+                            gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))',
+                            gap: '10px'
+                        }}
                     >
                         <DndProvider backend={HTML5Backend}>
                         {cards.map((product: any, index: number) => {
@@ -67,7 +70,7 @@ const SortableList = ({ selectedProducts, updateSelected, removeProduct, dataTyp
                             )
                         })} 
                         </DndProvider>
-                    </ImageList>
+                    </Box>
                 </>
                 : 
                 <></>

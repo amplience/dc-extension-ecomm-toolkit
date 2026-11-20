@@ -9,7 +9,6 @@ import {
     Backdrop,
     CircularProgress,
     IconButton,
-    ImageList,
     Pagination,
     Tabs,
     Tab,
@@ -530,14 +529,13 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
                         >
                             Search results (click to select products)
                         </Typography>
-                        <ImageList
-                            sx={{
-                                width: '100%',
-                                display: 'flex',
-                                flexWrap: 'wrap'
+                        <Box
+                            py={1}
+                            sx={{ 
+                                display: 'grid',
+                                gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))',
+                                gap: '10px'
                             }}
-                            gap={10}
-                            rowHeight={140}
                         >
                             {results
                                 .map((product: any, index: number) => {
@@ -555,7 +553,7 @@ const ProductSelector: React.FC<AmpSDKProps> = ({ ampSDK }) => {
                                         />
                                     )
                                 })}
-                        </ImageList>
+                        </Box>
                         {noOfPages[1] > 1 && (
                             <ThemeProvider theme={PaginationTheme}>
                                 <Pagination
