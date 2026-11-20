@@ -1,6 +1,7 @@
 import { Identifiable, flattenCategories } from "@amplience/dc-integration-middleware";
 import { ContentFieldExtension, init } from 'dc-extensions-sdk';
 import { initCommerceApi } from "../pages/api";
+import { registerAmplienceCodec } from "./codecs/amplience-pim";
 import { ExtParameters, FieldModel } from "./models/extensionParams";
 import _ from 'lodash'
 
@@ -40,6 +41,7 @@ const amplienceSDK = async () => {
     // end
 
     let { instance, installation } = sdk.params as ExtParameters
+    registerAmplienceCodec(sdk.client, sdk.hub.id)
     let commerceApi = await initCommerceApi(installation)
 
     if (instance.data === 'category') {
