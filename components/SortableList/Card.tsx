@@ -7,9 +7,7 @@ import { ItemTypes } from './ItemTypes'
 import ProductTile from '../ProductTile'
 
 const style = {
-    marginBottom: '.5rem',
-    backgroundColor: 'white',
-    cursor: 'move !important'
+    backgroundColor: 'white'
 }
 
 export interface CardProps {
@@ -117,7 +115,7 @@ export const Card: FC<CardProps> = ({
     return (
         <div
             ref={ref}
-            style={{ ...style, opacity, height: size, width: size }}
+            style={{ ...style, opacity }}
             data-handler-id={handlerId}
         >
             <ProductTile

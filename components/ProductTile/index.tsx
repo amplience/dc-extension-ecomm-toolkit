@@ -1,10 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
     Avatar,
     Box,
-    ImageListItem,
-    Typography,
     IconButton,
     Dialog,
     DialogTitle,
@@ -18,15 +16,21 @@ import DeleteIcon from '@mui/icons-material/Delete'
 import styled from '@emotion/styled'
 
 const StyledItem = styled(Box)`
-    cursor: pointer;
     border-radius: 4px;
     border: 1px solid #b4bef2;
     overflow: hidden;
     position: relative;
     box-shadow: 0 1px 2px 1px #002c421f;
+    .image-wrap {
+        position: relative;
+        aspect-ratio: 1;
+        overflow: hidden;
+    }
     img {
-        ratio: 1;
+        display: block;
+        width: 100%;
         height: 100%;
+        object-fit: cover;
         opacity: 1;
         filter: grayscale(0%);
         transition: all 0.8s ease;
@@ -53,29 +57,32 @@ const StyledItem = styled(Box)`
         fill: none;
         outline: 2;
     }
-    .text-box {
-        position: absolute;
-        bottom: 9px;
-        left: 0;
-        right: 0;
-        margin: 0 9px;
-        borderradius: 6px;
-        display: inline-block;
-        padding: 6px 10px;
-        transition: all 0.8s ease;
-        border-radius: 3px;
-        background: rgba(255, 255, 255, 0.75);
-        z-index: 1;
-        color: #002c42
+    .caption {
+        padding: 6px 8px;
+        background: #fff;
+        color: #002c42;
+        font-size: 11px;
+        line-height: 1.3;
+    }
+    .caption-name {
+        font-weight: 600;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+    .caption-sku {
+        margin-top: 2px;
+        font-style: italic;
+        color: #597684;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
     &:hover {
         text-decoration: none;
         img {
             filter: grayscale(65%);
-        }
-        .text-box {
-            background: rgba(255, 255, 255, 0.95);
-            border-color: #aaa;
         }
     }
 `
@@ -102,9 +109,13 @@ const ProductTile = ({
     )
     const [showSelectVariant, setShowSelectVariant] = useState(false)
     const [selectedIndex, setSelectedIndex] = React.useState(0)
-    const ref = useRef(null)
     const [imageLoaded, setImageLoaded] = useState(false)
     const [imgUrl, setImgUrl] = useState((variant.images && variant.images[0] && variant.images[0].url) || null)
+
+    // Full identifiers live in the tooltip rather than over the image.
+    const tooltip = [product.name, `ID: ${product.id}`, variant.sku && `SKU: ${variant.sku}`]
+        .filter(Boolean)
+        .join('\n')
 
     const handleClick = () => {
         if (selectProduct !== undefined) {
@@ -211,42 +222,41 @@ const ProductTile = ({
                 </List>
             </Dialog>
             <StyledItem
-                height={size}
-                width={size}
-                sx={removeProduct !== undefined ? { cursor: 'move' } : {}}
+                title={tooltip}
+                sx={
+                    removeProduct !== undefined
+                        ? { cursor: "grab", "&:active": { cursor: "grabbing" } }
+                        : { cursor: "pointer" }
+                }
             >
                 {actions()}
-                <ImageListItem ref={ref} onClick={handleClick}>
-                    <img
-                        onLoad={handleLoaded}
-                        className={!imageLoaded ? 'hidden' : ''}
-                        src={`${(variant.images && variant.images[0] && variant.images[0].url)}?sw=${
-                            size * 2
-                        }&fit=crop&auto=format`}
-                        srcSet={`${(variant.images && variant.images[0] && variant.images[0].url)}?sw=${
-                            size * 2
-                        }&fit=crop&auto=format&dpr=2 2x`}
-                        alt={product.name}
-                    />
-                    <Skeleton
-                        className={!imageLoaded ? 'loading skel' : 'skel'}
-                        variant='rounded'
-                        width={'100%'}
-                        height={size}
-                    />
-                    <div className='text-box'>
-                        <Typography mb={0.5} variant='h3' fontSize={'11px'}>
-                            {product.name}
-                        </Typography>
-                        <Typography
-                            variant='h4'
-                            fontStyle={'italic'}
-                            fontSize={'11px'}
-                        >
-                            ({product.id})
-                        </Typography>
+                <div onClick={handleClick}>
+                    <div className='image-wrap'>
+                        <img
+                            onLoad={handleLoaded}
+                            className={!imageLoaded ? 'hidden' : ''}
+                            src={`${(variant.images && variant.images[0] && variant.images[0].url)}?sw=${
+                                size * 2
+                            }&fit=crop&auto=format`}
+                            srcSet={`${(variant.images && variant.images[0] && variant.images[0].url)}?sw=${
+                                size * 2
+                            }&fit=crop&auto=format&dpr=2 2x`}
+                            alt={product.name}
+                        />
+                        <Skeleton
+                            className={!imageLoaded ? 'loading skel' : 'skel'}
+                            variant='rounded'
+                            width={'100%'}
+                            height={size}
+                        />
                     </div>
-                </ImageListItem>
+                    <div className='caption'>
+                        <div className='caption-name'>{product.name}</div>
+                        {variant.sku && (
+                            <div className='caption-sku'>{variant.sku}</div>
+                        )}
+                    </div>
+                </div>
             </StyledItem>
         </>
     )
