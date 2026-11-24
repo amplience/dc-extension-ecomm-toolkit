@@ -20,11 +20,10 @@ const findBySku = async (codec: any, skus: string[]): Promise<(RawProduct | null
     for (let i = 0; i < skus.length; i += SKU_BATCH_SIZE) {
         const batch = skus.slice(i, i + SKU_BATCH_SIZE)
         const filter = `filter=variants.sku:${batch.map(quote).join(',')}`
-        found.push(
-            ...(await codec.fetch(
-                `/product-projections/search?${filter}&limit=${batch.length}`
-            ))
+        const fetched = await codec.fetch(
+            `/product-projections/search?${filter}&limit=${batch.length}`
         )
+        found.push(...fetched)
     }
 
     return skus.map((sku) => {

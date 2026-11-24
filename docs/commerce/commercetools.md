@@ -8,7 +8,7 @@ Full details can be seen in the `dc-integration-middleware` project [here](https
 
 ## Storing SKUs instead of product IDs
 
-By default the extension stores the commercetools product ID. Add the optional `identifier` installation parameter to store SKUs instead:
+By default the extension stores the commercetools product ID. Add the optional `identifier` installation parameter, beside `vendor` (or inside `codec_params`), to store SKUs instead:
 
 ```json
 {
