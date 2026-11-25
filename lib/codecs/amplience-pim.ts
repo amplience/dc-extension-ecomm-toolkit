@@ -60,9 +60,17 @@ const mapImage = (media: any): { url: string } | null => {
     return media?.image?.src ? { url: media.image.src } : null
 }
 
+/** A readable label from an identifier — `mens-shirts` becomes `Mens Shirts`. */
+export const categoryName = (id: string): string =>
+    id
+        .split(/[-_/]/)
+        .filter(Boolean)
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(' ')
+
 const mapCategory = (id: string): Category => ({
     id,
-    name: id,
+    name: categoryName(id),
     slug: id,
     children: [],
     products: [],
