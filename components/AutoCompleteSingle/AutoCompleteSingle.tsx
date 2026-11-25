@@ -1,9 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Autocomplete, TextField } from '@mui/material';
 import { AmpSDKProps } from "../../lib/models/treeItemData";
 
 const AutoCompleteSingle: React.FC<AmpSDKProps> = ({ ampSDK }) => {
   const [value, setValue] = useState(ampSDK.getValue())
+
+  // The frame has no height until it's set, so size it before the first open.
+  useEffect(() => {
+    ampSDK.setHeight(130)
+  }, [ampSDK])
+
   return (
     <Autocomplete
       disablePortal
