@@ -3,8 +3,13 @@ import { ContentFieldExtension, init } from 'dc-extensions-sdk';
 import { initCommerceApi } from "../pages/api";
 import { ExtParameters, FieldModel } from "./models/extensionParams";
 import _ from 'lodash'
+import { categoryIdentifier } from "../pages/api";
 
 export type ValueType = Identifiable | Identifiable[] | string | string[] | null
+
+/** The same tree, with each category's slug as its id. */
+const idsFromSlugs = (categories: any[]): any[] =>
+    categories.map((category) => ({ ...category, id: category.slug, children: idsFromSlugs(category.children ?? []) }))
 
 const amplienceSDK = async () => {
     const isEnforced = () => {
@@ -43,12 +48,15 @@ const amplienceSDK = async () => {
     let commerceApi = await initCommerceApi(installation)
 
     if (instance.data === 'category') {
+        // Only what a category field stores changes: product browsing keeps the platform's ids.
+        let categoryTree: any[] = await commerceApi.getCategoryTree({})
+        if (categoryIdentifier(installation) === 'slug') categoryTree = idsFromSlugs(categoryTree)
+
         if (instance.view === 'tree') {
-            values = await commerceApi.getCategoryTree({})
+            values = categoryTree
             if(value) value = cleanValue(value)
         }
         else {
-            let categoryTree: any[] = await commerceApi.getCategoryTree({})
             values = flattenCategories(categoryTree).map(cat => ({ name: `(${cat.slug}) ${cat.name}`, slug: cat.slug, id: cat.id }))
 
             value = instance.type === 'string' && value ? 
