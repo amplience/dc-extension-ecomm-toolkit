@@ -16,6 +16,7 @@ import {
 } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
 import styled from '@emotion/styled'
+import { getResizedImageUrl } from '../../lib/util/image'
 
 const StyledItem = styled(Box)`
     cursor: pointer;
@@ -199,7 +200,7 @@ const ProductTile = ({
                                     <Avatar
                                         variant='square'
                                         alt={product.name}
-                                        src={(variant.images && variant.images[0] && variant.images[0].url) || null}
+                                        src={getResizedImageUrl(variant.images?.[0]?.url, 80) || null}
                                     />
                                 </ListItemAvatar>
                                 <ListItemText
@@ -220,12 +221,7 @@ const ProductTile = ({
                     <img
                         onLoad={handleLoaded}
                         className={!imageLoaded ? 'hidden' : ''}
-                        src={`${(variant.images && variant.images[0] && variant.images[0].url)}?sw=${
-                            size * 2
-                        }&fit=crop&auto=format`}
-                        srcSet={`${(variant.images && variant.images[0] && variant.images[0].url)}?sw=${
-                            size * 2
-                        }&fit=crop&auto=format&dpr=2 2x`}
+                        src={getResizedImageUrl(variant.images?.[0]?.url, size * 2)}
                         alt={product.name}
                     />
                     <Skeleton
